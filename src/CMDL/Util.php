@@ -86,7 +86,7 @@ class Util
     }
 
 
-    public static function removeTextBetweenChars($s, $leftchar, $rightchar)
+    public static function removeTextBetweenCharsIncludingDelimiters($s, $leftchar, $rightchar)
     {
 
         $leftchar  = preg_quote($leftchar, "/");
@@ -118,9 +118,11 @@ class Util
             {
                 $items    = array();
                 $csvitems = explode(',', $csv);
+                $i=0;
 
                 foreach ($csvitems as $item)
                 {
+                    $i++;
                     $item     = trim($item);
                     $keyvalue = explode(':', $item);
                     if (count($keyvalue) == 2)
@@ -130,9 +132,20 @@ class Util
                     }
                     else
                     {
-                        $key   = $item;
+                        $key   = $i;
                         $value = $item;
                     }
+
+                    // remove surrounding quotes
+                    if (substr($value, 0, 1) == '"')
+                    {
+                        $value = trim($value, '"');
+                    }
+                    else
+                    {
+                        $value = trim($value, "'");
+                    }
+
                     $items[$key] = $value;
                 }
                 $lists[] = $items;
@@ -152,6 +165,7 @@ class Util
      */
     public static function extractParams($s)
     {
+        $s = self::removeTextBetweenCharsIncludingDelimiters($s, '(', ')');
 
         // remove double and leading/following spaces
 

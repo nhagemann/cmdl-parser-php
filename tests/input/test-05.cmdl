@@ -1,0 +1,42 @@
+Name
+--- insert ---
+Name
+--- edit ---
+Name
+
+
+
+
+@title News ""
+
+
+@description ""
+>>>
+>>>
+>>>
+>>>
+
+@workspaces (default)
+
+
+
+@init property1 "adsfsadf"
+
+@hint property1 ""
+
+    Halloisdfsdf
+    sdfsdf
+    asdf
+    sdf
+
+@help property1 ""
+>>>
+>>>
+>>>
+
+
+@subtypes none
+
+@status none
+@readonly (insert,edit)
+

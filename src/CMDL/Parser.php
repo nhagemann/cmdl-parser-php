@@ -155,7 +155,7 @@ class Parser
         if ($name)
         {
             $name = $name[0];
-            $line = Util::removeTextBetweenChars($line, '{', '}');
+            $line = Util::removeTextBetweenCharsIncludingDelimiters($line, '{', '}');
         }
         else
         {
@@ -180,7 +180,6 @@ class Parser
                 $onTheRight        = substr($onTheRight, $p + 1);
 
                 $lists      = Util::extractLists($onTheRight);
-                $onTheRight = Util::removeTextBetweenChars($onTheRight, '(', ')');
                 $params     = Util::extractParams($onTheRight);
 
             }
@@ -199,6 +198,10 @@ class Parser
         {
             case 'textfield':
                 $formElementDefinition = new TextfieldFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setSize($params[0]);
+                }
                 break;
             default:
                 throw new CMDLParserException('', CMDLParserException::CMDL_UNKNOWN_FIELD_TYPE);
