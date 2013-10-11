@@ -7,5 +7,5 @@ use CMDL\CMDLParserException;
 
 class SectionEndFormElementDefinition extends FormElementDefinition
 {
-
+    protected $type = 'section';
 }

@@ -5,6 +5,8 @@ namespace CMDL;
 use CMDL\Parser;
 use CMDL\Util;
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
+use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
+use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
 use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
@@ -12,7 +14,7 @@ use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
 class FormElementsTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testTextfield()
+    public function testTextfieldDefinition()
     {
         /* @var TextfieldFormElementDefinition */
         $formElementDefinition = Parser::parseFormElementDefinition('Title');
@@ -43,6 +45,34 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('XL', $formElementDefinition->getSize());
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertTrue($formElementDefinition->isUnique());
+    }
+
+    public function testTextareaDefinition()
+    {
+        /* @var TextareaFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('Abstract = textarea* 15 L {text1}');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextareaFormElementDefinition', $formElementDefinition);
+        $this->assertEquals('Abstract', $formElementDefinition->getLabel());
+        $this->assertEquals('text1', $formElementDefinition->getName());
+        $this->assertEquals(15, $formElementDefinition->getRows());
+        $this->assertEquals('L', $formElementDefinition->getSize());
+        $this->assertTrue($formElementDefinition->isMandatory());
+        $this->assertFalse($formElementDefinition->isUnique());
+    }
+
+    public function testTextareaDescendantsDefinition()
+    {
+        $formElementDefinition = Parser::parseFormElementDefinition('Abstract = richtext* 15 L {text1}');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\RichtextFormElementDefinition', $formElementDefinition);
+
+        $formElementDefinition = Parser::parseFormElementDefinition('Abstract = markdown* 15 L {text1}');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\MarkdownFormElementDefinition', $formElementDefinition);
+
+        $formElementDefinition = Parser::parseFormElementDefinition('Abstract = html* 15 L {text1}');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\HTMLFormElementDefinition', $formElementDefinition);
+
+        $formElementDefinition = Parser::parseFormElementDefinition('Abstract = cmdl* 15 L {text1}');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\CMDLFormElementDefinition', $formElementDefinition);
     }
 
 }

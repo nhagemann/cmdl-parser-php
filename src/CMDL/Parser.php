@@ -8,6 +8,11 @@ use CMDL\ViewDefinition;
 use CMDL\InsertionDefinition;
 use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
+use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
+use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
+use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
+use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
+use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
 use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
@@ -70,7 +75,7 @@ class Parser
                         }
                         break;
                     case '+': // start of an insertion definition
-                        $insertionName = Util::generateValidIdentifier($line);
+                        $insertionName                          = Util::generateValidIdentifier($line);
                         $currentFormElementDefinitionCollection = new InsertionDefinition($insertionName);
                         $contentTypeDefinition->addInsertionDefinition($currentFormElementDefinitionCollection);
                         break;
@@ -179,8 +184,8 @@ class Parser
                 $typeWithQualifier = substr($onTheRight, 0, $p);
                 $onTheRight        = substr($onTheRight, $p + 1);
 
-                $lists      = Util::extractLists($onTheRight);
-                $params     = Util::extractParams($onTheRight);
+                $lists  = Util::extractLists($onTheRight);
+                $params = Util::extractParams($onTheRight);
 
             }
             else
@@ -201,6 +206,61 @@ class Parser
                 if (isset($params[0]))
                 {
                     $formElementDefinition->setSize($params[0]);
+                }
+                break;
+            case 'textarea':
+                $formElementDefinition = new TextareaFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRows($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setSize($params[1]);
+                }
+                break;
+            case 'richtext':
+                $formElementDefinition = new RichtextFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRows($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setSize($params[1]);
+                }
+                break;
+            case 'markdown':
+                $formElementDefinition = new MarkdownFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRows($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setSize($params[1]);
+                }
+                break;
+            case 'html':
+                $formElementDefinition = new HTMLFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRows($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setSize($params[1]);
+                }
+                break;
+            case 'cmdl':
+                $formElementDefinition = new CMDLFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRows($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setSize($params[1]);
                 }
                 break;
             default:

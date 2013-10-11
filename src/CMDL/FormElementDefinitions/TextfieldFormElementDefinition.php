@@ -15,6 +15,8 @@ use CMDL\CMDLParserException;
 class TextfieldFormElementDefinition extends FormElementDefinition
 {
 
+    protected $type = 'textfield';
+
     protected $size = 'L';
 
 
@@ -26,7 +28,7 @@ class TextfieldFormElementDefinition extends FormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "size" of form element ' . $this->type . ' must be one of S,M,L,XL,XXL', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
 
     }
