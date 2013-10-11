@@ -1,0 +1,183 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: Nils
+ * Date: 10/10/13
+ * Time: 9:12 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
+namespace CMDL;
+
+class Util
+{
+
+    public static function generateValidIdentifier($s, $additionalchars = '')
+    {
+        $map = array(
+            'À'       => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'Ae', 'Å' => 'A', 'Æ' => 'AE', 'Ç' =>
+            'C', 'È'  => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I',
+            'Ï'       => 'I', 'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' =>
+            'Oe', 'Ő' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'Ue', 'Ű' => 'U',
+            'Ý'       => 'Y', 'Þ' => 'TH', 'ß' => 'ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' =>
+            'ae', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'ì'       => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'd', 'ñ' => 'n', 'ò' => 'o', 'ó' =>
+            'o', 'ô'  => 'o', 'õ' => 'o', 'ö' => 'oe', 'ő' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u',
+            'û'       => 'u', 'ü' => 'ue', 'ű' => 'u', 'ý' => 'y', 'þ' => 'th', 'ÿ' => 'y'
+        );
+
+        $pattern = '/[' . join(array_keys($map), '') . ']/u';
+        if (preg_match_all($pattern, $s, $matches))
+        {
+            for ($i = 0; $i < count($matches[0]); $i++)
+            {
+                $char = $matches[0][$i];
+                if (isset($map[$char]))
+                {
+                    $s = str_replace($char, $map[$char], $s);
+                }
+            }
+        }
+
+        $s            = strtolower($s);
+        $allowedchars = 'abcdefghijklmnopqrstuvwxyz0123456789_' . preg_quote($additionalchars);
+
+        $patterns = "/[^" . $allowedchars . "]*/";
+
+        return preg_replace($patterns, "", $s);
+    }
+
+
+    /**
+     *
+     * @param type $s
+     * @param type $leftchar
+     * @param type $rightchar
+     *
+     * @return type array!!
+     *
+     * @link: http://weblogtoolscollection.com/regex/regex.php
+     */
+    public static function getTextBetweenChars($s, $leftchar, $rightchar)
+    {
+
+        // Everything between two i "/i[^i]*i/";
+
+        $leftchar  = preg_quote($leftchar, "/");
+        $rightchar = preg_quote($rightchar, "/");
+        $pattern   = "/" . $leftchar . "[^" . $leftchar . $rightchar . "]*" . $rightchar . "/";
+
+        preg_match_all($pattern, $s, $matches);
+
+        if (count($matches[0]) == 0)
+        {
+            return false;
+        }
+        else
+        {
+            $result = array();
+            foreach ($matches[0] as $match)
+            {
+                $result[] = trim(substr($match, 1, -1));
+            }
+
+            return $result;
+        }
+    }
+
+
+    public static function removeTextBetweenChars($s, $leftchar, $rightchar)
+    {
+
+        $leftchar  = preg_quote($leftchar, "/");
+        $rightchar = preg_quote($rightchar, "/");
+        $pattern   = "/" . $leftchar . "[^" . $leftchar . $rightchar . "]*" . $rightchar . "/";
+
+        // replace matches with empty space
+        $result = preg_filter($pattern, " ", $s);
+        if ($result)
+        {
+            // and filter double whitespace afterwards (otherwise the upper pattern doesn't get matches without preceeding chars!?
+            $result = preg_replace('/\s+/', ' ', $result);
+
+            return $result;
+        }
+
+        return $s;
+    }
+
+
+    public static function extractLists($s)
+    {
+        $lists = array();
+
+        $result = self::getTextBetweenChars($s, "(", ")");
+        if ($result)
+        {
+            foreach ($result as $csv)
+            {
+                $items    = array();
+                $csvitems = explode(',', $csv);
+
+                foreach ($csvitems as $item)
+                {
+                    $item     = trim($item);
+                    $keyvalue = explode(':', $item);
+                    if (count($keyvalue) == 2)
+                    {
+                        $key   = trim($keyvalue[0]);
+                        $value = trim($keyvalue[1]);
+                    }
+                    else
+                    {
+                        $key   = $item;
+                        $value = $item;
+                    }
+                    $items[$key] = $value;
+                }
+                $lists[] = $items;
+            }
+
+        }
+
+        return $lists;
+    }
+
+
+    /**
+     *
+     * @param type $s
+     *
+     * @link http://stackoverflow.com/questions/366202/regex-for-splitting-a-string-using-space-when-not-surrounded-by-single-or-double
+     */
+    public static function extractParams($s)
+    {
+
+        // remove double and leading/following spaces
+
+        $s = preg_replace('/\s{2,}/', ' ', $s);
+        $s = trim($s);
+
+        $pattern = "/[^\\s\"']+|\"[^\"]*\"|'[^']*'/";
+        preg_match_all($pattern, $s, $matches);
+
+        $params = array();
+        foreach ($matches[0] as $match)
+        {
+
+            if (substr($match, 0, 1) == '"')
+            {
+                $match = trim($match, '"');
+            }
+            else
+            {
+                $match = trim($match, "'");
+            }
+            $params[] = $match;
+        }
+
+        return $params;
+
+    }
+}
+
