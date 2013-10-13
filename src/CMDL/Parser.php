@@ -8,6 +8,7 @@ use CMDL\ViewDefinition;
 use CMDL\InsertionDefinition;
 use CMDL\FormElementDefinition;
 
+use CMDL\FormElementDefinitions\PrintFormElementDefinition;
 use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
@@ -20,6 +21,24 @@ use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
 use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
 
 use CMDL\FormElementDefinitions\NumberFormElementDefinition;
+
+use CMDL\FormElementDefinitions\CheckboxFormElementDefinition;
+use CMDL\FormElementDefinitions\SelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\MultiSelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
+use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
+
+use CMDL\FormElementDefinitions\TimestampFormElementDefinition;
+use CMDL\FormElementDefinitions\DateFormElementDefinition;
+
+use CMDL\FormElementDefinitions\FileFormElementDefinition;
+use CMDL\FormElementDefinitions\FilesFormElementDefinition;
+use CMDL\FormElementDefinitions\ImageFormElementDefinition;
+use CMDL\FormElementDefinitions\ImagesFormElementDefinition;
+
+use CMDL\FormElementDefinitions\TableFormElementDefinition;
+
+use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
 
 use CMDL\Util;
 
@@ -205,6 +224,17 @@ class Parser
 
         switch ($type)
         {
+            case 'print':
+                $formElementDefinition = new PrintFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setProperty($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setDisplay($params[1]);
+                }
+                break;
             case 'textfield':
                 $formElementDefinition = new TextfieldFormElementDefinition($name);
                 if (isset($params[0]))
@@ -278,15 +308,155 @@ class Parser
                     $formElementDefinition->setUnit($params[1]);
                 }
                 break;
-            case 'timestamp':
-                $formElementDefinition = new NumberFormElementDefinition($name);
+            case 'checkbox':
+                $formElementDefinition = new CheckboxFormElementDefinition($name);
                 if (isset($params[0]))
                 {
-                    $formElementDefinition->setDigits($params[0]);
+                    $formElementDefinition->setLegend($params[0]);
+                }
+                break;
+            case 'selection':
+                $formElementDefinition = new SelectionFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setType($params[0]);
                 }
                 if (isset($params[1]))
                 {
-                    $formElementDefinition->setUnit($params[1]);
+                    $formElementDefinition->setOptions($lists[0]);
+                }
+                break;
+            case 'multiselection':
+                $formElementDefinition = new MultiSelectionFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setType($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setOptions($lists[0]);
+                }
+                break;
+            case 'reference':
+                $formElementDefinition = new ReferenceFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setContentType($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setType($params[0]);
+                }
+                if (isset($params[2]))
+                {
+                    $formElementDefinition->setWorkspace($params[0]);
+                }
+                if (isset($params[3]))
+                {
+                    $formElementDefinition->setOrder($params[0]);
+                }
+                break;
+            case 'multireference':
+                $formElementDefinition = new MultiReferenceFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setContentType($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setType($params[0]);
+                }
+                if (isset($params[2]))
+                {
+                    $formElementDefinition->setWorkspace($params[0]);
+                }
+                if (isset($params[3]))
+                {
+                    $formElementDefinition->setOrder($params[0]);
+                }
+                break;
+            case 'timestamp':
+                $formElementDefinition = new TimestampFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setType($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setInit($params[1]);
+                }
+                break;
+            case 'date':
+                $formElementDefinition = new DateFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setType($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setInit($params[1]);
+                }
+                break;
+            case 'file':
+                $formElementDefinition = new FileFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setPath($params[0]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'files':
+                $formElementDefinition = new FilesFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setPath($params[0]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'image':
+                $formElementDefinition = new ImageFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setPath($params[0]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'images':
+                $formElementDefinition = new ImagesFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setPath($params[0]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'table':
+                $formElementDefinition = new TableFormElementDefinition($name);
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setColumnHeadings($lists[0]);
+                }
+                if (isset($lists[1]))
+                {
+                    $formElementDefinition->setWidths($lists[1]);
+                }
+                break;
+            case 'sequence':
+                $formElementDefinition = new SequenceFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setInserts($lists[0]);
                 }
                 break;
             default:

@@ -7,6 +7,21 @@ Name
 
 
 
+
+
+
+abc = remote-file url path filetypes  (including a:b@)
+abc = remote-image url path filetypes
+abc = remote-selection url type
+abc = remote-multiselection url type
+
+abc = colorpicker limited (colors)
+abc = geolocation
+
+abc = custom youtube param1 param2 .... list1 list2 list3 ...
+
+
+
 @title News ""
 
 
@@ -29,10 +44,13 @@ Name
     asdf
     sdf
 
+
 @help property1 ""
 >>>
 >>>
 >>>
+
+@validate property1 minmax
 
 
 @subtypes none
@@ -41,3 +59,18 @@ Name
 @readonly (insert,edit)
 
 @languages (de: Deutsch,en: English)
+
+
+# additional properties (readonly and/or writeables)
+
+@extra-properties (property1, property2) (property3)
+
+@sortable list|tree|related|none
+
+@insert abc
+@insert property (1:abc,2:abc)
+
+#clipping
+
+
+
