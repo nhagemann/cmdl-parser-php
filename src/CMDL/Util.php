@@ -50,11 +50,11 @@ class Util
 
     /**
      *
-     * @param type $s
-     * @param type $leftchar
-     * @param type $rightchar
+     * @param string $s
+     * @param string $leftchar
+     * @param string $rightchar
      *
-     * @return type array!!
+     * @return array
      *
      * @link: http://weblogtoolscollection.com/regex/regex.php
      */
@@ -118,7 +118,7 @@ class Util
             {
                 $items    = array();
                 $csvitems = explode(',', $csv);
-                $i=0;
+                $i        = 0;
 
                 foreach ($csvitems as $item)
                 {
@@ -159,7 +159,7 @@ class Util
 
     /**
      *
-     * @param type $s
+     * @param string $s
      *
      * @link http://stackoverflow.com/questions/366202/regex-for-splitting-a-string-using-space-when-not-surrounded-by-single-or-double
      */

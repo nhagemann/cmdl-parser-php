@@ -8,18 +8,10 @@ Name
 
 
 
-# TODO ...
-abc = remote-selection url type
-abc = remote-multiselection url type
-abc = remote-reference
-abc = remote-multireference
-
-abc = colorpicker limited (colors)
-abc = geolocation
 
 
-abc = password md5 salted
-
+- language bei reference
+- punkt bei number
 
 __construct($name,$params,$lists)
 
@@ -60,7 +52,8 @@ __construct($name,$params,$lists)
 @status none
 @readonly (insert,edit)
 
-@languages (de: Deutsch,en: English)
+@languages (de: Deutsch,en: English)  none
+
 
 
 # additional properties (readonly and/or writeables)

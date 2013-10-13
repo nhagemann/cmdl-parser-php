@@ -5,25 +5,34 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class SelectionFormElementDefinition extends FormElementDefinition
+/**
+ * Class SelectionFormElementDefinition
+ *
+ * Examples:
+ *  Customer = remote-selection http://demo.org/json/customers dropdown
+ *
+ * @package CMDL\FormElementDefinitions
+ */
+class RemoteSelectionFormElementDefinition extends FormElementDefinition
 {
 
-    protected $elementType = 'selection';
+    protected $elementType = 'remote-selection';
 
     protected $type = 'dropdown';
 
-    protected $options = array();
+    protected $url = null;
 
 
     public function __construct($name, $params = array(), $lists = array())
     {
+
         if (isset($params[0]))
         {
-            $this->setType($params[0]);
+            $this->setUrl($params[0]);
         }
-        if (isset($lists[0]))
+        if (isset($params[1]))
         {
-            $this->setOptions($lists[0]);
+            $this->setType($params[1]);
         }
         parent::__construct($name, $params, $lists);
     }
@@ -48,22 +57,14 @@ class SelectionFormElementDefinition extends FormElementDefinition
     }
 
 
-    public function setOptions($options)
+    public function setUrl($url)
     {
-        if (is_array($options))
-        {
-            $this->options = $options;
-        }
-        else
-        {
-            throw  new CMDLParserException('Parameter "options" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
-        }
+        $this->url = $url;
     }
 
 
-    public function getOptions()
+    public function getUrl()
     {
-        return $this->options;
+        return $this->url;
     }
-
 }

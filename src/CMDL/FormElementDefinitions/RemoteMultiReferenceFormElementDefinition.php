@@ -5,12 +5,18 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class MultiSelectionFormElementDefinition extends SelectionFormElementDefinition
+class RemoteMultiReferenceFormElementDefinition extends RemoteReferenceFormElementDefinition
 {
 
-    protected $elementType = 'multiselection';
+    protected $elementType = 'multireference';
 
     protected $type = 'list';
+
+    protected $contentType = null;
+
+    protected $workspace = 'default';
+
+    protected $order = 'name';
 
 
     public function setType($type)

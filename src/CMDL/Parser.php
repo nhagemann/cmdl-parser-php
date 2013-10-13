@@ -20,6 +20,8 @@ use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
 use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
 use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
 
+use CMDL\FormElementDefinitions\PasswordFormElementDefinition;
+
 use CMDL\FormElementDefinitions\NumberFormElementDefinition;
 
 use CMDL\FormElementDefinitions\CheckboxFormElementDefinition;
@@ -27,6 +29,11 @@ use CMDL\FormElementDefinitions\SelectionFormElementDefinition;
 use CMDL\FormElementDefinitions\MultiSelectionFormElementDefinition;
 use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
 use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
+
+use CMDL\FormElementDefinitions\RemoteSelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteMultiSelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteReferenceFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteMultiReferenceFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TimestampFormElementDefinition;
 use CMDL\FormElementDefinitions\DateFormElementDefinition;
@@ -42,6 +49,8 @@ use CMDL\FormElementDefinitions\RemoteImageFormElementDefinition;
 use CMDL\FormElementDefinitions\RemoteImagesFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TableFormElementDefinition;
+use CMDL\FormElementDefinitions\ColorpickerFormElementDefinition;
+use CMDL\FormElementDefinitions\GeolocationFormElementDefinition;
 
 use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
 
@@ -221,11 +230,10 @@ class Parser
             else
             {
                 $typeWithQualifier = $onTheRight;
-                $onTheRight        = '';
             }
 
-            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*');
-            $type              = Util::generateValidIdentifier($typeWithQualifier);
+            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*-');
+            $type              = Util::generateValidIdentifier($typeWithQualifier, '-');
 
         }
 
@@ -304,6 +312,9 @@ class Parser
                     $formElementDefinition->setSize($params[1]);
                 }
                 break;
+            case 'password':
+                $formElementDefinition = new PasswordFormElementDefinition($name,$params,$lists);
+                break;
             case 'number':
                 $formElementDefinition = new NumberFormElementDefinition($name);
                 if (isset($params[0]))
@@ -323,64 +334,28 @@ class Parser
                 }
                 break;
             case 'selection':
-                $formElementDefinition = new SelectionFormElementDefinition($name);
-                if (isset($params[0]))
-                {
-                    $formElementDefinition->setType($params[0]);
-                }
-                if (isset($params[1]))
-                {
-                    $formElementDefinition->setOptions($lists[0]);
-                }
+                $formElementDefinition = new SelectionFormElementDefinition($name, $params, $lists);
                 break;
             case 'multiselection':
-                $formElementDefinition = new MultiSelectionFormElementDefinition($name);
-                if (isset($params[0]))
-                {
-                    $formElementDefinition->setType($params[0]);
-                }
-                if (isset($params[1]))
-                {
-                    $formElementDefinition->setOptions($lists[0]);
-                }
+                $formElementDefinition = new MultiSelectionFormElementDefinition($name, $params, $lists);
                 break;
             case 'reference':
-                $formElementDefinition = new ReferenceFormElementDefinition($name);
-                if (isset($params[0]))
-                {
-                    $formElementDefinition->setContentType($params[0]);
-                }
-                if (isset($params[1]))
-                {
-                    $formElementDefinition->setType($params[0]);
-                }
-                if (isset($params[2]))
-                {
-                    $formElementDefinition->setWorkspace($params[0]);
-                }
-                if (isset($params[3]))
-                {
-                    $formElementDefinition->setOrder($params[0]);
-                }
+                $formElementDefinition = new ReferenceFormElementDefinition($name, $params, $lists);
                 break;
             case 'multireference':
-                $formElementDefinition = new MultiReferenceFormElementDefinition($name);
-                if (isset($params[0]))
-                {
-                    $formElementDefinition->setContentType($params[0]);
-                }
-                if (isset($params[1]))
-                {
-                    $formElementDefinition->setType($params[0]);
-                }
-                if (isset($params[2]))
-                {
-                    $formElementDefinition->setWorkspace($params[0]);
-                }
-                if (isset($params[3]))
-                {
-                    $formElementDefinition->setOrder($params[0]);
-                }
+                $formElementDefinition = new MultiReferenceFormElementDefinition($name, $params, $lists);
+                break;
+            case 'remote-selection':
+                $formElementDefinition = new RemoteSelectionFormElementDefinition($name, $params, $lists);
+                break;
+            case 'remote-multiselection':
+                $formElementDefinition = new RemoteMultiSelectionFormElementDefinition($name, $params, $lists);
+                break;
+            case 'remote-reference':
+                $formElementDefinition = new RemoteReferenceFormElementDefinition($name, $params, $lists);
+                break;
+            case 'remote-multireference':
+                $formElementDefinition = new RemoteMultiReferenceFormElementDefinition($name, $params, $lists);
                 break;
             case 'timestamp':
                 $formElementDefinition = new TimestampFormElementDefinition($name);
@@ -519,6 +494,12 @@ class Parser
                     $formElementDefinition->setWidths($lists[1]);
                 }
                 break;
+            case 'colorpicker':
+                $formElementDefinition = new ColorpickerFormElementDefinition($name, $params, $lists);
+                break;
+            case 'geolocation':
+                $formElementDefinition = new GeolocationFormElementDefinition($name, $params, $lists);
+                break;
             case 'sequence':
                 $formElementDefinition = new SequenceFormElementDefinition($name);
                 if (isset($params[0]))
@@ -527,10 +508,10 @@ class Parser
                 }
                 break;
             case 'custom':
-                $formElementDefinition = new CustomFormElementDefinition($name,$params,$lists);
+                $formElementDefinition = new CustomFormElementDefinition($name, $params, $lists);
                 break;
             default:
-                throw new CMDLParserException('', CMDLParserException::CMDL_UNKNOWN_FIELD_TYPE);
+                throw new CMDLParserException('Unknown form element type ' . $type . '.', CMDLParserException::CMDL_UNKNOWN_FORMELEMENT_TYPE);
 
                 break;
         }

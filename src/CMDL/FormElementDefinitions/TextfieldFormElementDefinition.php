@@ -12,8 +12,6 @@ class TextfieldFormElementDefinition extends FormElementDefinition
 
     protected $size = 'L';
 
-    protected $type = 'dropdown';
-
 
     public function setSize($size)
     {

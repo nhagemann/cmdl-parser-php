@@ -5,10 +5,10 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class MultiSelectionFormElementDefinition extends SelectionFormElementDefinition
+class RemoteMultiSelectionFormElementDefinition extends RemoteSelectionFormElementDefinition
 {
 
-    protected $elementType = 'multiselection';
+    protected $elementType = 'remote-multiselection';
 
     protected $type = 'list';
 

@@ -5,12 +5,12 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class ReferenceFormElementDefinition extends FormElementDefinition
+class RemoteReferenceFormElementDefinition extends FormElementDefinition
 {
 
     protected $type = 'dropdown';
 
-    protected $elementType = 'reference';
+    protected $elementType = 'remote-reference';
 
     protected $contentType = null;
 
@@ -18,25 +18,31 @@ class ReferenceFormElementDefinition extends FormElementDefinition
 
     protected $order = 'name';
 
+    protected $url = null;
+
 
     public function __construct($name, $params = array(), $lists = array())
     {
 
         if (isset($params[0]))
         {
-            $this->setContentType($params[0]);
+            $this->setUrl($params[0]);
         }
         if (isset($params[1]))
         {
-            $this->setType($params[1]);
+            $this->setContentType($params[1]);
         }
         if (isset($params[2]))
         {
-            $this->setWorkspace($params[2]);
+            $this->setType($params[2]);
         }
         if (isset($params[3]))
         {
-            $this->setOrder($params[3]);
+            $this->setWorkspace($params[3]);
+        }
+        if (isset($params[4]))
+        {
+            $this->setOrder($params[4]);
         }
 
         parent::__construct($name, $params, $lists);
@@ -97,4 +103,15 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         return $this->workspace;
     }
 
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
 }

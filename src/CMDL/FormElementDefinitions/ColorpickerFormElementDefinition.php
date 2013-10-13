@@ -5,12 +5,12 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class SelectionFormElementDefinition extends FormElementDefinition
+class ColorpickerFormElementDefinition extends FormElementDefinition
 {
 
-    protected $elementType = 'selection';
+    protected $elementType = 'colorpicker';
 
-    protected $type = 'dropdown';
+    protected $selectionType = 'free';
 
     protected $options = array();
 
@@ -19,7 +19,7 @@ class SelectionFormElementDefinition extends FormElementDefinition
     {
         if (isset($params[0]))
         {
-            $this->setType($params[0]);
+            $this->setSelectionType($params[0]);
         }
         if (isset($lists[0]))
         {
@@ -29,22 +29,22 @@ class SelectionFormElementDefinition extends FormElementDefinition
     }
 
 
-    public function setType($type)
+    public function setSelectionType($selectionType)
     {
-        if (in_array($type, array( 'dropdown', 'radio', 'toggle' )))
+        if (in_array($selectionType, array( 'free','limited' )))
         {
-            $this->type = $type;
+            $this->selectionType = $selectionType;
         }
         else
         {
-            throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "selectionType" of form element ' . $this->elementType . ' must be one of free, limited.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 
 
-    public function getType()
+    public function getSelectionType()
     {
-        return $this->type;
+        return $this->selectionType;
     }
 
 
