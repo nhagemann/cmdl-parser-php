@@ -8,7 +8,7 @@ use CMDL\CMDLParserException;
 class TextareaFormElementDefinition extends TextfieldFormElementDefinition
 {
 
-    protected $type = 'textarea';
+    protected $elementType = 'textarea';
 
     protected $size = 'L';
     protected $rows = 10;
@@ -22,7 +22,7 @@ class TextareaFormElementDefinition extends TextfieldFormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('Parameter "rows" of form element textarea must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "rows" of form element ' . $this->elementType . ' must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 

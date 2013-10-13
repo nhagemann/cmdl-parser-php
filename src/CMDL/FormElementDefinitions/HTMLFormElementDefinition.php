@@ -9,7 +9,7 @@ use CMDL\CMDLParserException;
 class HTMLFormElementDefinition extends TextareaFormElementDefinition
 {
 
-    protected $type = 'html';
+    protected $elementType = 'html';
 
     protected $size = 'L';
 

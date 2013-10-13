@@ -7,15 +7,19 @@ use CMDL\ContentTypeDefinition;
 use CMDL\ViewDefinition;
 use CMDL\InsertionDefinition;
 use CMDL\FormElementDefinition;
+
+use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
+use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
+use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
+
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
 use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
 use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
 use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
-use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
-use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
-use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
+
+use CMDL\FormElementDefinitions\NumberFormElementDefinition;
 
 use CMDL\Util;
 
@@ -261,6 +265,28 @@ class Parser
                 if (isset($params[1]))
                 {
                     $formElementDefinition->setSize($params[1]);
+                }
+                break;
+            case 'number':
+                $formElementDefinition = new NumberFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setDigits($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setUnit($params[1]);
+                }
+                break;
+            case 'timestamp':
+                $formElementDefinition = new NumberFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setDigits($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setUnit($params[1]);
                 }
                 break;
             default:

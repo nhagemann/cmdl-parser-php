@@ -9,7 +9,7 @@ use CMDL\CMDLParserException;
 class RichtextFormElementDefinition extends TextareaFormElementDefinition
 {
 
-    protected $type = 'richtext';
+    protected $elementType = 'richtext';
 
     protected $size = 'L';
 

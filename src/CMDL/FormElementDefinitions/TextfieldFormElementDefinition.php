@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Nils
- * Date: 10/10/13
- * Time: 9:54 PM
- * To change this template use File | Settings | File Templates.
- */
 
 namespace CMDL\FormElementDefinitions;
 
@@ -15,7 +8,7 @@ use CMDL\CMDLParserException;
 class TextfieldFormElementDefinition extends FormElementDefinition
 {
 
-    protected $type = 'textfield';
+    protected $elementType = 'textfield';
 
     protected $size = 'L';
 
@@ -28,7 +21,7 @@ class TextfieldFormElementDefinition extends FormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('Parameter "size" of form element ' . $this->type . ' must be one of S,M,L,XL,XXL', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "size" of form element ' . $this->elementType . ' must be one of S,M,L,XL,XXL', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
 
     }

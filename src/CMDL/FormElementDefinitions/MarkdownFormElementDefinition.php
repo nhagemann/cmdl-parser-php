@@ -9,7 +9,7 @@ use CMDL\CMDLParserException;
 class MarkdownFormElementDefinition extends TextareaFormElementDefinition
 {
 
-    protected $type = 'markdown';
+    protected $elementType = 'markdown';
 
     protected $size = 'L';
 

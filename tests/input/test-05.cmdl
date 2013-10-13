@@ -40,3 +40,4 @@ Name
 @status none
 @readonly (insert,edit)
 
+@languages (de: Deutsch,en: English)

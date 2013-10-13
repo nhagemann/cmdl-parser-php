@@ -7,5 +7,5 @@ use CMDL\CMDLParserException;
 
 class HeadlineFormElementDefinition extends FormElementDefinition
 {
-    protected $type = 'headline';
+    protected $elementType = 'headline';
 }
