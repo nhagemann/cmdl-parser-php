@@ -13,14 +13,21 @@ class FormElementDefinition
 {
 
     protected $name = null;
+
     protected $label = null;
+
     protected $mandatory = false;
     protected $unique = false;
 
+    protected $params = array();
+    protected $lists = array();
 
-    public function __construct($name=null)
+
+    public function __construct($name = null, $params = array(), $lists = array())
     {
         $this->setName($name);
+        $this->params = $params;
+        $this->lists  = $lists;
     }
 
 
@@ -71,4 +78,39 @@ class FormElementDefinition
         return (boolean)$this->unique;
     }
 
+
+    public function hasParam($nr)
+    {
+        return isset($this->params[$nr - 1]);
+    }
+
+
+    public function hasList($nr)
+    {
+        return isset($this->lists[$nr - 1]);
+    }
+
+
+    public function getParam($nr)
+    {
+
+        if ($this->hasParam($nr))
+        {
+            return $this->params[$nr - 1];
+        }
+
+        return null;
+    }
+
+
+    public function getList($nr)
+    {
+
+        if ($this->hasList($nr))
+        {
+            return $this->lists[$nr - 1];
+        }
+
+        return null;
+    }
 }

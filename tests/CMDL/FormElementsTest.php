@@ -6,10 +6,6 @@ use CMDL\Parser;
 use CMDL\Util;
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
-use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
-use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
-use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
-use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
 
 class FormElementsTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,6 +43,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($formElementDefinition->isUnique());
     }
 
+
     public function testTextareaDefinition()
     {
         /* @var TextareaFormElementDefinition */
@@ -59,6 +56,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
     }
+
 
     public function testTextareaDescendantsDefinition()
     {
@@ -75,4 +73,15 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\CMDLFormElementDefinition', $formElementDefinition);
     }
 
+
+    public function testCustomFormElementDefinition()
+    {
+        $formElementDefinition = Parser::parseFormElementDefinition('prop1 = custom video youtube (360p,720p,1080p)');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\CustomFormElementDefinition', $formElementDefinition);
+
+        $this->assertEquals('video', $formElementDefinition->getType());
+        $this->assertEquals('youtube', $formElementDefinition->getParam(1));
+        $this->assertCount(3, $formElementDefinition->getList(1));
+
+    }
 }

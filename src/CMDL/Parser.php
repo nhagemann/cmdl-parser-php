@@ -36,9 +36,16 @@ use CMDL\FormElementDefinitions\FilesFormElementDefinition;
 use CMDL\FormElementDefinitions\ImageFormElementDefinition;
 use CMDL\FormElementDefinitions\ImagesFormElementDefinition;
 
+use CMDL\FormElementDefinitions\RemoteFileFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteFilesFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteImageFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteImagesFormElementDefinition;
+
 use CMDL\FormElementDefinitions\TableFormElementDefinition;
 
 use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
+
+use CMDL\FormElementDefinitions\CustomFormElementDefinition;
 
 use CMDL\Util;
 
@@ -441,6 +448,66 @@ class Parser
                     $formElementDefinition->setFileTypes($lists[0]);
                 }
                 break;
+            case 'remote-file':
+                $formElementDefinition = new RemoteFileFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRepositoryUrl($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setPath($params[1]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'remote-files':
+                $formElementDefinition = new RemoteFilesFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRepositoryUrl($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setPath($params[1]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'remote-image':
+                $formElementDefinition = new RemoteImageFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRepositoryUrl($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setPath($params[1]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
+            case 'remote-images':
+                $formElementDefinition = new RemoteImagesFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setRepositoryUrl($params[0]);
+                }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setPath($params[1]);
+                }
+                if (isset($lists[0]))
+                {
+                    $formElementDefinition->setFileTypes($lists[0]);
+                }
+                break;
             case 'table':
                 $formElementDefinition = new TableFormElementDefinition($name);
                 if (isset($lists[0]))
@@ -458,6 +525,9 @@ class Parser
                 {
                     $formElementDefinition->setInserts($lists[0]);
                 }
+                break;
+            case 'custom':
+                $formElementDefinition = new CustomFormElementDefinition($name,$params,$lists);
                 break;
             default:
                 throw new CMDLParserException('', CMDLParserException::CMDL_UNKNOWN_FIELD_TYPE);

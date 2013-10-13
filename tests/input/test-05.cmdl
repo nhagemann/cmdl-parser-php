@@ -8,18 +8,20 @@ Name
 
 
 
-
-
-abc = remote-file url path filetypes  (including a:b@)
-abc = remote-image url path filetypes
+# TODO ...
 abc = remote-selection url type
 abc = remote-multiselection url type
+abc = remote-reference
+abc = remote-multireference
 
 abc = colorpicker limited (colors)
 abc = geolocation
 
-abc = custom youtube param1 param2 .... list1 list2 list3 ...
 
+abc = password md5 salted
+
+
+__construct($name,$params,$lists)
 
 
 @title News ""
