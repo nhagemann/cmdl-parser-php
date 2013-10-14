@@ -1,9 +1,9 @@
 {
-    "name": "nhagemann/cmdlparser",
+    "name": "CMDL Parser PHP",
     "description": "",
     "type": "library",
     "homepage": "http://www.nilshagemann.de",
-    "license": "LGPL",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nils Hagemann",
