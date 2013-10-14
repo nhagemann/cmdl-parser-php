@@ -5,7 +5,7 @@ namespace CMDL;
 use CMDL\Parser;
 use CMDL\CMDLParserException;
 use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
+use CMDL\ClippingDefinition;
 use CMDL\FormElementDefinition;
 
 class ParsingTest extends \PHPUnit_Framework_TestCase
@@ -30,29 +30,29 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testViewNotDefined()
+    public function testClippingNotDefined()
     {
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-01.cmdl');
 
         $this->setExpectedException('CMDL\CMDLParserException');
 
-        $contentTypeDefinition->getViewDefinition('none');
+        $contentTypeDefinition->getClippingDefinition('none');
 
     }
 
 
-    public function testViewsDefined()
+    public function testClippingsDefined()
     {
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-01.cmdl');
 
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
-        $this->assertInstanceOf('CMDL\ViewDefinition', $viewDefinition);
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('insert');
-        $this->assertInstanceOf('CMDL\ViewDefinition', $viewDefinition);
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('edit');
-        $this->assertInstanceOf('CMDL\ViewDefinition', $viewDefinition);
+        $viewDefinition = $contentTypeDefinition->getClippingDefinition('default');
+        $this->assertInstanceOf('CMDL\ClippingDefinition', $viewDefinition);
+        $viewDefinition = $contentTypeDefinition->getClippingDefinition('insert');
+        $this->assertInstanceOf('CMDL\ClippingDefinition', $viewDefinition);
+        $viewDefinition = $contentTypeDefinition->getClippingDefinition('edit');
+        $this->assertInstanceOf('CMDL\ClippingDefinition', $viewDefinition);
 
     }
 
@@ -62,11 +62,11 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-01.cmdl');
 
-        /* @var ViewDefinition */
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
 
         /* @var FormElementDefinition */
-        $fieldDefinition = $viewDefinition->getFormElementDefinition('name');
+        $fieldDefinition = $clippingDefinition->getFormElementDefinition('name');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fieldDefinition);
     }
 
@@ -76,10 +76,10 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-02.cmdl');
 
-        /* @var ViewDefinition */
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
 
-        $fields = $viewDefinition->getFormElementDefinitions();
+        $fields = $clippingDefinition->getFormElementDefinitions();
 
         $this->assertInstanceOf('CMDL\FormElementDefinitions\HeadlineFormElementDefinition', $fields[0]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[1]);
@@ -95,10 +95,10 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-03.cmdl');
 
-        /* @var ViewDefinition */
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
 
-        $fields = $viewDefinition->getFormElementDefinitions();
+        $fields = $clippingDefinition->getFormElementDefinitions();
 
         $this->assertInstanceOf('CMDL\FormElementDefinitions\SectionStartFormElementDefinition', $fields[0]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\HeadlineFormElementDefinition', $fields[1]);
@@ -120,14 +120,14 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-04.cmdl');
 
-        /* @var ViewDefinition */
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
-        $fields         = $viewDefinition->getFormElementDefinitions();
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
+        $fields         = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
-        /* @var ViewDefinition */
-        $viewDefinition = $contentTypeDefinition->getViewDefinition('edit');
-        $fields         = $viewDefinition->getFormElementDefinitions();
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('edit');
+        $fields         = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
         /* @var InsertionDefinition */

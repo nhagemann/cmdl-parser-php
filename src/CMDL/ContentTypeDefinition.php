@@ -3,14 +3,14 @@
 namespace CMDL;
 
 use CMDL\CMDLParserException;
-use CMDL\ViewDefinition;
+use CMDL\ClippingDefinition;
 use CMDL\InsertionDefinition;
 
 class ContentTypeDefinition
 {
 
     protected $cmdl = null;
-    protected $views = array();
+    protected $clippings = array();
     protected $insertions = array();
 
     public function setCMDL($s)
@@ -23,19 +23,19 @@ class ContentTypeDefinition
         return $this->cmdl;
     }
 
-    public function getViewDefinition($name = 'default')
+    public function getClippingDefinition($name = 'default')
     {
-        if (array_key_exists($name,$this->views))
+        if (array_key_exists($name,$this->clippings))
         {
-            return $this->views[$name];
+            return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('',CMDLParserException::CMDL_VIEW_NOT_DEFINED);
+        throw new CMDLParserException('',CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
     }
 
-    public function addViewDefinition(ViewDefinition $definition)
+    public function addClippingDefinition(ClippingDefinition $definition)
     {
-        $this->views[$definition->getName()]= $definition;
+        $this->clippings[$definition->getName()]= $definition;
     }
 
 

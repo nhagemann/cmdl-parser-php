@@ -39,14 +39,14 @@ class FormElementDefinitionCollection
     }
 
 
-    public function getFormElementDefinition($name = 'default')
+    public function getFormElementDefinition($name)
     {
         if (array_key_exists($name, $this->namedFields))
         {
             return $this->namedFields[$name];
         }
 
-        throw new CMDLParserException('', CMDLParserException::CMDL_FIELD_NOT_DEFINED);
+        throw new CMDLParserException('Could not find a formelement named ' . $name, CMDLParserException::CMDL_FORMELEMENT_NOT_FOUND);
     }
 
 

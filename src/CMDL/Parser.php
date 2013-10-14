@@ -4,7 +4,7 @@ namespace CMDL;
 
 use CMDL\CMDLParserException;
 use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
+use CMDL\ClippingDefinition;
 use CMDL\InsertionDefinition;
 use CMDL\FormElementDefinition;
 
@@ -81,8 +81,8 @@ class Parser
         $contentTypeDefinition = new ContentTypeDefinition();
         $contentTypeDefinition->setCMDL($cmdl);
 
-        $currentFormElementDefinitionCollection = new ViewDefinition('default');
-        $contentTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
+        $currentFormElementDefinitionCollection = new ClippingDefinition('default');
+        $contentTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
 
         $cmdl = explode(PHP_EOL, $cmdl);
 
@@ -99,18 +99,18 @@ class Parser
                     case ' ': // ignore empty lines
                     case '':
                         break;
-                    case '-': // start of a view definition
-                        $viewName = Util::generateValidIdentifier($line);
+                    case '-': // start of a clipping definition
+                        $clippingName = Util::generateValidIdentifier($line);
 
-                        if ($viewName == 'default')
+                        if ($clippingName == 'default')
                         {
-                            // get the already created and added definition of view "default"
-                            $currentFormElementDefinitionCollection = $contentTypeDefinition->getViewDefinition('default');
+                            // get the already created and added definition of clipping "default"
+                            $currentFormElementDefinitionCollection = $contentTypeDefinition->getClippingDefinition('default');
                         }
                         else
                         {
-                            $currentFormElementDefinitionCollection = new ViewDefinition($viewName);
-                            $contentTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
+                            $currentFormElementDefinitionCollection = new ClippingDefinition($clippingName);
+                            $contentTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
                         }
                         break;
                     case '+': // start of an insertion definition
