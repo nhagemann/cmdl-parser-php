@@ -202,7 +202,6 @@ class Parser
         {
             $name = Util::generateValidIdentifier($title);
         }
-
         //
         // extract type and qualifier
         //

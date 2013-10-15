@@ -9,6 +9,10 @@ class FormElementDefinitionCollection
     protected $fields = array();
     protected $namedFields = array();
 
+    protected $properties = null;
+    protected $mandatoryProperties = null;
+    protected $uniqueProperties = null;
+
 
     public function __construct($name = 'default')
     {
@@ -36,6 +40,10 @@ class FormElementDefinitionCollection
             $this->namedFields[$definition->getName()] = $definition;
         }
         $this->fields[] = $definition;
+
+        $this->properties          = null;
+        $this->mandatoryProperties = null;
+        $this->uniqueProperties    = null;
     }
 
 
@@ -55,30 +63,47 @@ class FormElementDefinitionCollection
         return $this->fields;
     }
 
-    public function getProperties($clippingName=null)
-    {
-        $properties = array();
-        $clippings = $this->clippings;
-        if ($clippingName!=null)
-        {
-            if (array_key_exists($clippingName,$this->clippings))
-            {
-                $clippings = $this->clippings[$clippingName];
-            }
-            else
-            {
-                return false;
-            }
-        }
 
-        foreach ($clippings as $clippingDefinition)
+    public function getProperties()
+    {
+        if ($this->properties)
         {
-            foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
+            return $this->properties;
+        }
+        $properties = array();
+        $mandatoryProperties= array();
+        $uniqueProperties=array();
+
+        foreach ($this->fields as $formElementDefinition)
+        {
+            if ($formElementDefinition->getName())
             {
-                $properties[]=$formElementDefinition->getName();
+                $properties[] = $formElementDefinition->getName();
+                if ($formElementDefinition->isMandatory())
+                {
+                    $mandatoryProperties[] = $formElementDefinition->getName();
+                }
+                if ($formElementDefinition->isUnique())
+                {
+                    $uniqueProperties[] = $formElementDefinition->getName();
+                }
             }
         }
-        return $properties;
+        $this->properties = $properties;
+        $this->mandatoryProperties = $mandatoryProperties;
+        $this->uniqueProperties = $uniqueProperties;
+
+        return $this->properties;
+    }
+
+
+    public function hasProperty($property)
+    {
+        if (in_array($property,$this->getProperties()))
+        {
+            return true;
+        }
+        return false;
     }
 
 }

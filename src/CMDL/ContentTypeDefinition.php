@@ -54,4 +54,41 @@ class ContentTypeDefinition
         $this->insertions[$definition->getName()]= $definition;
     }
 
+    public function hasProperty($property,$clippingName)
+    {
+        // include super properties
+        if (in_array($property,array('name')))
+        {
+            return true;
+        }
+        return $this->getClippingDefinition($clippingName)->hasProperty($property);
+
+    }
+
+
+    public function getProperties($clippingName=null)
+    {
+        $properties = array();
+        $clippings = $this->clippings;
+        if ($clippingName!=null)
+        {
+            if (array_key_exists($clippingName,$this->clippings))
+            {
+                $clippings = $this->clippings[$clippingName];
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        foreach ($clippings as $clippingDefinition)
+        {
+             foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
+             {
+                $properties[]=$formElementDefinition->getName();
+             }
+        }
+        return $properties;
+    }
 }
