@@ -14,6 +14,8 @@ class ColorpickerFormElementDefinition extends FormElementDefinition
 
     protected $options = array();
 
+    protected $maxValueLength = 6;
+
 
     public function __construct($name, $params = array(), $lists = array())
     {

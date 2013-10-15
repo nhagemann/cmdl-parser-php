@@ -12,6 +12,8 @@ class RemoteImagesFormElementDefinition extends ImagesFormElementDefinition
 
     protected $repositoryUrl = null;
 
+    protected $maxValueLength = 256;
+
 
     public function setRepositoryUrl($repositoryUrl)
     {

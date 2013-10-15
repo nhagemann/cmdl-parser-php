@@ -14,6 +14,8 @@ class TableFormElementDefinition extends FormElementDefinition
 
     protected $widths = array();
 
+    protected $maxValueLength = 256;
+
 
     public function setColumnHeadings($columnHeadings)
     {

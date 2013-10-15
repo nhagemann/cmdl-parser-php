@@ -10,6 +10,7 @@ class CheckboxFormElementDefinition extends FormElementDefinition
 
     protected $elementType = 'checkbox';
 
+    protected $maxValueLength = 1;
 
     public function setLegend($legend)
     {

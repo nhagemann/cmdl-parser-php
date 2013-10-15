@@ -12,6 +12,8 @@ class SequenceFormElementDefinition extends FormElementDefinition
 
     protected $inserts = array();
 
+    protected $maxValueLength = 256;
+
 
     public function setInserts($inserts)
     {

@@ -15,4 +15,6 @@ class HTMLFormElementDefinition extends TextareaFormElementDefinition
 
     protected $rows = 10;
 
+    protected $maxValueLength = 256;
+
 }

@@ -12,6 +12,7 @@ class MultiSelectionFormElementDefinition extends SelectionFormElementDefinition
 
     protected $type = 'list';
 
+    protected $maxValueLength = 256;
 
     public function setType($type)
     {

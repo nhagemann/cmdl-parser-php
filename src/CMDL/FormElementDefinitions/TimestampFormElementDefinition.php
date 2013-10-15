@@ -14,6 +14,7 @@ class TimestampFormElementDefinition extends FormElementDefinition
 
     protected $init = null;
 
+    protected $maxValueLength = 10;
 
     public function setType($type)
     {

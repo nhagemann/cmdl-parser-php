@@ -18,6 +18,8 @@ class MultiReferenceFormElementDefinition extends ReferenceFormElementDefinition
 
     protected $order = 'name';
 
+    protected $maxValueLength = 256;
+
 
     public function setType($type)
     {

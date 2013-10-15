@@ -177,6 +177,8 @@ class Parser
     public static function parseFormElementDefinition($line)
     {
         $line = trim($line);
+        $name = Util::getTextBetweenChars($line, '{', '}');
+        $line = Util::removeTextBetweenCharsIncludingDelimiters($line, '{', '}');
 
         $p = strpos($line, '=');
 
@@ -191,20 +193,16 @@ class Parser
             $onTheRight = '';
         }
 
-        //
-        // check for distinct property name
-        //
-
-        $name = Util::getTextBetweenChars($line, '{', '}');
         if ($name)
         {
             $name = $name[0];
-            $line = Util::removeTextBetweenCharsIncludingDelimiters($line, '{', '}');
+
         }
         else
         {
             $name = Util::generateValidIdentifier($title);
         }
+
         //
         // extract type and qualifier
         //

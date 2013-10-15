@@ -12,6 +12,8 @@ class RemoteFilesFormElementDefinition extends FilesFormElementDefinition
 
     protected $repositoryUrl = null;
 
+    protected $maxValueLength = 256;
+
 
     public function setRepositoryUrl($repositoryUrl)
     {

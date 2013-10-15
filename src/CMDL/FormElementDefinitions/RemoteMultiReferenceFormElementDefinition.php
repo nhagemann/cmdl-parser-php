@@ -18,6 +18,7 @@ class RemoteMultiReferenceFormElementDefinition extends RemoteReferenceFormEleme
 
     protected $order = 'name';
 
+    protected $maxValueLength = 256;
 
     public function setType($type)
     {

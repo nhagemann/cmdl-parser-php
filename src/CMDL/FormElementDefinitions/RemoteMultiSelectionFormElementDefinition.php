@@ -12,6 +12,7 @@ class RemoteMultiSelectionFormElementDefinition extends RemoteSelectionFormEleme
 
     protected $type = 'list';
 
+    protected $maxValueLength = 256;
 
     public function setType($type)
     {

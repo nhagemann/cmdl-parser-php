@@ -12,6 +12,7 @@ class CustomFormElementDefinition extends FormElementDefinition
 
     protected $type = null;
 
+    protected $maxValueLength = 256;
 
     public function __construct($name, $params, $lists)
     {

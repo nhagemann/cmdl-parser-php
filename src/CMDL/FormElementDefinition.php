@@ -22,6 +22,7 @@ class FormElementDefinition
     protected $params = array();
     protected $lists = array();
 
+    protected $maxValueLength = 255;
 
     public function __construct($name = null, $params = array(), $lists = array())
     {
@@ -112,5 +113,10 @@ class FormElementDefinition
         }
 
         return null;
+    }
+
+    public function getMaxValueLength()
+    {
+        return $this->maxValueLength;
     }
 }

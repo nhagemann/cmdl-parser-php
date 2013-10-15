@@ -13,6 +13,7 @@ class TextareaFormElementDefinition extends TextfieldFormElementDefinition
     protected $size = 'L';
     protected $rows = 10;
 
+    protected $maxValueLength = 256;
 
     public function setRows($rows)
     {

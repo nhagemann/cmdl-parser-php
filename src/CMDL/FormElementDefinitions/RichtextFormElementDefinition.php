@@ -15,4 +15,5 @@ class RichtextFormElementDefinition extends TextareaFormElementDefinition
 
     protected $rows = 10;
 
+    protected $maxValueLength = 256;
 }
