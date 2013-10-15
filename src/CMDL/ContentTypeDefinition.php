@@ -9,70 +9,97 @@ use CMDL\InsertionDefinition;
 class ContentTypeDefinition
 {
 
+    protected $name = null;
+
     protected $cmdl = null;
     protected $clippings = array();
     protected $insertions = array();
 
+
+    public function __construct($name = null)
+    {
+        $this->name = $name;
+    }
+
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+
     public function setCMDL($s)
     {
-        $this->cmdl =$s;
+        $this->cmdl = $s;
     }
+
 
     public function getCMDL()
     {
         return $this->cmdl;
     }
 
+
     public function getClippingDefinition($name = 'default')
     {
-        if (array_key_exists($name,$this->clippings))
+        if (array_key_exists($name, $this->clippings))
         {
             return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('',CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
+        throw new CMDLParserException('', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
     }
+
 
     public function addClippingDefinition(ClippingDefinition $definition)
     {
-        $this->clippings[$definition->getName()]= $definition;
+        $this->clippings[$definition->getName()] = $definition;
     }
 
 
     public function getInsertionDefinition($name)
     {
-        if (array_key_exists($name,$this->insertions))
+        if (array_key_exists($name, $this->insertions))
         {
             return $this->insertions[$name];
         }
 
-        throw new CMDLParserException('',CMDLParserException::CMDL_INSERTION_NOT_DEFINED);
+        throw new CMDLParserException('', CMDLParserException::CMDL_INSERTION_NOT_DEFINED);
     }
+
 
     public function addInsertionDefinition(InsertionDefinition $definition)
     {
-        $this->insertions[$definition->getName()]= $definition;
+        $this->insertions[$definition->getName()] = $definition;
     }
 
-    public function hasProperty($property,$clippingName)
+
+    public function hasProperty($property, $clippingName)
     {
         // include super properties
-        if (in_array($property,array('name')))
+        if (in_array($property, array( 'name' )))
         {
             return true;
         }
+
         return $this->getClippingDefinition($clippingName)->hasProperty($property);
 
     }
 
 
-    public function getProperties($clippingName=null)
+    public function getProperties($clippingName = null)
     {
         $properties = array();
-        $clippings = $this->clippings;
-        if ($clippingName!=null)
+        $clippings  = $this->clippings;
+        if ($clippingName != null)
         {
-            if (array_key_exists($clippingName,$this->clippings))
+            if (array_key_exists($clippingName, $this->clippings))
             {
                 $clippings = $this->clippings[$clippingName];
             }
@@ -84,11 +111,12 @@ class ContentTypeDefinition
 
         foreach ($clippings as $clippingDefinition)
         {
-             foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
-             {
-                $properties[]=$formElementDefinition->getName();
-             }
+            foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
+            {
+                $properties[] = $formElementDefinition->getName();
+            }
         }
+
         return $properties;
     }
 }
