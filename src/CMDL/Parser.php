@@ -60,6 +60,7 @@ use CMDL\Util;
 
 class Parser
 {
+    static $superProperties = array('name','status','subtype');
 
     public static function parseCMDLFile($filename)
     {

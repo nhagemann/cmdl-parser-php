@@ -1,8 +1,12 @@
-Name
 --- insert ---
-Name
+Title = textfield*!
+Type = selection (1:News,2:Information) {subtype}
 --- edit ---
-Name
+Title = textfield*!
+Abstract = textarea*
+Body = textarea*
+Source
+Status
 
 
 
@@ -10,61 +14,61 @@ Name
 
 
 
-- language bei reference
-- punkt bei number
-[[[
-
-
-
-@title News ""
-
-
-@description ""
->>>
->>>
->>>
->>>
-
-@workspaces (default)
-
-
-
-@init property1 "adsfsadf"
-
-@hint property1 ""
-
-    Halloisdfsdf
-    sdfsdf
-    asdf
-    sdf
-
-
-@help property1 ""
->>>
->>>
->>>
-
-@validate property1 minmax
-
-
-@subtypes none
-
-@status none
-@readonly (insert,edit)
-
-@languages (de: Deutsch,en: English)  none
-
-
-
+#- language bei reference
+#- punkt bei number
+#[[[
+#
+#
+#
+#@title News ""
+#
+#
+#@description ""
+#>>>
+#>>>
+#>>>
+#>>>
+#
+#@workspaces (default)
+#
+#
+#
+#@init property1 "adsfsadf"
+#
+#@hint property1 ""
+#
+#    Halloisdfsdf
+#    sdfsdf
+#    asdf
+#    sdf
+#
+#
+#@help property1 ""
+#>>>
+#>>>
+#>>>
+#
+#@validate property1 minmax
+#
+#
+#@subtypes none
+#
+#@status none
+#@readonly (insert,edit)
+#
+#@languages (de: Deutsch,en: English)  none
+#
+#
+#
 # additional properties (readonly and/or writeables)
-
-@extra-properties (property1, property2) (property3)
-
-@sortable list|tree|related|none
-
-@insert abc
-@insert property (1:abc,2:abc)
-
+#
+#@extra-properties (property1, property2) (property3)
+#
+#@sortable list|tree|related|none
+#
+#@insert abc
+#@insert property (1:abc,2:abc)
+#
 #clipping
 
 

@@ -96,6 +96,23 @@ class FormElementDefinitionCollection
         return $this->properties;
     }
 
+    public function getMandatoryProperties()
+    {
+        if (!$this->properties)
+        {
+            $this->getProperties();
+        }
+        return $this->mandatoryProperties;
+    }
+
+    public function getUniqueProperties()
+    {
+        if (!$this->properties)
+        {
+            $this->getProperties();
+        }
+        return $this->uniqueProperties;
+    }
 
     public function hasProperty($property)
     {

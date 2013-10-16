@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Nils
- * Date: 10/10/13
- * Time: 9:50 PM
- * To change this template use File | Settings | File Templates.
- */
 
 namespace CMDL;
 
@@ -16,6 +9,8 @@ class FormElementDefinition
 
     protected $label = null;
 
+    protected $defaultValue = null;
+
     protected $mandatory = false;
     protected $unique = false;
 
@@ -23,6 +18,7 @@ class FormElementDefinition
     protected $lists = array();
 
     protected $maxValueLength = 255;
+
 
     public function __construct($name = null, $params = array(), $lists = array())
     {
@@ -53,6 +49,18 @@ class FormElementDefinition
     public function getLabel()
     {
         return $this->label;
+    }
+
+
+    public function setDefaultValue($defaultValue)
+    {
+        $this->defaultValue = $defaultValue;
+    }
+
+
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
     }
 
 
@@ -114,6 +122,7 @@ class FormElementDefinition
 
         return null;
     }
+
 
     public function getMaxValueLength()
     {

@@ -46,6 +46,12 @@ class ContentTypeDefinition
     }
 
 
+    /**
+     * @param string $name
+     *
+     * @return ClippingDefinition
+     * @throws CMDLParserException
+     */
     public function getClippingDefinition($name = 'default')
     {
         if (array_key_exists($name, $this->clippings))
@@ -53,7 +59,7 @@ class ContentTypeDefinition
             return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
+        throw new CMDLParserException('Content type' . rtrim(' ' . $this->getName()) . ' has no clipping "' . $name . '"', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
     }
 
 
@@ -95,28 +101,42 @@ class ContentTypeDefinition
 
     public function getProperties($clippingName = null)
     {
-        $properties = array();
-        $clippings  = $this->clippings;
-        if ($clippingName != null)
+        if ($clippingName)
         {
-            if (array_key_exists($clippingName, $this->clippings))
-            {
-                $clippings = $this->clippings[$clippingName];
-            }
-            else
-            {
-                return false;
-            }
-        }
+            $clippingDefinition = $this->getClippingDefinition($clippingName);
 
-        foreach ($clippings as $clippingDefinition)
+            return $clippingDefinition->getProperties();
+        }
+        else
         {
-            foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
+            $properties = array();
+            foreach ($this->clippings as $clippingDefinition)
             {
-                $properties[] = $formElementDefinition->getName();
-            }
-        }
+                $properties = array_merge($properties, $clippingDefinition->getProperties());
 
-        return $properties;
+            }
+
+            return array_unique($properties);
+        }
+    }
+
+
+    public function getMandatoryProperties($clippingName)
+    {
+
+        $clippingDefinition = $this->getClippingDefinition($clippingName);
+
+        return $clippingDefinition->getMandatoryProperties();
+
+    }
+
+
+    public function getUniqueProperties($clippingName)
+    {
+
+        $clippingDefinition = $this->getClippingDefinition($clippingName);
+
+        return $clippingDefinition->getUniqueProperties();
+
     }
 }
