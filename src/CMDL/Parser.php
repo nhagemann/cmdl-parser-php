@@ -12,6 +12,8 @@ use CMDL\FormElementDefinitions\PrintFormElementDefinition;
 use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
+use CMDL\FormElementDefinitions\TabStartFormElementDefinition;
+use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
@@ -88,6 +90,7 @@ class Parser
         $cmdl = explode(PHP_EOL, $cmdl);
 
         $sectionOpened = false;
+        $tabOpened = false;
 
         foreach ($cmdl AS $line)
         {
@@ -101,7 +104,7 @@ class Parser
                     case '':
                         break;
                     case '-': // start of a clipping definition
-                        $clippingName = Util::generateValidIdentifier($line);
+                        $clippingName = Util::generateValidIdentifier(trim($line,'-'));
 
                         if ($clippingName == 'default')
                         {
@@ -121,7 +124,21 @@ class Parser
                         break;
                     case '[':
 
-                        if (substr($line, 1, 1) == '[') // it's a section
+                        if (substr($line, 0, 3) == '[[[') // it's a tab
+                        {
+                            if ($tabOpened == true) // There's still an open section -> close it first
+                            {
+                                $formElementDefinition = new TabEndFormElementDefinition();
+                                $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
+                            }
+
+                            $formElementDefinition = new TabStartFormElementDefinition();
+
+                            $formElementDefinition->setLabel(rtrim(substr($line, 3), ']'));
+                            $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
+                            $tabOpened = true;
+                        }
+                        elseif (substr($line, 0, 2) == '[[') // it's a section
                         {
 
                             if ($sectionOpened == true) // There's still an open section -> close it first
@@ -152,10 +169,17 @@ class Parser
 
                         break;
                     case ']':
-                        if ($sectionOpened == true)
+                        if (substr($line, 0, 3) == ']]]') // it's a tab
+                        {
+                            $formElementDefinition = new TabEndFormElementDefinition();
+                            $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
+                            $tabOpened = false;
+                        }
+                        elseif ($sectionOpened == true)
                         {
                             $formElementDefinition = new SectionEndFormElementDefinition();
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
+                            $sectionOpened = false;
                         }
 
                         break;
@@ -230,8 +254,8 @@ class Parser
                 $typeWithQualifier = $onTheRight;
             }
 
-            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*-');
-            $type              = Util::generateValidIdentifier($typeWithQualifier, '-');
+            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*');
+            $type              = Util::generateValidIdentifier($typeWithQualifier);
 
         }
 

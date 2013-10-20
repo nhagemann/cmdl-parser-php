@@ -5,7 +5,7 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class HeadlineFormElementDefinition extends FormElementDefinition
+class TabEndFormElementDefinition extends FormElementDefinition
 {
-    protected $elementType = 'headline';
+    protected $elementType = 'tab';
 }

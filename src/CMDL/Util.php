@@ -40,7 +40,7 @@ class Util
         }
 
         $s            = strtolower($s);
-        $allowedchars = 'abcdefghijklmnopqrstuvwxyz0123456789_' . preg_quote($additionalchars);
+        $allowedchars = preg_quote('abcdefghijklmnopqrstuvwxyz0123456789_-') . preg_quote($additionalchars);
 
         $patterns = "/[^" . $allowedchars . "]*/";
 
@@ -118,11 +118,9 @@ class Util
             {
                 $items    = array();
                 $csvitems = explode(',', $csv);
-                $i        = 0;
 
                 foreach ($csvitems as $item)
                 {
-                    $i++;
                     $item     = trim($item);
                     $keyvalue = explode(':', $item);
                     if (count($keyvalue) == 2)
@@ -132,7 +130,7 @@ class Util
                     }
                     else
                     {
-                        $key   = $i;
+                        $key = $item;
                         $value = $item;
                     }
 

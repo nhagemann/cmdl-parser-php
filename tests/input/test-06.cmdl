@@ -1,3 +1,4 @@
+[[[Tab 1]]]
 [[Section 1]]
 [Headline 1]
 property1
@@ -7,3 +8,9 @@ property2
 property3
 ]]
 property4
+[[[Tab 2]]]
+property5
+property6
+]]]
+property7
+property8

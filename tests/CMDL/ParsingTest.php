@@ -122,23 +122,55 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
 
         /* @var ClippingDefinition */
         $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
-        $fields         = $clippingDefinition->getFormElementDefinitions();
+        $fields             = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
         /* @var ClippingDefinition */
         $clippingDefinition = $contentTypeDefinition->getClippingDefinition('edit');
-        $fields         = $clippingDefinition->getFormElementDefinitions();
+        $fields             = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
         /* @var InsertionDefinition */
         $insertionDefinition = $contentTypeDefinition->getInsertionDefinition('insert1');
-        $fields         = $insertionDefinition->getFormElementDefinitions();
+        $fields              = $insertionDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
         /* @var InsertionDefinition */
         $insertionDefinition = $contentTypeDefinition->getInsertionDefinition('insert2');
-        $fields         = $insertionDefinition->getFormElementDefinitions();
+        $fields              = $insertionDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
+    }
+
+
+    public function testTabsExtracted()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-06.cmdl');
+
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
+
+        $fields = $clippingDefinition->getFormElementDefinitions();
+
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabStartFormElementDefinition', $fields[0]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\SectionStartFormElementDefinition', $fields[1]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\HeadlineFormElementDefinition', $fields[2]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[3]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[4]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\SectionEndFormElementDefinition', $fields[5]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\SectionStartFormElementDefinition', $fields[6]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\HeadlineFormElementDefinition', $fields[7]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[8]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\SectionEndFormElementDefinition', $fields[9]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[10]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $fields[11]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabStartFormElementDefinition', $fields[12]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[13]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[14]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $fields[15]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[16]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[17]);
+
     }
 
 }

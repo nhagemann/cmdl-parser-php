@@ -18,6 +18,10 @@ class ReferenceFormElementDefinition extends FormElementDefinition
 
     protected $order = 'name';
 
+    protected $language = 'none';
+
+    protected $timeshift = 0;
+
 
     public function __construct($name, $params = array(), $lists = array())
     {
@@ -38,6 +42,15 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         {
             $this->setOrder($params[3]);
         }
+        if (isset($params[4]))
+        {
+            $this->setLanguage($params[4]);
+        }
+        if (isset($params[5]))
+        {
+            $this->setTimeshift($params[5]);
+        }
+
 
         parent::__construct($name, $params, $lists);
     }
@@ -96,5 +109,30 @@ class ReferenceFormElementDefinition extends FormElementDefinition
     {
         return $this->workspace;
     }
+
+
+    public function setTimeshift($timeshift)
+    {
+        $this->timeshift = $timeshift;
+    }
+
+
+    public function getTimeshift()
+    {
+        return $this->timeshift;
+    }
+
+
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
 
 }

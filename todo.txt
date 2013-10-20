@@ -1,0 +1,44 @@
+
+=== content type level ===
+
+@content-type-title News ""
+
+@content-type-description ""
+
+@workspaces (default)
+@languages (de: Deutsch,en: English)  none
+
+@readonly (insert,edit)
+
+@subtypes none
+@status none
+@sortable list|tree|related|none
+
+
+@hidden-properties (property1, property2)
+
+=== field level ===
+
+
+
+@init property1 "adsfsadf"
+
+@hint property1 ""
+@help property1 ""
+@info property1 ""
+@placeholder property1 ""
+@default-value
+
+@validate property1 minmax
+
+
+=== specials ===
+
+@insert abc
+@insert property (1:abc,2:abc)
+
+Remember to adjust the getPropertiesMethods upon insert
+
+
+
+

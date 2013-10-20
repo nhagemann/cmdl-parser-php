@@ -20,6 +20,10 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
 
     protected $url = null;
 
+    protected $language = 'none';
+
+    protected $timeshift = 0;
+
 
     public function __construct($name, $params = array(), $lists = array())
     {
@@ -43,6 +47,14 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
         if (isset($params[4]))
         {
             $this->setOrder($params[4]);
+        }
+        if (isset($params[5]))
+        {
+            $this->setLanguage($params[5]);
+        }
+        if (isset($params[6]))
+        {
+            $this->setTimeshift($params[6]);
         }
 
         parent::__construct($name, $params, $lists);
@@ -113,5 +125,29 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
     public function getUrl()
     {
         return $this->url;
+    }
+
+
+    public function setTimeshift($timeshift)
+    {
+        $this->timeshift = $timeshift;
+    }
+
+
+    public function getTimeshift()
+    {
+        return $this->timeshift;
+    }
+
+
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

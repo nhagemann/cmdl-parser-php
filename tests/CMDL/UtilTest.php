@@ -35,15 +35,15 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         $result = Util::extractLists('param1 "param 2" param3 (a,b,c)');
         $this->assertCount(1, $result);
 
-        $this->assertArrayHasKey('1', $result[0]);
-        $this->assertEquals('a', $result[0]['1']);
+        $this->assertArrayHasKey('a', $result[0]);
+        $this->assertEquals('a', $result[0]['a']);
 
         $result = Util::extractLists('(a:dog,horse,c:cow) (green, blue, red ,purple)');
 
         $this->assertCount(2, $result);
 
         $this->assertArrayHasKey('a', $result[0]);
-        $this->assertArrayHasKey('2', $result[0]);
+        $this->assertArrayHasKey('horse', $result[0]);
         $this->assertArrayHasKey('c', $result[0]);
 
         $this->assertContains('green', $result[1]);
