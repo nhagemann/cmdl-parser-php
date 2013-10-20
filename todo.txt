@@ -1,3 +1,4 @@
+language parameter bei get cmdl
 
 === content type level ===
 
@@ -19,17 +20,17 @@
 
 === field level ===
 
+@default-value
+
+@validate property1 minmax
 
 
-@init property1 "adsfsadf"
 
 @hint property1 ""
 @help property1 ""
 @info property1 ""
 @placeholder property1 ""
-@default-value
 
-@validate property1 minmax
 
 
 === specials ===
@@ -42,3 +43,10 @@ Remember to adjust the getPropertiesMethods upon insert
 
 
 
+// Think about it ...
+
+@on-before-save
+@on-save
+@on-load
+@on-before-delete
+@on-delete

@@ -11,5 +11,6 @@ class CMDLParserException extends \Exception
     const CMDL_FORMELEMENT_NOT_FOUND    = 5;
     const CMDL_INVALID_OPTION_VALUE     = 6;
     const CMDL_UNKNOWN_PROPERTY         = 7;
+    const CMDL_UNKNOWN_ANNOTATION       = 8;
 
 }

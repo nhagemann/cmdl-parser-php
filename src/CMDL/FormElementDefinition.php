@@ -4,6 +4,7 @@ namespace CMDL;
 
 class FormElementDefinition
 {
+    protected $elementType = null;
 
     protected $name = null;
 

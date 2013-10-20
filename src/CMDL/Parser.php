@@ -58,20 +58,28 @@ use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
 
 use CMDL\FormElementDefinitions\CustomFormElementDefinition;
 
+use CMDL\Annotations\ContentTypeTitleAnnotation;
+use CMDL\Annotations\ContentTypeDescriptionAnnotation;
+
 use CMDL\Util;
 
 class Parser
 {
-    static $superProperties = array('name','status','subtype');
 
-    public static function parseCMDLFile($filename)
+    static $superProperties = array( 'name', 'status', 'subtype' );
+
+
+    public static function parseCMDLFile($filename, $contentTypeName = null, $contentTypeTitle = null)
     {
         if (realpath($filename))
         {
             $s = file_get_contents($filename);
             if ($s)
             {
-                return self::parseCMDLString($s);
+                /* @var ContentTypeDefinition */
+                $contentTypeDefinition = self::parseCMDLString($s, $contentTypeName, $contentTypeTitle);
+
+                return $contentTypeDefinition;
             }
         }
 
@@ -79,7 +87,7 @@ class Parser
     }
 
 
-    public static function parseCMDLString($cmdl)
+    public static function parseCMDLString($cmdl, $contentTypeName = null, $contentTypeTitle = null)
     {
         $contentTypeDefinition = new ContentTypeDefinition();
         $contentTypeDefinition->setCMDL($cmdl);
@@ -90,7 +98,7 @@ class Parser
         $cmdl = explode(PHP_EOL, $cmdl);
 
         $sectionOpened = false;
-        $tabOpened = false;
+        $tabOpened     = false;
 
         foreach ($cmdl AS $line)
         {
@@ -98,13 +106,16 @@ class Parser
             {
                 switch ($line[0])
                 {
+                    case '@': // annotation
+                        $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $line);
+                        break;
                     case '#': // comment
                         break;
                     case ' ': // ignore empty lines
                     case '':
                         break;
                     case '-': // start of a clipping definition
-                        $clippingName = Util::generateValidIdentifier(trim($line,'-'));
+                        $clippingName = Util::generateValidIdentifier(trim($line, '-'));
 
                         if ($clippingName == 'default')
                         {
@@ -193,6 +204,15 @@ class Parser
 
                 }
             }
+        }
+
+        if ($contentTypeName != null)
+        {
+            $contentTypeDefinition->setName($contentTypeName);
+        }
+        if ($contentTypeTitle != null)
+        {
+            $contentTypeDefinition->setTitle($contentTypeTitle);
         }
 
         return $contentTypeDefinition;
@@ -335,7 +355,7 @@ class Parser
                 }
                 break;
             case 'password':
-                $formElementDefinition = new PasswordFormElementDefinition($name,$params,$lists);
+                $formElementDefinition = new PasswordFormElementDefinition($name, $params, $lists);
                 break;
             case 'number':
                 $formElementDefinition = new NumberFormElementDefinition($name);
@@ -551,5 +571,38 @@ class Parser
         }
 
         return $formElementDefinition;
+    }
+
+
+    public static function parseAnnotation(ContentTypeDefinition $contentTypeDefinition, $line)
+    {
+        $p = strpos($line, ' ');
+
+        if ($p) // type could be the only content of $onetheright (i.e. no parameters given)
+        {
+            $annotationName = trim(substr($line, 1, $p));
+            $onTheRight     = substr($line, $p + 1);
+
+            $lists  = Util::extractLists($onTheRight);
+            $params = Util::extractParams($onTheRight);
+        }
+
+        switch ($annotationName)
+        {
+            case 'content-type-title':
+                $annotation = new ContentTypeTitleAnnotation($contentTypeDefinition, $params, $lists);
+
+                break;
+            case 'content-type-description':
+                $annotation = new ContentTypeDescriptionAnnotation($contentTypeDefinition, $params, $lists);
+                break;
+            default:
+                throw new CMDLParserException('Unknown annotation ' . $annotationName . '.', CMDLParserException::CMDL_UNKNOWN_ANNOTATION);
+                break;
+        }
+
+        $contentTypeDefinition = $annotation->apply();
+
+        return $contentTypeDefinition;
     }
 }

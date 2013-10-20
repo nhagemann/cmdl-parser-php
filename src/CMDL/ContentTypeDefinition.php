@@ -10,6 +10,8 @@ class ContentTypeDefinition
 {
 
     protected $name = null;
+    protected $title = null;
+    protected $description = null;
 
     protected $cmdl = null;
     protected $clippings = array();
@@ -32,6 +34,31 @@ class ContentTypeDefinition
     {
         return $this->name;
     }
+
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
 
 
     public function setCMDL($s)
