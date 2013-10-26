@@ -32,9 +32,13 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 
     public function testListExtraction()
     {
+
+        $result = Util::extractLists('(1:online,2:offline)');
+        $this->assertCount(1, $result);
+        $this->assertCount(2, $result[0]);
+
         $result = Util::extractLists('param1 "param 2" param3 (a,b,c)');
         $this->assertCount(1, $result);
-
         $this->assertArrayHasKey('a', $result[0]);
         $this->assertEquals('a', $result[0]['a']);
 
@@ -56,5 +60,6 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Lassy', $result[0]);
         $this->assertContains('Black Beauty ', $result[0]);
         $this->assertContains('Milka Cow', $result[0]);
+
     }
 }

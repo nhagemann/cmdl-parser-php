@@ -13,10 +13,12 @@ class ContentTypeDefinition
     protected $title = null;
     protected $description = null;
 
-
     protected $languages = null;
     protected $subtypes = null;
     protected $statusList = null;
+
+    protected $workspaces = array( 'default' => 'Default' );
+    protected $operations = array( 'list', 'get', 'insert', 'update', 'delete', 'sort', 'timeshift', 'revisions' );
 
     protected $cmdl = null;
     protected $clippings = array();
@@ -131,7 +133,7 @@ class ContentTypeDefinition
         }
         else
         {
-            return in_array($property,$this->getProperties());
+            return in_array($property, $this->getProperties());
         }
 
     }
@@ -179,7 +181,18 @@ class ContentTypeDefinition
     }
 
 
-    public function setLanguages($languages)
+    public function hasLanguages()
+    {
+        if ($this->languages == null or count($this->languages) == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function setLanguages(array $languages)
     {
         $this->languages = $languages;
     }
@@ -191,7 +204,18 @@ class ContentTypeDefinition
     }
 
 
-    public function setStatusList($statusList)
+    public function hasStatusList()
+    {
+        if ($this->statusList == null or count($this->statusList) == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function setStatusList(array $statusList)
     {
         $this->statusList = $statusList;
     }
@@ -203,7 +227,18 @@ class ContentTypeDefinition
     }
 
 
-    public function setSubtypes($subtypes)
+    public function hasSubtypes()
+    {
+        if ($this->subtypes == null or count($this->subtypes) == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function setSubtypes(array $subtypes)
     {
         $this->subtypes = $subtypes;
     }
@@ -214,5 +249,70 @@ class ContentTypeDefinition
         return $this->subtypes;
     }
 
+
+    public function setWorkspaces($workspaces)
+    {
+        $this->workspaces = $workspaces;
+    }
+
+
+    public function getWorkspaces()
+    {
+        return $this->workspaces;
+    }
+
+
+    public function setOperations($operations)
+    {
+        $this->operations = $operations;
+    }
+
+
+    public function hasListOperation()
+    {
+        return in_array('list', $this->operations);
+    }
+
+
+    public function hasGetOperation()
+    {
+        return in_array('get', $this->operations);
+    }
+
+
+    public function hasInsertOperation()
+    {
+        return in_array('insert', $this->operations);
+    }
+
+
+    public function hasUpdateOperation()
+    {
+        return in_array('update', $this->operations);
+    }
+
+
+    public function hasDeleteOperation()
+    {
+        return in_array('delete', $this->operations);
+    }
+
+
+    public function hasSortOperation()
+    {
+        return in_array('sort', $this->operations);
+    }
+
+
+    public function hasTimeshiftOperation()
+    {
+        return in_array('timeshift', $this->operations);
+    }
+
+
+    public function hasRevisionsOperation()
+    {
+        return in_array('revisions', $this->operations);
+    }
 
 }

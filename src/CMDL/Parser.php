@@ -61,6 +61,12 @@ use CMDL\FormElementDefinitions\CustomFormElementDefinition;
 
 use CMDL\Annotations\ContentTypeTitleAnnotation;
 use CMDL\Annotations\ContentTypeDescriptionAnnotation;
+use CMDL\Annotations\ContentTypeLanguagesAnnotation;
+use CMDL\Annotations\ContentTypeStatusAnnotation;
+use CMDL\Annotations\ContentTypeSubtypesAnnotation;
+use CMDL\Annotations\ContentTypeWorkspacesAnnotation;
+use CMDL\Annotations\ContentTypeOperationsAnnotation;
+
 use CMDL\Annotations\FormElementDefaultValueAnnotation;
 
 use CMDL\Annotations\FormElementHelpAnnotation;
@@ -598,7 +604,7 @@ class Parser
         if ($p)
         {
             $annotationName = trim(substr($line, 1, $p));
-            $onTheRight = substr($line, $p + 1);
+            $onTheRight     = substr($line, $p + 1);
 
             $lists  = Util::extractLists($onTheRight);
             $params = Util::extractParams($onTheRight);
@@ -606,8 +612,8 @@ class Parser
         else
         {
             $annotationName = substr($line, 1);
-            $lists = array();
-            $params = array();
+            $lists          = array();
+            $params         = array();
 
         }
 
@@ -620,8 +626,23 @@ class Parser
             case 'content-type-description':
                 $annotation = new ContentTypeDescriptionAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
+            case 'languages':
+                $annotation = new ContentTypeLanguagesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'status':
+                $annotation = new ContentTypeStatusAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'subtypes':
+                $annotation = new ContentTypeSubtypesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'workspaces':
+                $annotation = new ContentTypeWorkspacesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'operations':
+                $annotation = new ContentTypeOperationsAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
             case 'default-value':
-                   $annotation = new FormElementDefaultValueAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementDefaultValueAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'help':
                 $annotation = new FormElementHelpAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);

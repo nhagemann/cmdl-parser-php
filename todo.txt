@@ -1,4 +1,13 @@
-language parameter bei get cmdl
+- language parameter bei get cmdl
+- @sortable not|list|tree|related property1
+- @filterable not|all|restricted ()
+- @hidden-properties (property1, property2)
+- @validate property1 minmax
+
+
+
+
+
 
 === content type level ===
 
@@ -7,20 +16,24 @@ language parameter bei get cmdl
 @content-type-description ""
 
 
-@languages (de: Deutsch,en: English)  none
+@languages none (de: Deutsch,en: English)
 @subtypes none
 @status none
 
+@workspaces (default)
 
-@sortable list|tree|related|none
-@filterable none|all|restricted ()
+@operations (list,get,insert,update,delete,sort,timeshift,revisions)
+
+@sortable not|list|tree|related property1
+@filterable not|all|restricted ()
+
+
 
 @hidden-properties (property1, property2)
 
-=== clipping level ===
 
-@workspaces (default)
-@access get,insert,update,delete,list (edit, default)
+
+
 
 === element level ===
 
@@ -46,14 +59,13 @@ language parameter bei get cmdl
 Remember to adjust the getPropertiesMethods upon insert
 
 
+@preview url
+
+@hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
 
 
 
 
-// Think about it ...
+Content Type xyz doesn't support time shifting. Switching back to real time.
 
-@on-before-save
-@on-save
-@on-load
-@on-before-delete
-@on-delete
+Content Type xyz has no workspace list, switching back to to workspace default.
