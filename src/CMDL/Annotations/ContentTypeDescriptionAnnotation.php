@@ -13,7 +13,15 @@ class ContentTypeDescriptionAnnotation extends Annotation
 
     public function apply()
     {
-        $this->contentTypeDefinition->setDescription($this->getParam(1));
+
+        if ($this->hasParam(1))
+        {
+            $this->contentTypeDefinition->setDescription($this->getParam(1));
+        }
+        else
+        {
+            throw new CMDLParserException('Missing mandatory parameter title for annotation @content-type-title.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
+        }
 
         return $this->contentTypeDefinition;
     }

@@ -6,30 +6,35 @@ language parameter bei get cmdl
 
 @content-type-description ""
 
-@workspaces (default)
+
 @languages (de: Deutsch,en: English)  none
-
-@readonly (insert,edit)
-
 @subtypes none
 @status none
-@sortable list|tree|related|none
 
+
+@sortable list|tree|related|none
+@filterable none|all|restricted ()
 
 @hidden-properties (property1, property2)
 
-=== field level ===
+=== clipping level ===
+
+@workspaces (default)
+@access get,insert,update,delete,list (edit, default)
+
+=== element level ===
 
 @default-value
 
-@validate property1 minmax
 
 
 
-@hint property1 ""
+@hint xxx property1 ""
 @help property1 ""
 @info property1 ""
 @placeholder property1 ""
+
+@validate property1 minmax
 
 
 
@@ -39,6 +44,8 @@ language parameter bei get cmdl
 @insert property (1:abc,2:abc)
 
 Remember to adjust the getPropertiesMethods upon insert
+
+
 
 
 

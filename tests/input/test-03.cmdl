@@ -1,5 +1,5 @@
 @content-type-title News
-@content-type-description "Example Content Type"
+@content-type-description  "Example Content Type"
 [[Section 1]]
 [Headline 1]
 property1

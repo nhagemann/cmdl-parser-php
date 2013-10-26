@@ -1,0 +1,16 @@
+--- default ---
+name
+author
+text = textarea 10
+
+
+
+@default-value name "New Article"
+@placeholder name "New Article"
+@help name "Remember to choose a SEO friendly title!"
+@hint name "Name of the new article"
+@info name "This name is used within all channels (Desktop, Mobile, Podcast)"
+
+
+--- list ---
+name

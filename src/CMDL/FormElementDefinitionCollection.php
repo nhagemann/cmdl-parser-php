@@ -2,6 +2,8 @@
 
 namespace CMDL;
 
+use CMDL\FormElementDefinition;
+
 class FormElementDefinitionCollection
 {
 
@@ -47,6 +49,12 @@ class FormElementDefinitionCollection
     }
 
 
+    /**
+     * @param $name
+     *
+     * @return FormElementDefinition
+     * @throws CMDLParserException
+     */
     public function getFormElementDefinition($name)
     {
         if (array_key_exists($name, $this->namedFields))

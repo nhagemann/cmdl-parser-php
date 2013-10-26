@@ -12,5 +12,6 @@ class CMDLParserException extends \Exception
     const CMDL_INVALID_OPTION_VALUE     = 6;
     const CMDL_UNKNOWN_PROPERTY         = 7;
     const CMDL_UNKNOWN_ANNOTATION       = 8;
+    const CMDL_MISSING_MANDATORY_PARAM  = 9;
 
 }

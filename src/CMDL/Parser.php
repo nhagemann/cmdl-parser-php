@@ -7,6 +7,7 @@ use CMDL\ContentTypeDefinition;
 use CMDL\ClippingDefinition;
 use CMDL\InsertionDefinition;
 use CMDL\FormElementDefinition;
+use CMDL\FormElementDefinitionCollection;
 
 use CMDL\FormElementDefinitions\PrintFormElementDefinition;
 use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
@@ -60,6 +61,12 @@ use CMDL\FormElementDefinitions\CustomFormElementDefinition;
 
 use CMDL\Annotations\ContentTypeTitleAnnotation;
 use CMDL\Annotations\ContentTypeDescriptionAnnotation;
+use CMDL\Annotations\FormElementDefaultValueAnnotation;
+
+use CMDL\Annotations\FormElementHelpAnnotation;
+use CMDL\Annotations\FormElementHintAnnotation;
+use CMDL\Annotations\FormElementInfoAnnotation;
+use CMDL\Annotations\FormElementPlaceholderAnnotation;
 
 use CMDL\Util;
 
@@ -100,6 +107,8 @@ class Parser
         $sectionOpened = false;
         $tabOpened     = false;
 
+        $annotationLines = array();
+
         foreach ($cmdl AS $line)
         {
             if (isset($line[0]))
@@ -107,7 +116,9 @@ class Parser
                 switch ($line[0])
                 {
                     case '@': // annotation
-                        $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $line);
+                        $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $line);
+                        //$annotationLines[]=$line;
+
                         break;
                     case '#': // comment
                         break;
@@ -205,6 +216,12 @@ class Parser
                 }
             }
         }
+
+        /*
+        foreach ($annotationLines as $line)
+        {
+            $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $line);
+        }*/
 
         if ($contentTypeName != null)
         {
@@ -574,27 +591,49 @@ class Parser
     }
 
 
-    public static function parseAnnotation(ContentTypeDefinition $contentTypeDefinition, $line)
+    public static function parseAnnotation(ContentTypeDefinition $contentTypeDefinition, FormElementDefinitionCollection $currentFormElementDefinitionCollection, $line)
     {
         $p = strpos($line, ' ');
 
-        if ($p) // type could be the only content of $onetheright (i.e. no parameters given)
+        if ($p)
         {
             $annotationName = trim(substr($line, 1, $p));
-            $onTheRight     = substr($line, $p + 1);
+            $onTheRight = substr($line, $p + 1);
 
             $lists  = Util::extractLists($onTheRight);
             $params = Util::extractParams($onTheRight);
+        }
+        else
+        {
+            $annotationName = substr($line, 1);
+            $lists = array();
+            $params = array();
+
         }
 
         switch ($annotationName)
         {
             case 'content-type-title':
-                $annotation = new ContentTypeTitleAnnotation($contentTypeDefinition, $params, $lists);
+                $annotation = new ContentTypeTitleAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
 
                 break;
             case 'content-type-description':
-                $annotation = new ContentTypeDescriptionAnnotation($contentTypeDefinition, $params, $lists);
+                $annotation = new ContentTypeDescriptionAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'default-value':
+                   $annotation = new FormElementDefaultValueAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'help':
+                $annotation = new FormElementHelpAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'hint':
+                $annotation = new FormElementHintAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'info':
+                $annotation = new FormElementInfoAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'placeholder':
+                $annotation = new FormElementPlaceholderAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             default:
                 throw new CMDLParserException('Unknown annotation ' . $annotationName . '.', CMDLParserException::CMDL_UNKNOWN_ANNOTATION);

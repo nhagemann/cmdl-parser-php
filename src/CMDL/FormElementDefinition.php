@@ -12,6 +12,13 @@ class FormElementDefinition
 
     protected $defaultValue = null;
 
+
+    protected $help = null;
+    protected $hint = null;
+    protected $info = null;
+    protected $placeholder = null;
+
+
     protected $mandatory = false;
     protected $unique = false;
 
@@ -129,4 +136,55 @@ class FormElementDefinition
     {
         return $this->maxValueLength;
     }
+
+
+    public function setHelp($help)
+    {
+        $this->help = $help;
+    }
+
+
+    public function getHelp()
+    {
+        return $this->help;
+    }
+
+
+    public function setHint($hint)
+    {
+        $this->hint = $hint;
+    }
+
+
+    public function getHint()
+    {
+        return $this->hint;
+    }
+
+
+    public function setInfo($info)
+    {
+        $this->info = $info;
+    }
+
+
+    public function getInfo()
+    {
+        return $this->info;
+    }
+
+
+    public function setPlaceholder($placeholder)
+    {
+        $this->placeholder = $placeholder;
+    }
+
+
+    public function getPlaceholder()
+    {
+        return $this->placeholder;
+    }
+
+
+
 }

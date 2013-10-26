@@ -13,6 +13,11 @@ class ContentTypeDefinition
     protected $title = null;
     protected $description = null;
 
+
+    protected $languages = null;
+    protected $subtypes = null;
+    protected $statusList = null;
+
     protected $cmdl = null;
     protected $clippings = array();
     protected $insertions = array();
@@ -58,7 +63,6 @@ class ContentTypeDefinition
     {
         return $this->title;
     }
-
 
 
     public function setCMDL($s)
@@ -113,15 +117,22 @@ class ContentTypeDefinition
     }
 
 
-    public function hasProperty($property, $clippingName)
+    public function hasProperty($property, $clippingName = null)
     {
         // include super properties
-        if (in_array($property, array( 'name' )))
+        if (in_array($property, Parser::$superProperties))
         {
             return true;
         }
 
-        return $this->getClippingDefinition($clippingName)->hasProperty($property);
+        if ($clippingName)
+        {
+            return $this->getClippingDefinition($clippingName)->hasProperty($property);
+        }
+        else
+        {
+            return in_array($property,$this->getProperties());
+        }
 
     }
 
@@ -166,4 +177,42 @@ class ContentTypeDefinition
         return $clippingDefinition->getUniqueProperties();
 
     }
+
+
+    public function setLanguages($languages)
+    {
+        $this->languages = $languages;
+    }
+
+
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+
+    public function setStatusList($statusList)
+    {
+        $this->statusList = $statusList;
+    }
+
+
+    public function getStatusList()
+    {
+        return $this->statusList;
+    }
+
+
+    public function setSubtypes($subtypes)
+    {
+        $this->subtypes = $subtypes;
+    }
+
+
+    public function getSubtypes()
+    {
+        return $this->subtypes;
+    }
+
+
 }
