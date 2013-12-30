@@ -141,11 +141,15 @@ class ContentTypeDefinition
 
     public function getProperties($clippingName = null)
     {
+        $inserts = array();
+
         if ($clippingName)
         {
             $clippingDefinition = $this->getClippingDefinition($clippingName);
 
-            return $clippingDefinition->getProperties();
+            $properties = $clippingDefinition->getProperties();
+
+            $inserts = $clippingDefinition->getPossibleInsertionNames();
         }
         else
         {
@@ -153,11 +157,22 @@ class ContentTypeDefinition
             foreach ($this->clippings as $clippingDefinition)
             {
                 $properties = array_merge($properties, $clippingDefinition->getProperties());
-
+                $inserts    = array_merge($inserts, $clippingDefinition->getPossibleInsertionNames());
             }
 
-            return array_unique($properties);
         }
+
+        $inserts = array_unique($inserts);
+
+        foreach ($inserts as $insertionName)
+        {
+            $insertionDefinition = $this->getInsertionDefinition($insertionName);
+            $properties          = array_merge($properties, $insertionDefinition->getProperties());
+        }
+
+        $properties = array_unique($properties);
+
+        return $properties;
     }
 
 
@@ -297,22 +312,9 @@ class ContentTypeDefinition
         return in_array('delete', $this->operations);
     }
 
-
-    public function hasSortOperation()
+    public function hasRevisionOperations()
     {
-        return in_array('sort', $this->operations);
-    }
-
-
-    public function hasTimeshiftOperation()
-    {
-        return in_array('timeshift', $this->operations);
-    }
-
-
-    public function hasRevisionsOperation()
-    {
-        return in_array('revisions', $this->operations);
+        return in_array('revision', $this->operations);
     }
 
 }

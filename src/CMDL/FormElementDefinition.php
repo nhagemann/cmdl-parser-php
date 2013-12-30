@@ -35,6 +35,10 @@ class FormElementDefinition
         $this->lists  = $lists;
     }
 
+    public function getFormElementType()
+    {
+        return $this->elementType;
+    }
 
     public function setName($name)
     {

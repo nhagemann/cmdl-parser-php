@@ -12,5 +12,8 @@ text = textarea 10
 @info name "This name is used within all channels (Desktop, Mobile, Podcast)"
 
 
+@hidden-properties (source, licence)
+
 --- list ---
 name
+@hidden-properties (source)

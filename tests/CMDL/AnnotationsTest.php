@@ -7,6 +7,7 @@ use CMDL\CMDLParserException;
 use CMDL\ContentTypeDefinition;
 use CMDL\ClippingDefinition;
 use CMDL\FormElementDefinition;
+use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 
 class AnnotationsTest extends \PHPUnit_Framework_TestCase
 {
@@ -129,10 +130,7 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($contentTypeDefinition->hasInsertOperation());
         $this->assertTrue($contentTypeDefinition->hasUpdateOperation());
         $this->assertTrue($contentTypeDefinition->hasDeleteOperation());
-        $this->assertTrue($contentTypeDefinition->hasSortOperation());
-        $this->assertTrue($contentTypeDefinition->hasTimeshiftOperation());
-        $this->assertTrue($contentTypeDefinition->hasRevisionsOperation());
-
+         $this->assertTrue($contentTypeDefinition->hasRevisionOperations());
 
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@operations (list)');
@@ -141,9 +139,77 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($contentTypeDefinition->hasInsertOperation());
         $this->assertFalse($contentTypeDefinition->hasUpdateOperation());
         $this->assertFalse($contentTypeDefinition->hasDeleteOperation());
-        $this->assertFalse($contentTypeDefinition->hasSortOperation());
-        $this->assertFalse($contentTypeDefinition->hasTimeshiftOperation());
-        $this->assertFalse($contentTypeDefinition->hasRevisionsOperation());
+        $this->assertFalse($contentTypeDefinition->hasRevisionOperations());
+
+    }
+
+
+    public function testHiddenPropertiesAnnotation()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-07.cmdl');
+        $this->assertTrue($contentTypeDefinition->hasProperty('name'));
+        $this->assertTrue($contentTypeDefinition->hasProperty('status'));
+        $this->assertTrue($contentTypeDefinition->hasProperty('licence'));
+        $this->assertTrue($contentTypeDefinition->hasProperty('source'));
+
+        $clipping = $contentTypeDefinition->getClippingDefinition('default');
+        $this->assertTrue($clipping->hasProperty('name'));
+        $this->assertTrue($clipping->hasProperty('status'));
+        $this->assertTrue($clipping->hasProperty('licence'));
+        $this->assertTrue($clipping->hasProperty('source'));
+
+        $clipping = $contentTypeDefinition->getClippingDefinition('list');
+        $this->assertTrue($clipping->hasProperty('name'));
+        $this->assertTrue($clipping->hasProperty('status'));
+        $this->assertFalse($clipping->hasProperty('licence'));
+        $this->assertTrue($clipping->hasProperty('source'));
+    }
+
+
+    public function testInsertAnnotation()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-08.cmdl');
+
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
+
+        $formelements = $clippingDefinition->getFormElementDefinitions();
+
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formelements[0]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\InsertFormElementDefinition', $formelements[3]);
+
+        /* @var $formElement InsertFormElementDefinition */
+        $formElement = $formelements[3];
+        $this->assertEquals('insert1',$formElement->getInsertionName());
+
+        $this->assertContains('a',$contentTypeDefinition->getProperties());
+        $this->assertContains('d',$contentTypeDefinition->getProperties());
+        $this->assertNotContains('j',$contentTypeDefinition->getProperties());
+
+
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-09.cmdl');
+
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
+
+        $formelements = $clippingDefinition->getFormElementDefinitions();
+
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formelements[0]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\InsertFormElementDefinition', $formelements[3]);
+
+        /* @var $formElement InsertFormElementDefinition */
+        $formElement = $formelements[3];
+        $this->assertEquals('insert1',$formElement->getInsertionName(1));
+        $this->assertEquals('insert2',$formElement->getInsertionName(2));
+        $this->assertEquals(null,$formElement->getInsertionName(3));
+        $this->assertEquals('a',$formElement->getPropertyName());
+
+        $this->assertContains('a',$contentTypeDefinition->getProperties());
+        $this->assertContains('d',$contentTypeDefinition->getProperties());
+        $this->assertContains('j',$contentTypeDefinition->getProperties());
 
     }
 }

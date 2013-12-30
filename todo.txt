@@ -1,19 +1,22 @@
 - language parameter bei get cmdl
-- @sortable not|list|tree|related property1
-- @filterable not|all|restricted ()
-- @hidden-properties (property1, property2)
+
+@sortable no|list|tree|related property1
 - @validate property1 minmax
+- @preview url
+- @hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
+- @content-type-thumbnail property default
+- @timeshiftable yes|no
 
 
 
-
-
-
+                                                                                                                                x
 === content type level ===
 
 @content-type-title News ""
 
 @content-type-description ""
+
+@content-type-thumbnail property default
 
 
 @languages none (de: Deutsch,en: English)
@@ -22,11 +25,11 @@
 
 @workspaces (default)
 
-@operations (list,get,insert,update,delete,sort,timeshift,revisions)
+@operations (list,get,insert,update,delete,revision)
 
-@sortable not|list|tree|related property1
-@filterable not|all|restricted ()
+@sortable no|list|tree|related property1
 
+@timeshiftable yes|no
 
 
 @hidden-properties (property1, property2)
@@ -55,8 +58,6 @@
 
 @insert abc
 @insert property (1:abc,2:abc)
-
-Remember to adjust the getPropertiesMethods upon insert
 
 
 @preview url

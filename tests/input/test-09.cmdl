@@ -1,0 +1,17 @@
+a
+b
+c
+@insert a (1:insert1, 2:insert2)
+g
+h
+i
+
++++ insert1 +++
+d
+e
+f
+
++++ insert2 +++
+j
+k
+l

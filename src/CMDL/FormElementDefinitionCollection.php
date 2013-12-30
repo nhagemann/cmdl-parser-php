@@ -15,6 +15,8 @@ class FormElementDefinitionCollection
     protected $mandatoryProperties = null;
     protected $uniqueProperties = null;
 
+    protected $hiddenProperties = array();
+
 
     public function __construct($name = 'default')
     {
@@ -78,9 +80,9 @@ class FormElementDefinitionCollection
         {
             return $this->properties;
         }
-        $properties = array();
-        $mandatoryProperties= array();
-        $uniqueProperties=array();
+        $properties          = $this->getHiddenProperties();
+        $mandatoryProperties = array();
+        $uniqueProperties    = array();
 
         foreach ($this->fields as $formElementDefinition)
         {
@@ -97,12 +99,13 @@ class FormElementDefinitionCollection
                 }
             }
         }
-        $this->properties = $properties;
+        $this->properties          = $properties;
         $this->mandatoryProperties = $mandatoryProperties;
-        $this->uniqueProperties = $uniqueProperties;
+        $this->uniqueProperties    = $uniqueProperties;
 
         return $this->properties;
     }
+
 
     public function getMandatoryProperties()
     {
@@ -110,8 +113,10 @@ class FormElementDefinitionCollection
         {
             $this->getProperties();
         }
+
         return $this->mandatoryProperties;
     }
+
 
     public function getUniqueProperties()
     {
@@ -119,16 +124,31 @@ class FormElementDefinitionCollection
         {
             $this->getProperties();
         }
+
         return $this->uniqueProperties;
     }
 
+
     public function hasProperty($property)
     {
-        if (in_array($property,$this->getProperties()))
+        if (in_array($property, $this->getProperties()))
         {
             return true;
         }
+
         return false;
+    }
+
+
+    public function setHiddenProperties($hiddenProperties)
+    {
+        $this->hiddenProperties = $hiddenProperties;
+    }
+
+
+    public function getHiddenProperties()
+    {
+        return $this->hiddenProperties;
     }
 
 }
