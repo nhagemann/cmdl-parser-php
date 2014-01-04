@@ -20,7 +20,7 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
 
     protected $url = null;
 
-    protected $language = 'none';
+    protected $language = 'default';
 
     protected $timeshift = 0;
 

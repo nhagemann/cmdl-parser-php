@@ -18,7 +18,7 @@ class ReferenceFormElementDefinition extends FormElementDefinition
 
     protected $order = 'name';
 
-    protected $language = 'none';
+    protected $language = 'default';
 
     protected $timeshift = 0;
 
