@@ -27,10 +27,10 @@ class ContentTypeSubtypesAnnotation extends Annotation
             {
                 throw new CMDLParserException('Missing mandatory values list for annotation @subtypes.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
             }
-            $this->contentTypeDefinition->setSubtypes($this->getList(1));
+            $this->dataTypeDefinition->setSubtypes($this->getList(1));
         }
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

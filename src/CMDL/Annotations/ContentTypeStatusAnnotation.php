@@ -27,10 +27,10 @@ class ContentTypeStatusAnnotation extends Annotation
             {
                 throw new CMDLParserException('Missing mandatory values list for annotation @status.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
             }
-            $this->contentTypeDefinition->setStatusList($this->getList(1));
+            $this->dataTypeDefinition->setStatusList($this->getList(1));
         }
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

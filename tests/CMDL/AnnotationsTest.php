@@ -33,11 +33,11 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
     public function test1MissingMandatoryParameters()
     {
         /* @var ContentTypeDefinition */
-        $contentTypeDefinition = Parser::parseCMDLString('@content-type-title Test');
+        $contentTypeDefinition = Parser::parseCMDLString('@title Test');
 
         $this->setExpectedException('CMDL\CMDLParserException');
         /* @var ContentTypeDefinition */
-        $contentTypeDefinition = Parser::parseCMDLString('@content-type-title');
+        $contentTypeDefinition = Parser::parseCMDLString('@title');
 
     }
 
@@ -47,7 +47,7 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('CMDL\CMDLParserException');
         /* @var ContentTypeDefinition */
-        $contentTypeDefinition = Parser::parseCMDLString('@content-type-description');
+        $contentTypeDefinition = Parser::parseCMDLString('@description');
     }
 
 
@@ -130,7 +130,7 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($contentTypeDefinition->hasInsertOperation());
         $this->assertTrue($contentTypeDefinition->hasUpdateOperation());
         $this->assertTrue($contentTypeDefinition->hasDeleteOperation());
-         $this->assertTrue($contentTypeDefinition->hasRevisionOperations());
+        $this->assertTrue($contentTypeDefinition->hasRevisionOperations());
 
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@operations (list)');
@@ -141,6 +141,27 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($contentTypeDefinition->hasDeleteOperation());
         $this->assertFalse($contentTypeDefinition->hasRevisionOperations());
 
+    }
+
+    public function testSortableAnnotation()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('');
+        $this->assertFalse($contentTypeDefinition->isSortable());
+        $this->assertFalse($contentTypeDefinition->isSortableAsList());
+        $this->assertFalse($contentTypeDefinition->isSortableAsTree());
+
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('@sortable ');
+        $this->assertTrue($contentTypeDefinition->isSortable());
+        $this->assertTrue($contentTypeDefinition->isSortableAsList());
+        $this->assertFalse($contentTypeDefinition->isSortableAsTree());
+
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('@sortable tree');
+        $this->assertTrue($contentTypeDefinition->isSortable());
+        $this->assertTrue($contentTypeDefinition->isSortableAsList());
+        $this->assertTrue($contentTypeDefinition->isSortableAsTree());
     }
 
 

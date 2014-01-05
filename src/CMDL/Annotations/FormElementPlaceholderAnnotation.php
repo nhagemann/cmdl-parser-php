@@ -24,7 +24,7 @@ class FormElementPlaceholderAnnotation extends Annotation
             throw new CMDLParserException('Missing mandatory parameter value for annotation @placeholder.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        if (!$this->contentTypeDefinition->hasProperty($this->getParam(1)))
+        if (!$this->dataTypeDefinition->hasProperty($this->getParam(1)))
         {
             throw new CMDLParserException('Unknown property ' . $this->getParam(1) . ' within annotation @placeholder.', CMDLParserException::CMDL_UNKNOWN_PROPERTY);
         }
@@ -32,7 +32,7 @@ class FormElementPlaceholderAnnotation extends Annotation
         $this->currentFormElementDefinitionCollection->getFormElementDefinition($this->getParam(1))
             ->setPlaceholder($this->getParam(2));
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

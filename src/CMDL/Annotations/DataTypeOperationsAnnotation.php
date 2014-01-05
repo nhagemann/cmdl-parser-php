@@ -5,7 +5,7 @@ namespace CMDL\Annotations;
 use CMDL\Annotation;
 use CMDL\CMDLParserException;
 
-class ContentTypeOperationsAnnotation extends Annotation
+class DataTypeOperationsAnnotation extends Annotation
 {
 
     protected $annotationType = 'operations';
@@ -19,9 +19,9 @@ class ContentTypeOperationsAnnotation extends Annotation
             throw new CMDLParserException('Missing mandatory list for annotation @operations.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        $this->contentTypeDefinition->setOperations(array_keys($this->getList(1)));
+        $this->dataTypeDefinition->setOperations(array_keys($this->getList(1)));
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

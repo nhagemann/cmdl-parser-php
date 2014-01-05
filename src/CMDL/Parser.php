@@ -3,6 +3,8 @@
 namespace CMDL;
 
 use CMDL\CMDLParserException;
+use CMDL\DataTypeDefinition;
+use CMDL\ConfigTypeDefinition;
 use CMDL\ContentTypeDefinition;
 use CMDL\ClippingDefinition;
 use CMDL\InsertionDefinition;
@@ -59,13 +61,14 @@ use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
 
 use CMDL\FormElementDefinitions\CustomFormElementDefinition;
 
-use CMDL\Annotations\ContentTypeTitleAnnotation;
-use CMDL\Annotations\ContentTypeDescriptionAnnotation;
-use CMDL\Annotations\ContentTypeLanguagesAnnotation;
+use CMDL\Annotations\DataTypeTitleAnnotation;
+use CMDL\Annotations\DataTypeDescriptionAnnotation;
+use CMDL\Annotations\DataTypeLanguagesAnnotation;
 use CMDL\Annotations\ContentTypeStatusAnnotation;
 use CMDL\Annotations\ContentTypeSubtypesAnnotation;
-use CMDL\Annotations\ContentTypeWorkspacesAnnotation;
-use CMDL\Annotations\ContentTypeOperationsAnnotation;
+use CMDL\Annotations\DataTypeWorkspacesAnnotation;
+use CMDL\Annotations\DataTypeOperationsAnnotation;
+use CMDL\Annotations\SortableAnnotation;
 
 use CMDL\Annotations\FormElementDefaultValueAnnotation;
 
@@ -86,17 +89,17 @@ class Parser
     static $superProperties = array( 'name', 'status', 'subtype' );
 
 
-    public static function parseCMDLFile($filename, $contentTypeName = null, $contentTypeTitle = null)
+    public static function parseCMDLFile($filename, $dataTypeName = null, $dataTypeTitle = null, $dataType = 'content')
     {
         if (realpath($filename))
         {
             $s = file_get_contents($filename);
             if ($s)
             {
-                /* @var ContentTypeDefinition */
-                $contentTypeDefinition = self::parseCMDLString($s, $contentTypeName, $contentTypeTitle);
 
-                return $contentTypeDefinition;
+                $dataTypeDefinition = self::parseCMDLString($s, $dataTypeName, $dataTypeTitle, $dataType);
+
+                return $dataTypeDefinition;
             }
         }
 
@@ -104,13 +107,28 @@ class Parser
     }
 
 
-    public static function parseCMDLString($cmdl, $contentTypeName = null, $contentTypeTitle = null)
+    public static function parseCMDLString($cmdl, $dataTypeName = null, $dataTypeTitle = null, $dataType = 'content')
     {
-        $contentTypeDefinition = new ContentTypeDefinition();
-        $contentTypeDefinition->setCMDL($cmdl);
+        switch ($dataType)
+        {
+            case 'content':
+                $dataTypeDefinition = new ContentTypeDefinition();
+                break;
+            case 'config':
+                $dataTypeDefinition = new ConfigTypeDefinition();
+                break;
+            case 'data':
+                $dataTypeDefinition = new DataTypeDefinition();
+                break;
+            default:
+                throw new CMDLParserException('Unknown data type '.$dataType.'. Must be one of content,config,data.', CMDLParserException::CMDL_UNKNOWN_DATATYPE);
+                break;
+        }
+
+        $dataTypeDefinition->setCMDL($cmdl);
 
         $currentFormElementDefinitionCollection = new ClippingDefinition('default');
-        $contentTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
+        $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
 
         $cmdl = explode(PHP_EOL, $cmdl);
 
@@ -126,7 +144,7 @@ class Parser
                 switch ($line[0])
                 {
                     case '@': // annotation
-                        $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $line);
+                        $dataTypeDefinition = self::parseAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $line);
                         //$annotationLines[]=$line;
 
                         break;
@@ -141,18 +159,18 @@ class Parser
                         if ($clippingName == 'default')
                         {
                             // get the already created and added definition of clipping "default"
-                            $currentFormElementDefinitionCollection = $contentTypeDefinition->getClippingDefinition('default');
+                            $currentFormElementDefinitionCollection = $dataTypeDefinition->getClippingDefinition('default');
                         }
                         else
                         {
                             $currentFormElementDefinitionCollection = new ClippingDefinition($clippingName);
-                            $contentTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
+                            $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
                         }
                         break;
                     case '+': // start of an insertion definition
                         $insertionName                          = Util::generateValidIdentifier($line);
                         $currentFormElementDefinitionCollection = new InsertionDefinition($insertionName);
-                        $contentTypeDefinition->addInsertionDefinition($currentFormElementDefinitionCollection);
+                        $dataTypeDefinition->addInsertionDefinition($currentFormElementDefinitionCollection);
                         break;
                     case '[':
 
@@ -233,16 +251,16 @@ class Parser
             $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $line);
         }*/
 
-        if ($contentTypeName != null)
+        if ($dataTypeName != null)
         {
-            $contentTypeDefinition->setName($contentTypeName);
+            $dataTypeDefinition->setName($dataTypeName);
         }
-        if ($contentTypeTitle != null)
+        if ($dataTypeTitle != null)
         {
-            $contentTypeDefinition->setTitle($contentTypeTitle);
+            $dataTypeDefinition->setTitle($dataTypeTitle);
         }
 
-        return $contentTypeDefinition;
+        return $dataTypeDefinition;
     }
 
 
@@ -601,7 +619,7 @@ class Parser
     }
 
 
-    public static function parseAnnotation(ContentTypeDefinition $contentTypeDefinition, FormElementDefinitionCollection $currentFormElementDefinitionCollection, $line)
+    public static function parseAnnotation(DataTypeDefinition $dataTypeDefinition, FormElementDefinitionCollection $currentFormElementDefinitionCollection, $line)
     {
         $p = strpos($line, ' ');
 
@@ -623,56 +641,60 @@ class Parser
 
         switch ($annotationName)
         {
-            case 'content-type-title':
-                $annotation = new ContentTypeTitleAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+            case 'title':
+                $annotation = new DataTypeTitleAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
 
                 break;
-            case 'content-type-description':
-                $annotation = new ContentTypeDescriptionAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+            case 'description':
+                $annotation = new DataTypeDescriptionAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'languages':
-                $annotation = new ContentTypeLanguagesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeLanguagesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'status':
-                $annotation = new ContentTypeStatusAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new ContentTypeStatusAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'subtypes':
-                $annotation = new ContentTypeSubtypesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new ContentTypeSubtypesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'workspaces':
-                $annotation = new ContentTypeWorkspacesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeWorkspacesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'operations':
-                $annotation = new ContentTypeOperationsAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeOperationsAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'sortable':
+                $annotation = new SortableAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'default-value':
-                $annotation = new FormElementDefaultValueAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementDefaultValueAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'help':
-                $annotation = new FormElementHelpAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementHelpAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'hint':
-                $annotation = new FormElementHintAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementHintAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'info':
-                $annotation = new FormElementInfoAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementInfoAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'placeholder':
-                $annotation = new FormElementPlaceholderAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementPlaceholderAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'hidden-properties':
-                $annotation = new FormElementCollectionHiddenPropertiesAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementCollectionHiddenPropertiesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'insert':
-                $annotation = new InsertAnnotation($contentTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new InsertAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
+
             default:
                 throw new CMDLParserException('Unknown annotation ' . $annotationName . '.', CMDLParserException::CMDL_UNKNOWN_ANNOTATION);
                 break;
         }
 
-        $contentTypeDefinition = $annotation->apply();
+        $dataTypeDefinition = $annotation->apply();
 
-        return $contentTypeDefinition;
+        return $dataTypeDefinition;
     }
 }

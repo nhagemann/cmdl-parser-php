@@ -21,7 +21,7 @@ class FormElementCollectionHiddenPropertiesAnnotation extends Annotation
 
         $this->currentFormElementDefinitionCollection->setHiddenProperties($this->getList(1));
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

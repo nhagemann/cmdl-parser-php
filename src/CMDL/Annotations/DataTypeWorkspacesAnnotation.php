@@ -5,7 +5,7 @@ namespace CMDL\Annotations;
 use CMDL\Annotation;
 use CMDL\CMDLParserException;
 
-class ContentTypeWorkspacesAnnotation extends Annotation
+class DataTypeWorkspacesAnnotation extends Annotation
 {
 
     protected $annotationType = 'workspaces';
@@ -19,9 +19,9 @@ class ContentTypeWorkspacesAnnotation extends Annotation
             throw new CMDLParserException('Missing mandatory list for annotation @workspaces.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        $this->contentTypeDefinition->setWorkspaces($this->getList(1));
+        $this->dataTypeDefinition->setWorkspaces($this->getList(1));
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

@@ -24,7 +24,7 @@ class FormElementInfoAnnotation extends Annotation
             throw new CMDLParserException('Missing mandatory parameter value for annotation @info.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        if (!$this->contentTypeDefinition->hasProperty($this->getParam(1)))
+        if (!$this->dataTypeDefinition->hasProperty($this->getParam(1)))
         {
             throw new CMDLParserException('Unknown property ' . $this->getParam(1) . ' within annotation @info.', CMDLParserException::CMDL_UNKNOWN_PROPERTY);
         }
@@ -32,7 +32,7 @@ class FormElementInfoAnnotation extends Annotation
         $this->currentFormElementDefinitionCollection->getFormElementDefinition($this->getParam(1))
             ->setInfo($this->getParam(2));
 
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 }

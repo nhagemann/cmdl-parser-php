@@ -1,72 +1,25 @@
-- language parameter bei get cmdl
+Version 1.0
+===========
 
-@sortable no|list|tree|related property1
-- @validate property1 minmax
+CMDL 1.0
 - @preview url
-- @hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
-- @content-type-thumbnail property default
 - @timeshiftable yes|no
 
+make annotation parsing sensitive for different data-types
 
 
-                                                                                                                                x
-=== content type level ===
+==============
 
-@content-type-title News ""
-
-@content-type-description ""
-
-@content-type-thumbnail property default
-
-
-@languages none (de: Deutsch,en: English)
-@subtypes none
-@status none
-
-@workspaces (default)
-
-@operations (list,get,insert,update,delete,revision)
-
-@sortable no|list|tree|related property1
-
-@timeshiftable yes|no
-
-
-@hidden-properties (property1, property2)
+CMDL 1.1:
+- @sortable related property1
+- @validate property1 minmax
+- @content-type-thumbnail property default
+- @hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
 
 
 
 
 
-=== element level ===
-
-@default-value
 
 
 
-
-@hint xxx property1 ""
-@help property1 ""
-@info property1 ""
-@placeholder property1 ""
-
-@validate property1 minmax
-
-
-
-=== specials ===
-
-@insert abc
-@insert property (1:abc,2:abc)
-
-
-@preview url
-
-@hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
-
-
-
-
-Content Type xyz doesn't support time shifting. Switching back to real time.
-
-Content Type xyz has no workspace list, switching back to to workspace default.

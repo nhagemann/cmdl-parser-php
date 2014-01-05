@@ -2,6 +2,7 @@
 
 namespace CMDL;
 
+use CMDL\DataTypeDefinition;
 use CMDL\ContentTypeDefinition;
 use CMDL\FormElementDefinitionCollection;
 
@@ -11,9 +12,9 @@ class Annotation
     protected $annotationType = null;
 
     /**
-     * @var ContentTypeDefinition|null
+     * @var DataTypeDefinition|null
      */
-    protected $contentTypeDefinition = null;
+    protected $dataTypeDefinition = null;
     /**
      * @var FormElementDefinitionCollection|null
      */
@@ -22,9 +23,9 @@ class Annotation
     protected $lists = array();
 
 
-    public function __construct(ContentTypeDefinition $contentTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array())
+    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array())
     {
-        $this->contentTypeDefinition = $contentTypeDefinition;
+        $this->dataTypeDefinition = $dataTypeDefinition;
         $this->currentFormElementDefinitionCollection = $currentFormElementDefinitionCollection;
         $this->params                = $params;
         $this->lists                 = $lists;
@@ -33,7 +34,7 @@ class Annotation
 
     public function apply()
     {
-        return $this->contentTypeDefinition;
+        return $this->dataTypeDefinition;
     }
 
 
