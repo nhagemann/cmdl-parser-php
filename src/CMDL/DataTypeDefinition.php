@@ -193,17 +193,6 @@ class DataTypeDefinition
     }
 
 
-    public function hasLanguages()
-    {
-        if ($this->languages == null or count($this->languages) < 2)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-
     public function setLanguages(array $languages)
     {
         $this->languages = $languages;
@@ -216,6 +205,17 @@ class DataTypeDefinition
     }
 
 
+    public function hasLanguages()
+    {
+        if ($this->languages == null or count($this->languages) < 2)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
     public function setWorkspaces($workspaces)
     {
         $this->workspaces = $workspaces;
@@ -225,6 +225,17 @@ class DataTypeDefinition
     public function getWorkspaces()
     {
         return $this->workspaces;
+    }
+
+
+    public function hasWorkspaces()
+    {
+        if ($this->workspaces == null or count($this->workspaces) < 2)
+        {
+            return false;
+        }
+
+        return true;
     }
 
 }
