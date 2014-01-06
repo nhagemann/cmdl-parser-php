@@ -12,7 +12,7 @@ class ConfigTypeDefinition extends DataTypeDefinition
 
     protected $operations = array( 'list', 'get', 'update', 'revision' );
 
-    protected $timeShiftAble = false;
+    protected $timeShiftable = false;
 
 
     public function setOperations($operations)
@@ -53,14 +53,14 @@ class ConfigTypeDefinition extends DataTypeDefinition
     }
 
 
-    public function setTimeShiftAble($timeShiftAble)
+    public function setTimeShiftable($timeShiftable)
     {
-        $this->timeShiftAble = $timeShiftAble;
+        $this->timeShiftable = $timeShiftable;
     }
 
 
-    public function isTimeShiftAble()
+    public function isTimeShiftable()
     {
-        return $this->timeShiftAble;
+        return $this->timeShiftable;
     }
 }

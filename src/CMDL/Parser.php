@@ -68,7 +68,8 @@ use CMDL\Annotations\ContentTypeStatusAnnotation;
 use CMDL\Annotations\ContentTypeSubtypesAnnotation;
 use CMDL\Annotations\DataTypeWorkspacesAnnotation;
 use CMDL\Annotations\DataTypeOperationsAnnotation;
-use CMDL\Annotations\SortableAnnotation;
+use CMDL\Annotations\DataTypeSortableAnnotation;
+use CMDL\Annotations\DataTypeTimeShiftableAnnotation;
 
 use CMDL\Annotations\FormElementDefaultValueAnnotation;
 
@@ -664,7 +665,10 @@ class Parser
                 $annotation = new DataTypeOperationsAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'sortable':
-                $annotation = new SortableAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeSortableAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'time-shiftable':
+                $annotation = new DataTypeTimeShiftableAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'default-value':
                 $annotation = new FormElementDefaultValueAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);

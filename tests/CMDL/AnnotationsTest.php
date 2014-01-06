@@ -143,6 +143,7 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
     }
 
+
     public function testSortableAnnotation()
     {
         /* @var ContentTypeDefinition */
@@ -162,6 +163,18 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($contentTypeDefinition->isSortable());
         $this->assertTrue($contentTypeDefinition->isSortableAsList());
         $this->assertTrue($contentTypeDefinition->isSortableAsTree());
+    }
+
+
+    public function testTimeShiftableAnnotation()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('');
+        $this->assertFalse($contentTypeDefinition->isTimeShiftAble());
+
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('@time-shiftable ');
+        $this->assertTrue($contentTypeDefinition->isTimeShiftAble());
     }
 
 
@@ -203,12 +216,11 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
         /* @var $formElement InsertFormElementDefinition */
         $formElement = $formelements[3];
-        $this->assertEquals('insert1',$formElement->getInsertionName());
+        $this->assertEquals('insert1', $formElement->getInsertionName());
 
-        $this->assertContains('a',$contentTypeDefinition->getProperties());
-        $this->assertContains('d',$contentTypeDefinition->getProperties());
-        $this->assertNotContains('j',$contentTypeDefinition->getProperties());
-
+        $this->assertContains('a', $contentTypeDefinition->getProperties());
+        $this->assertContains('d', $contentTypeDefinition->getProperties());
+        $this->assertNotContains('j', $contentTypeDefinition->getProperties());
 
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-09.cmdl');
@@ -223,14 +235,14 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
         /* @var $formElement InsertFormElementDefinition */
         $formElement = $formelements[3];
-        $this->assertEquals('insert1',$formElement->getInsertionName(1));
-        $this->assertEquals('insert2',$formElement->getInsertionName(2));
-        $this->assertEquals(null,$formElement->getInsertionName(3));
-        $this->assertEquals('a',$formElement->getPropertyName());
+        $this->assertEquals('insert1', $formElement->getInsertionName(1));
+        $this->assertEquals('insert2', $formElement->getInsertionName(2));
+        $this->assertEquals(null, $formElement->getInsertionName(3));
+        $this->assertEquals('a', $formElement->getPropertyName());
 
-        $this->assertContains('a',$contentTypeDefinition->getProperties());
-        $this->assertContains('d',$contentTypeDefinition->getProperties());
-        $this->assertContains('j',$contentTypeDefinition->getProperties());
+        $this->assertContains('a', $contentTypeDefinition->getProperties());
+        $this->assertContains('d', $contentTypeDefinition->getProperties());
+        $this->assertContains('j', $contentTypeDefinition->getProperties());
 
     }
 }

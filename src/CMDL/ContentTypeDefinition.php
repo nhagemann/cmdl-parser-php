@@ -17,7 +17,7 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     protected $sortable = null;
 
-    protected $timeShiftAble = false;
+    protected $timeShiftable = false;
 
 
     public function hasStatusList()
@@ -151,15 +151,15 @@ class ContentTypeDefinition extends DataTypeDefinition
     }
 
 
-    public function setTimeShiftAble($timeShiftAble)
+    public function setTimeShiftable($timeShiftable)
     {
-        $this->timeShiftAble = $timeShiftAble;
+        $this->timeShiftable = $timeShiftable;
     }
 
 
-    public function isTimeShiftAble()
+    public function isTimeShiftable()
     {
-        return $this->timeShiftAble;
+        return $this->timeShiftable;
     }
 
 }
