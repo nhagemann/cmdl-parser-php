@@ -590,7 +590,7 @@ class Parser
                 break;
             case 'sequence':
                 $formElementDefinition = new SequenceFormElementDefinition($name);
-                if (isset($params[0]))
+                if (isset($lists[0]))
                 {
                     $formElementDefinition->setInserts($lists[0]);
                 }
