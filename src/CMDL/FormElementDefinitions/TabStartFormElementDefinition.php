@@ -7,7 +7,7 @@ use CMDL\CMDLParserException;
 
 class TabStartFormElementDefinition extends FormElementDefinition
 {
-    protected $elementType = 'tab';
+    protected $elementType = 'tab-start';
 
     protected $opened = false;
 

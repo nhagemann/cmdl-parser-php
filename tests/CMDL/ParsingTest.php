@@ -163,13 +163,13 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[8]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\SectionEndFormElementDefinition', $formElements[9]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[10]);
-        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $formElements[11]);
-        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabStartFormElementDefinition', $formElements[12]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabNextFormElementDefinition', $formElements[11]);
+        //$this->assertInstanceOf('CMDL\FormElementDefinitions\TabStartFormElementDefinition', $formElements[12]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[12]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[13]);
-        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[14]);
-        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $formElements[15]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $formElements[14]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[15]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[16]);
-        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[17]);
 
     }
 

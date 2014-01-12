@@ -16,6 +16,7 @@ use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
 use CMDL\FormElementDefinitions\TabStartFormElementDefinition;
+use CMDL\FormElementDefinitions\TabNextFormElementDefinition;
 use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
@@ -177,13 +178,17 @@ class Parser
 
                         if (substr($line, 0, 3) == '[[[') // it's a tab
                         {
-                            if ($tabOpened == true) // There's still an open section -> close it first
+                            if ($tabOpened == true) // There's already an open tab
                             {
-                                $formElementDefinition = new TabEndFormElementDefinition();
-                                $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
+                                $formElementDefinition = new TabNextFormElementDefinition();
+
+                            }
+                            else
+                            {
+                                $formElementDefinition = new TabStartFormElementDefinition();
                             }
 
-                            $formElementDefinition = new TabStartFormElementDefinition();
+
 
                             $formElementDefinition->setLabel(rtrim(substr($line, 3), ']'));
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);

@@ -7,7 +7,7 @@ use CMDL\CMDLParserException;
 
 class SectionStartFormElementDefinition extends FormElementDefinition
 {
-    protected $elementType = 'section';
+    protected $elementType = 'section-start';
 
     protected $opened = false;
 
