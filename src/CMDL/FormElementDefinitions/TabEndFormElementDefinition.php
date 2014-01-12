@@ -7,5 +7,5 @@ use CMDL\CMDLParserException;
 
 class TabEndFormElementDefinition extends FormElementDefinition
 {
-    protected $elementType = 'tab-start';
+    protected $elementType = 'tab-end';
 }
