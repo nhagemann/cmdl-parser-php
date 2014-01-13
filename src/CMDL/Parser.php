@@ -136,6 +136,7 @@ class Parser
 
         $sectionOpened = false;
         $tabOpened     = false;
+        $currentTabLabel = '';
 
         $annotationLines = array();
 
@@ -178,6 +179,8 @@ class Parser
 
                         if (substr($line, 0, 3) == '[[[') // it's a tab
                         {
+                            $currentTabLabel = rtrim(substr($line, 3), ']');
+
                             if ($tabOpened == true) // There's already an open tab
                             {
                                 $formElementDefinition = new TabNextFormElementDefinition();
@@ -190,7 +193,7 @@ class Parser
 
 
 
-                            $formElementDefinition->setLabel(rtrim(substr($line, 3), ']'));
+                            $formElementDefinition->setLabel($currentTabLabel);
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                             $tabOpened = true;
                         }
@@ -228,8 +231,10 @@ class Parser
                         if (substr($line, 0, 3) == ']]]') // it's a tab
                         {
                             $formElementDefinition = new TabEndFormElementDefinition();
+                            $formElementDefinition->setLabel($currentTabLabel);
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                             $tabOpened = false;
+                            $currentTabLabel ='';
                         }
                         elseif ($sectionOpened == true)
                         {
