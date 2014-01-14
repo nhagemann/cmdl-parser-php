@@ -93,6 +93,112 @@ class DataTypeDefinition
     }
 
 
+    public function hasClippingDefinition($name)
+    {
+        if (array_key_exists($name, $this->clippings))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public function getListClippingDefinition($name = 'list')
+    {
+        if ($name != 'list')
+        {
+            if ($this->hasClippingDefinition($name))
+            {
+                return $this->getClippingDefinition($name);
+            }
+        }
+
+        if ($this->hasClippingDefinition('list'))
+        {
+            return $this->getClippingDefinition('list');
+        }
+
+        return $this->getClippingDefinition('default');
+    }
+
+
+    public function getInsertClippingDefinition($name = 'insert')
+    {
+        if ($name != 'insert')
+        {
+            if ($this->hasClippingDefinition($name))
+            {
+                return $this->getClippingDefinition($name);
+            }
+        }
+
+        if ($this->hasClippingDefinition('insert'))
+        {
+            return $this->getClippingDefinition('insert');
+        }
+
+        return $this->getClippingDefinition('default');
+    }
+
+
+    public function getEditClippingDefinition($name = 'edit')
+    {
+        if ($name != 'edit')
+        {
+            if ($this->hasClippingDefinition($name))
+            {
+                return $this->getClippingDefinition($name);
+            }
+        }
+
+        if ($this->hasClippingDefinition('edit'))
+        {
+            return $this->getClippingDefinition('edit');
+        }
+
+        return $this->getClippingDefinition('default');
+    }
+
+
+    public function getDuplicateClippingDefinition($name = 'duplicate')
+    {
+        if ($name != 'duplicate')
+        {
+            if ($this->hasClippingDefinition($name))
+            {
+                return $this->getClippingDefinition($name);
+            }
+        }
+
+        if ($this->hasClippingDefinition('duplicate'))
+        {
+            return $this->getClippingDefinition('duplicate');
+        }
+
+        return $this->getClippingDefinition('default');
+    }
+
+
+    public function getExchangeClippingDefinition($name = 'exchange')
+    {
+        if ($name != 'exchange')
+        {
+            if ($this->hasClippingDefinition($name))
+            {
+                return $this->getClippingDefinition($name);
+            }
+        }
+
+        if ($this->hasClippingDefinition('exchange'))
+        {
+            return $this->getClippingDefinition('exchange');
+        }
+
+        return $this->getClippingDefinition('default');
+    }
+
+
     public function addClippingDefinition(ClippingDefinition $definition)
     {
         $this->clippings[$definition->getName()] = $definition;

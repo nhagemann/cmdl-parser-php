@@ -13,6 +13,8 @@ class ContentTypeDefinition extends DataTypeDefinition
     protected $subtypes = null;
     protected $statusList = null;
 
+    // TODO: import, export
+
     protected $operations = array( 'list', 'get', 'update', 'insert', 'delete', 'revision' );
 
     protected $sortable = null;
