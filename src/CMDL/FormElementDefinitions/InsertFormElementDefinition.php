@@ -3,7 +3,6 @@
 namespace CMDL\FormElementDefinitions;
 
 use CMDL\FormElementDefinition;
-use CMDL\CMDLParserException;
 
 class InsertFormElementDefinition extends FormElementDefinition
 {

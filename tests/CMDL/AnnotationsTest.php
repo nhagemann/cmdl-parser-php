@@ -203,8 +203,10 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertAnnotation()
     {
+
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-08.cmdl');
+
 
         /* @var ClippingDefinition */
         $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
@@ -217,6 +219,8 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         /* @var $formElement InsertFormElementDefinition */
         $formElement = $formelements[3];
         $this->assertEquals('insert1', $formElement->getInsertionName());
+
+
 
         $this->assertContains('a', $contentTypeDefinition->getProperties());
         $this->assertContains('d', $contentTypeDefinition->getProperties());

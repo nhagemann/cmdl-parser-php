@@ -138,8 +138,6 @@ class Parser
         $tabOpened     = false;
         $currentTabLabel = '';
 
-        $annotationLines = array();
-
         foreach ($cmdl AS $line)
         {
             if (isset($line[0]))
@@ -148,7 +146,6 @@ class Parser
                 {
                     case '@': // annotation
                         $dataTypeDefinition = self::parseAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $line);
-                        //$annotationLines[]=$line;
 
                         break;
                     case '#': // comment
@@ -256,11 +253,6 @@ class Parser
             }
         }
 
-        /*
-        foreach ($annotationLines as $line)
-        {
-            $contentTypeDefinition = self::parseAnnotation($contentTypeDefinition, $line);
-        }*/
 
         if ($dataTypeName != null)
         {

@@ -8,7 +8,7 @@ use CMDL\CMDLParserException;
 class DateFormElementDefinition extends FormElementDefinition
 {
 
-    protected $elementType = 'timestamp';
+    protected $elementType = 'date';
 
     protected $type = 'long';
 
@@ -18,7 +18,7 @@ class DateFormElementDefinition extends FormElementDefinition
 
     public function setType($type)
     {
-        if (in_array($type, array( 'long', 'short', 'datetime', 'datetimeseconds' )))
+        if (in_array($type, array( 'long', 'short', 'datetime', 'full' )))
         {
             $this->type = $type;
         }
