@@ -208,12 +208,10 @@ class DataTypeDefinition
     public function getInsertionDefinition($name)
     {
 
-
         if (array_key_exists($name, $this->insertions))
         {
             return $this->insertions[$name];
         }
-
 
         throw new CMDLParserException('', CMDLParserException::CMDL_INSERTION_NOT_DEFINED);
     }
@@ -248,7 +246,6 @@ class DataTypeDefinition
     public function getProperties($clippingName = null)
     {
 
-
         $inserts = array();
 
         if ($clippingName)
@@ -270,25 +267,18 @@ class DataTypeDefinition
 
         }
 
-
         $inserts = array_unique($inserts);
-
-
-
 
         foreach ($inserts as $insertionName)
         {
 
-
             $insertionDefinition = $this->getInsertionDefinition($insertionName);
 
+            $properties = array_merge($properties, $insertionDefinition->getProperties());
 
-            $properties          = array_merge($properties, $insertionDefinition->getProperties());
         }
 
-
         $properties = array_unique($properties);
-
 
         return $properties;
     }

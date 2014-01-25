@@ -17,11 +17,13 @@ class FormElementDefinitionCollection
 
     protected $hiddenProperties = array();
 
+    protected $parentDataTypeDefinition = null;
 
-    public function __construct($name = 'default')
+
+    public function __construct($name = 'default', $parentDataTypeDefinition = null)
     {
         $this->setName($name);
-
+        $this->parentDataTypeDefinition = $parentDataTypeDefinition;
     }
 
 
@@ -97,8 +99,25 @@ class FormElementDefinitionCollection
                 {
                     $uniqueProperties[] = $formElementDefinition->getName();
                 }
+
             }
         }
+
+        if ($this->parentDataTypeDefinition)
+        {
+
+            $inserts = $this->getPossibleInsertionNames();
+            foreach ($inserts as $insertionName)
+            {
+
+                $insertionDefinition = $this->parentDataTypeDefinition->getInsertionDefinition($insertionName);
+
+                $properties = array_merge($properties, $insertionDefinition->getProperties());
+
+            }
+
+        }
+
         $this->properties          = $properties;
         $this->mandatoryProperties = $mandatoryProperties;
         $this->uniqueProperties    = $uniqueProperties;
@@ -151,4 +170,28 @@ class FormElementDefinitionCollection
         return $this->hiddenProperties;
     }
 
+
+    public function getPossibleInsertionNames()
+    {
+        /* @var $formElementDefinition FormElementDefinition */
+        $inserts = array();
+        foreach ($this->getFormElementDefinitions() as $formElementDefinition)
+        {
+            if ($formElementDefinition->getFormElementType() == 'insert')
+            {
+
+                if ($formElementDefinition->getPropertyName() == null)
+                {
+                    $inserts[] = $formElementDefinition->getInsertionName();
+                }
+                else
+                {
+                    $inserts = $inserts + array_values($formElementDefinition->getInsertConditions());
+                }
+            }
+
+        }
+
+        return $inserts;
+    }
 }

@@ -248,5 +248,16 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('d', $contentTypeDefinition->getProperties());
         $this->assertContains('j', $contentTypeDefinition->getProperties());
 
+        $this->assertTrue($contentTypeDefinition->hasProperty('a'));
+        $this->assertTrue($contentTypeDefinition->hasProperty('d'));
+        $this->assertTrue($contentTypeDefinition->hasProperty('j'));
+
+        //var_dump($clippingDefinition->getPossibleInsertionNames());
+        //var_dump($clippingDefinition->getProperties());
+
+        $this->assertTrue($clippingDefinition->hasProperty('a'));
+        $this->assertTrue($clippingDefinition->hasProperty('d'));
+        $this->assertTrue($clippingDefinition->hasProperty('j'));
+
     }
 }

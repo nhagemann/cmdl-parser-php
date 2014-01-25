@@ -129,7 +129,7 @@ class Parser
 
         $dataTypeDefinition->setCMDL($cmdl);
 
-        $currentFormElementDefinitionCollection = new ClippingDefinition('default');
+        $currentFormElementDefinitionCollection = new ClippingDefinition('default',$dataTypeDefinition);
         $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
 
         $cmdl = explode(PHP_EOL, $cmdl);
