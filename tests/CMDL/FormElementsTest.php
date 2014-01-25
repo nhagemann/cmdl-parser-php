@@ -71,6 +71,10 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
 
         $formElementDefinition = Parser::parseFormElementDefinition('Abstract = cmdl* 15 L {text1}');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\CMDLFormElementDefinition', $formElementDefinition);
+
+        $formElementDefinition = Parser::parseFormElementDefinition('Template = sourcecode html 15 L {text1}');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\SourceCodeFormElementDefinition', $formElementDefinition);
+        $this->assertEquals('html',$formElementDefinition->getType());
     }
 
 

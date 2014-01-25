@@ -25,6 +25,7 @@ use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
 use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
 use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
 use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
+use CMDL\FormElementDefinitions\SourceCodeFormElementDefinition;
 
 use CMDL\FormElementDefinitions\PasswordFormElementDefinition;
 
@@ -322,8 +323,8 @@ class Parser
                 $typeWithQualifier = $onTheRight;
             }
 
-            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*');
-            $type              = Util::generateValidIdentifier($typeWithQualifier);
+            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*-');
+            $type              = Util::generateValidIdentifier($typeWithQualifier,'-');
 
         }
 
@@ -401,6 +402,9 @@ class Parser
                 {
                     $formElementDefinition->setSize($params[1]);
                 }
+                break;
+            case 'sourcecode':
+                $formElementDefinition = new SourceCodeFormElementDefinition($name, $params, $lists);
                 break;
             case 'password':
                 $formElementDefinition = new PasswordFormElementDefinition($name, $params, $lists);
