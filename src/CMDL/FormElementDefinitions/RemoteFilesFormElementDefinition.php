@@ -2,9 +2,6 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
-use CMDL\CMDLParserException;
-
 class RemoteFilesFormElementDefinition extends FilesFormElementDefinition
 {
 

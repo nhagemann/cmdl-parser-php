@@ -3,7 +3,6 @@
 namespace CMDL\Annotations;
 
 use CMDL\Annotation;
-use CMDL\CMDLParserException;
 
 class DataTypeTimeShiftableAnnotation extends Annotation
 {

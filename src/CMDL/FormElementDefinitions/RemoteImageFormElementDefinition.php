@@ -2,8 +2,6 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
-use CMDL\CMDLParserException;
 
 class RemoteImageFormElementDefinition extends ImageFormElementDefinition
 {

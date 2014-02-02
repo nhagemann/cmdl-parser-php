@@ -4,8 +4,7 @@ namespace CMDL;
 
 use CMDL\DataTypeDefinition;
 use CMDL\CMDLParserException;
-use CMDL\ClippingDefinition;
-use CMDL\InsertionDefinition;
+
 
 class ConfigTypeDefinition extends DataTypeDefinition
 {

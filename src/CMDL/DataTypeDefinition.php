@@ -318,7 +318,7 @@ class DataTypeDefinition
 
     public function hasLanguages()
     {
-        if ($this->languages == null or count($this->languages) < 2)
+        if ($this->languages == null || count($this->languages) < 2)
         {
             return false;
         }
@@ -341,7 +341,7 @@ class DataTypeDefinition
 
     public function hasWorkspaces()
     {
-        if ($this->workspaces == null or count($this->workspaces) < 2)
+        if ($this->workspaces == null || count($this->workspaces) < 2)
         {
             return false;
         }

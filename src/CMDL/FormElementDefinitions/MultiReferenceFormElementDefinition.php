@@ -2,7 +2,7 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
+
 use CMDL\CMDLParserException;
 
 class MultiReferenceFormElementDefinition extends ReferenceFormElementDefinition

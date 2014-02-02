@@ -3,7 +3,6 @@
 namespace CMDL;
 
 use CMDL\Parser;
-use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitionCollection;
 
 class ClippingDefinition extends FormElementDefinitionCollection

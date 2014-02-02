@@ -3,7 +3,6 @@
 namespace CMDL;
 
 use CMDL\DataTypeDefinition;
-use CMDL\ContentTypeDefinition;
 use CMDL\FormElementDefinitionCollection;
 
 class Annotation

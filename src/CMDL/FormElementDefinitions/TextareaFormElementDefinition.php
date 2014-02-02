@@ -1,7 +1,6 @@
 <?php
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\CMDLParserException;
 
