@@ -5,16 +5,13 @@ namespace CMDL;
 use CMDL\DataTypeDefinition;
 use CMDL\CMDLParserException;
 
-
 class ContentTypeDefinition extends DataTypeDefinition
 {
 
     protected $subtypes = null;
     protected $statusList = null;
 
-    // TODO: import, export
-
-    protected $operations = array( 'list', 'get', 'update', 'insert', 'delete', 'revision' );
+    protected $operations = array( 'list', 'get', 'update', 'insert', 'delete', 'revision', 'export', 'import' );
 
     protected $sortable = null;
 
@@ -115,6 +112,18 @@ class ContentTypeDefinition extends DataTypeDefinition
     public function hasRevisionOperations()
     {
         return in_array('revision', $this->operations);
+    }
+
+
+    public function hasExportOperation()
+    {
+        return in_array('export', $this->operations);
+    }
+
+
+    public function hasImportOperation()
+    {
+        return in_array('import', $this->operations);
     }
 
 

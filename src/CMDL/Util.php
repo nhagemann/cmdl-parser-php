@@ -22,7 +22,8 @@ class Util
         $pattern = '/[' . join(array_keys($map), '') . ']/u';
         if (preg_match_all($pattern, $s, $matches))
         {
-            for ($i = 0; $i < count($matches[0]); $i++)
+            $c = count($matches[0]);
+            for ($i = 0; $i < $c; $i++)
             {
                 $char = $matches[0][$i];
                 if (isset($map[$char]))
@@ -123,7 +124,7 @@ class Util
                     }
                     else
                     {
-                        $key = $item;
+                        $key   = $item;
                         $value = $item;
                     }
 

@@ -12,7 +12,6 @@ class ClippingDefinition extends FormElementDefinitionCollection
     {
         $properties = parent::getProperties();
 
-        //var_dump($properties);
         $properties = array_unique(array_merge(Parser::$superProperties, $properties));
 
         return $properties;
