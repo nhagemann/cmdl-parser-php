@@ -255,6 +255,22 @@ class Parser
         }
 
 
+        /*
+        foreach ($dataTypeDefinition->getClippingDefinitions() as $clippingDefinition)
+        {
+            foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
+            {
+                if ($formElementDefinition->getFormElementType()=='insert')
+                {
+
+                }
+            }
+            //$test = new TextfieldFormElementDefinition();
+            //$test->setName('b');
+            //$clippingDefinition->addFormElementDefinition($test);
+        } */
+
+
         if ($dataTypeName != null)
         {
             $dataTypeDefinition->setName($dataTypeName);

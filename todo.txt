@@ -15,11 +15,16 @@ CMDL 1.1:
 - @validate property1 minmax
 - @content-type-thumbnail property default
 - @hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
+- @client-hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
+- @server-hooks (insert: http://www.ard.de, update:, delete ) (insert: xxx, update:, delete: xxx) // after before
+- @workflow chained-properties (a,b) languages/workspaces/full
 
 
 
 
 
 
+clipping => view
+inserts => clipping
 
 

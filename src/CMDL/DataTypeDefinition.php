@@ -103,6 +103,10 @@ class DataTypeDefinition
         return false;
     }
 
+    public function getClippingDefinitions()
+    {
+        return $this->clippings;
+    }
 
     public function getListClippingDefinition($name = 'list')
     {
@@ -207,13 +211,12 @@ class DataTypeDefinition
 
     public function getInsertionDefinition($name)
     {
-
         if (array_key_exists($name, $this->insertions))
         {
             return $this->insertions[$name];
         }
 
-        throw new CMDLParserException('', CMDLParserException::CMDL_INSERTION_NOT_DEFINED);
+        throw new CMDLParserException('Insertion '.$name.' not defined.', CMDLParserException::CMDL_INSERTION_NOT_DEFINED);
     }
 
 
@@ -222,6 +225,10 @@ class DataTypeDefinition
         $this->insertions[$definition->getName()] = $definition;
     }
 
+    public function hasInsertionDefinition($name)
+    {
+        return  array_key_exists($name, $this->insertions);
+    }
 
     public function hasProperty($property, $clippingName = null)
     {
@@ -248,6 +255,7 @@ class DataTypeDefinition
 
         $inserts = array();
 
+
         if ($clippingName)
         {
             $clippingDefinition = $this->getClippingDefinition($clippingName);
@@ -266,6 +274,7 @@ class DataTypeDefinition
             }
 
         }
+
 
         $inserts = array_unique($inserts);
 

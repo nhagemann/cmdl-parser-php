@@ -1,0 +1,16 @@
+name
+comment
+a = sequence (s1)
+@insert insert1
+
++++ insert1 +++
+b = sequence (s2)
+
+
++++ s1 +++
+c
+d
+
++++ s2 +++
+e
+f

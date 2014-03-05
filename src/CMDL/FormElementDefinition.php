@@ -27,6 +27,7 @@ class FormElementDefinition
 
     protected $maxValueLength = 255;
 
+    protected $insertedByInsert = false;
 
     public function __construct($name = null, $params = array(), $lists = array())
     {
@@ -190,5 +191,19 @@ class FormElementDefinition
     }
 
 
+    public function setInsertedByInsert($insertName)
+    {
+        $this->insertedByInsert = $insertName;
+    }
+
+    public function isInsertedByInsert()
+    {
+        return (boolean)$this->insertedByInsert;
+    }
+
+    public function getInsertedByInsertName()
+    {
+        return $this->insertedByInsert;
+    }
 
 }
