@@ -9,6 +9,7 @@ class SequenceWithinInsertTest extends \PHPUnit_Framework_TestCase
 
     public function testFormElementFound()
     {
+
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-11.cmdl');
 
         $this->assertInstanceOf('CMDL\ContentTypeDefinition', $contentTypeDefinition);

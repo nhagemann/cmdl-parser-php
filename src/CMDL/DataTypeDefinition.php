@@ -13,7 +13,7 @@ class DataTypeDefinition
     protected $title = null;
     protected $description = null;
 
-    protected $languages = null;
+    protected $languages = array( 'default' => 'Default' );
 
     protected $workspaces = array( 'default' => 'Default' );
 
