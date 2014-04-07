@@ -6,7 +6,7 @@ use CMDL\CMDLParserException;
 use CMDL\DataTypeDefinition;
 use CMDL\ConfigTypeDefinition;
 use CMDL\ContentTypeDefinition;
-use CMDL\ClippingDefinition;
+use CMDL\ViewDefinition;
 use CMDL\InsertionDefinition;
 use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitionCollection;
@@ -124,19 +124,19 @@ class Parser
                 $dataTypeDefinition = new DataTypeDefinition();
                 break;
             default:
-                throw new CMDLParserException('Unknown data type '.$dataType.'. Must be one of content,config,data.', CMDLParserException::CMDL_UNKNOWN_DATATYPE);
+                throw new CMDLParserException('Unknown data type ' . $dataType . '. Must be one of content,config,data.', CMDLParserException::CMDL_UNKNOWN_DATATYPE);
                 break;
         }
 
         $dataTypeDefinition->setCMDL($cmdl);
 
-        $currentFormElementDefinitionCollection = new ClippingDefinition('default',$dataTypeDefinition);
-        $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
+        $currentFormElementDefinitionCollection = new ViewDefinition('default', $dataTypeDefinition);
+        $dataTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
 
         $cmdl = explode(PHP_EOL, $cmdl);
 
-        $sectionOpened = false;
-        $tabOpened     = false;
+        $sectionOpened   = false;
+        $tabOpened       = false;
         $currentTabLabel = '';
 
         foreach ($cmdl AS $line)
@@ -154,18 +154,18 @@ class Parser
                     case ' ': // ignore empty lines
                     case '':
                         break;
-                    case '-': // start of a clipping definition
-                        $clippingName = Util::generateValidIdentifier(trim($line, '-'));
+                    case '-': // start of a view definition
+                        $viewName = Util::generateValidIdentifier(trim($line, '-'));
 
-                        if ($clippingName == 'default')
+                        if ($viewName == 'default')
                         {
-                            // get the already created and added definition of clipping "default"
-                            $currentFormElementDefinitionCollection = $dataTypeDefinition->getClippingDefinition('default');
+                            // get the already created and added definition of view "default"
+                            $currentFormElementDefinitionCollection = $dataTypeDefinition->getViewDefinition('default');
                         }
                         else
                         {
-                            $currentFormElementDefinitionCollection = new ClippingDefinition($clippingName);
-                            $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
+                            $currentFormElementDefinitionCollection = new ViewDefinition($viewName);
+                            $dataTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
                         }
                         break;
                     case '+': // start of an insertion definition
@@ -188,8 +188,6 @@ class Parser
                             {
                                 $formElementDefinition = new TabStartFormElementDefinition();
                             }
-
-
 
                             $formElementDefinition->setLabel($currentTabLabel);
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
@@ -231,8 +229,8 @@ class Parser
                             $formElementDefinition = new TabEndFormElementDefinition();
                             $formElementDefinition->setLabel($currentTabLabel);
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
-                            $tabOpened = false;
-                            $currentTabLabel ='';
+                            $tabOpened       = false;
+                            $currentTabLabel = '';
                         }
                         elseif ($sectionOpened == true)
                         {
@@ -253,23 +251,6 @@ class Parser
                 }
             }
         }
-
-
-        /*
-        foreach ($dataTypeDefinition->getClippingDefinitions() as $clippingDefinition)
-        {
-            foreach ($clippingDefinition->getFormElementDefinitions() as $formElementDefinition)
-            {
-                if ($formElementDefinition->getFormElementType()=='insert')
-                {
-
-                }
-            }
-            //$test = new TextfieldFormElementDefinition();
-            //$test->setName('b');
-            //$clippingDefinition->addFormElementDefinition($test);
-        } */
-
 
         if ($dataTypeName != null)
         {
@@ -340,7 +321,7 @@ class Parser
             }
 
             $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*-');
-            $type              = Util::generateValidIdentifier($typeWithQualifier,'-');
+            $type              = Util::generateValidIdentifier($typeWithQualifier, '-');
 
         }
 

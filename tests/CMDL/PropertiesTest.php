@@ -5,18 +5,18 @@ namespace CMDL;
 use CMDL\Parser;
 use CMDL\CMDLParserException;
 use CMDL\ContentTypeDefinition;
-use CMDL\ClippingDefinition;
+use CMDL\ViewDefinition;
 use CMDL\FormElementDefinition;
 
 class PropertiesTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testUnknownClipping()
+    public function testUnknownView()
     {
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-05.cmdl');
 
         $this->setExpectedException('CMDL\CMDLParserException');
-        $contentTypeDefinition->getProperties('unknownclipping');
+        $contentTypeDefinition->getProperties('unknownview');
     }
 
 

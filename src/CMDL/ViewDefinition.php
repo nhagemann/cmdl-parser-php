@@ -5,7 +5,7 @@ namespace CMDL;
 use CMDL\Parser;
 use CMDL\FormElementDefinitionCollection;
 
-class ClippingDefinition extends FormElementDefinitionCollection
+class ViewDefinition extends FormElementDefinitionCollection
 {
 
     public function getProperties()

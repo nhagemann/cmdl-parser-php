@@ -3,7 +3,7 @@
 namespace CMDL;
 
 use CMDL\CMDLParserException;
-use CMDL\ClippingDefinition;
+use CMDL\ViewDefinition;
 use CMDL\InsertionDefinition;
 
 class DataTypeDefinition
@@ -18,7 +18,7 @@ class DataTypeDefinition
     protected $workspaces = array( 'default' => 'Default' );
 
     protected $cmdl = null;
-    protected $clippings = array();
+    protected $views = array();
     protected $insertions = array();
 
 
@@ -79,23 +79,23 @@ class DataTypeDefinition
     /**
      * @param string $name
      *
-     * @return ClippingDefinition
+     * @return ViewDefinition
      * @throws CMDLParserException
      */
-    public function getClippingDefinition($name = 'default')
+    public function getViewDefinition($name = 'default')
     {
-        if (array_key_exists($name, $this->clippings))
+        if (array_key_exists($name, $this->views))
         {
-            return $this->clippings[$name];
+            return $this->views[$name];
         }
 
-        throw new CMDLParserException('Data type' . rtrim(' ' . $this->getName()) . ' has no clipping "' . $name . '"', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
+        throw new CMDLParserException('Data type' . rtrim(' ' . $this->getName()) . ' has no view "' . $name . '"', CMDLParserException::CMDL_VIEW_NOT_DEFINED);
     }
 
 
-    public function hasClippingDefinition($name)
+    public function hasViewDefinition($name)
     {
-        if (array_key_exists($name, $this->clippings))
+        if (array_key_exists($name, $this->views))
         {
             return true;
         }
@@ -103,109 +103,109 @@ class DataTypeDefinition
         return false;
     }
 
-    public function getClippingDefinitions()
+    public function getViewDefinitions()
     {
-        return $this->clippings;
+        return $this->views;
     }
 
-    public function getListClippingDefinition($name = 'list')
+    public function getListViewDefinition($name = 'list')
     {
         if ($name != 'list')
         {
-            if ($this->hasClippingDefinition($name))
+            if ($this->hasViewDefinition($name))
             {
-                return $this->getClippingDefinition($name);
+                return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasClippingDefinition('list'))
+        if ($this->hasViewDefinition('list'))
         {
-            return $this->getClippingDefinition('list');
+            return $this->getViewDefinition('list');
         }
 
-        return $this->getClippingDefinition('default');
+        return $this->getViewDefinition('default');
     }
 
 
-    public function getInsertClippingDefinition($name = 'insert')
+    public function getInsertViewDefinition($name = 'insert')
     {
         if ($name != 'insert')
         {
-            if ($this->hasClippingDefinition($name))
+            if ($this->hasViewDefinition($name))
             {
-                return $this->getClippingDefinition($name);
+                return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasClippingDefinition('insert'))
+        if ($this->hasViewDefinition('insert'))
         {
-            return $this->getClippingDefinition('insert');
+            return $this->getViewDefinition('insert');
         }
 
-        return $this->getClippingDefinition('default');
+        return $this->getViewDefinition('default');
     }
 
 
-    public function getEditClippingDefinition($name = 'edit')
+    public function getEditViewDefinition($name = 'edit')
     {
         if ($name != 'edit')
         {
-            if ($this->hasClippingDefinition($name))
+            if ($this->hasViewDefinition($name))
             {
-                return $this->getClippingDefinition($name);
+                return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasClippingDefinition('edit'))
+        if ($this->hasViewDefinition('edit'))
         {
-            return $this->getClippingDefinition('edit');
+            return $this->getViewDefinition('edit');
         }
 
-        return $this->getClippingDefinition('default');
+        return $this->getViewDefinition('default');
     }
 
 
-    public function getDuplicateClippingDefinition($name = 'duplicate')
+    public function getDuplicateViewDefinition($name = 'duplicate')
     {
         if ($name != 'duplicate')
         {
-            if ($this->hasClippingDefinition($name))
+            if ($this->hasViewDefinition($name))
             {
-                return $this->getClippingDefinition($name);
+                return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasClippingDefinition('duplicate'))
+        if ($this->hasViewDefinition('duplicate'))
         {
-            return $this->getClippingDefinition('duplicate');
+            return $this->getViewDefinition('duplicate');
         }
 
-        return $this->getClippingDefinition('default');
+        return $this->getViewDefinition('default');
     }
 
 
-    public function getExchangeClippingDefinition($name = 'exchange')
+    public function getExchangeViewDefinition($name = 'exchange')
     {
         if ($name != 'exchange')
         {
-            if ($this->hasClippingDefinition($name))
+            if ($this->hasViewDefinition($name))
             {
-                return $this->getClippingDefinition($name);
+                return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasClippingDefinition('exchange'))
+        if ($this->hasViewDefinition('exchange'))
         {
-            return $this->getClippingDefinition('exchange');
+            return $this->getViewDefinition('exchange');
         }
 
-        return $this->getClippingDefinition('default');
+        return $this->getViewDefinition('default');
     }
 
 
-    public function addClippingDefinition(ClippingDefinition $definition)
+    public function addViewDefinition(ViewDefinition $definition)
     {
-        $this->clippings[$definition->getName()] = $definition;
+        $this->views[$definition->getName()] = $definition;
     }
 
 
@@ -230,7 +230,7 @@ class DataTypeDefinition
         return  array_key_exists($name, $this->insertions);
     }
 
-    public function hasProperty($property, $clippingName = null)
+    public function hasProperty($property, $viewName = null)
     {
         // include super properties
         if (in_array($property, Parser::$superProperties))
@@ -238,9 +238,9 @@ class DataTypeDefinition
             return true;
         }
 
-        if ($clippingName)
+        if ($viewName)
         {
-            return $this->getClippingDefinition($clippingName)->hasProperty($property);
+            return $this->getViewDefinition($viewName)->hasProperty($property);
         }
         else
         {
@@ -250,27 +250,27 @@ class DataTypeDefinition
     }
 
 
-    public function getProperties($clippingName = null)
+    public function getProperties($viewName = null)
     {
 
         $inserts = array();
 
 
-        if ($clippingName)
+        if ($viewName)
         {
-            $clippingDefinition = $this->getClippingDefinition($clippingName);
+            $viewDefinition = $this->getViewDefinition($viewName);
 
-            $properties = $clippingDefinition->getProperties();
+            $properties = $viewDefinition->getProperties();
 
-            $inserts = $clippingDefinition->getPossibleInsertionNames();
+            $inserts = $viewDefinition->getPossibleInsertionNames();
         }
         else
         {
             $properties = array();
-            foreach ($this->clippings as $clippingDefinition)
+            foreach ($this->views as $viewDefinition)
             {
-                $properties = array_merge($properties, $clippingDefinition->getProperties());
-                $inserts    = array_merge($inserts, $clippingDefinition->getPossibleInsertionNames());
+                $properties = array_merge($properties, $viewDefinition->getProperties());
+                $inserts    = array_merge($inserts, $viewDefinition->getPossibleInsertionNames());
             }
 
         }
@@ -293,22 +293,22 @@ class DataTypeDefinition
     }
 
 
-    public function getMandatoryProperties($clippingName)
+    public function getMandatoryProperties($viewName)
     {
 
-        $clippingDefinition = $this->getClippingDefinition($clippingName);
+        $viewDefinition = $this->getViewDefinition($viewName);
 
-        return $clippingDefinition->getMandatoryProperties();
+        return $viewDefinition->getMandatoryProperties();
 
     }
 
 
-    public function getUniqueProperties($clippingName)
+    public function getUniqueProperties($viewName)
     {
 
-        $clippingDefinition = $this->getClippingDefinition($clippingName);
+        $viewDefinition = $this->getViewDefinition($viewName);
 
-        return $clippingDefinition->getUniqueProperties();
+        return $viewDefinition->getUniqueProperties();
 
     }
 

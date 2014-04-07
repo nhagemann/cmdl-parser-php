@@ -5,7 +5,7 @@ namespace CMDL;
 use CMDL\Parser;
 use CMDL\CMDLParserException;
 use CMDL\ContentTypeDefinition;
-use CMDL\ClippingDefinition;
+use CMDL\ViewDefinition;
 use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 
@@ -56,7 +56,7 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-07.cmdl');
 
-        $formElement = $contentTypeDefinition->getClippingDefinition('default')->getFormElementDefinition('name');
+        $formElement = $contentTypeDefinition->getViewDefinition('default')->getFormElementDefinition('name');
 
         $this->assertEquals('New Article', $formElement->getDefaultValue());
         $this->assertEquals('New Article', $formElement->getPlaceholder());
@@ -187,17 +187,17 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($contentTypeDefinition->hasProperty('licence'));
         $this->assertTrue($contentTypeDefinition->hasProperty('source'));
 
-        $clipping = $contentTypeDefinition->getClippingDefinition('default');
-        $this->assertTrue($clipping->hasProperty('name'));
-        $this->assertTrue($clipping->hasProperty('status'));
-        $this->assertTrue($clipping->hasProperty('licence'));
-        $this->assertTrue($clipping->hasProperty('source'));
+        $view = $contentTypeDefinition->getViewDefinition('default');
+        $this->assertTrue($view->hasProperty('name'));
+        $this->assertTrue($view->hasProperty('status'));
+        $this->assertTrue($view->hasProperty('licence'));
+        $this->assertTrue($view->hasProperty('source'));
 
-        $clipping = $contentTypeDefinition->getClippingDefinition('list');
-        $this->assertTrue($clipping->hasProperty('name'));
-        $this->assertTrue($clipping->hasProperty('status'));
-        $this->assertFalse($clipping->hasProperty('licence'));
-        $this->assertTrue($clipping->hasProperty('source'));
+        $view = $contentTypeDefinition->getViewDefinition('list');
+        $this->assertTrue($view->hasProperty('name'));
+        $this->assertTrue($view->hasProperty('status'));
+        $this->assertFalse($view->hasProperty('licence'));
+        $this->assertTrue($view->hasProperty('source'));
     }
 
 
@@ -208,10 +208,10 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-08.cmdl');
 
 
-        /* @var ClippingDefinition */
-        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
+        /* @var ViewDefinition */
+        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
 
-        $formelements = $clippingDefinition->getFormElementDefinitions();
+        $formelements = $viewDefinition->getFormElementDefinitions();
 
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formelements[0]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\InsertFormElementDefinition', $formelements[3]);
@@ -229,10 +229,10 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-09.cmdl');
 
-        /* @var ClippingDefinition */
-        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('default');
+        /* @var ViewDefinition */
+        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
 
-        $formelements = $clippingDefinition->getFormElementDefinitions();
+        $formelements = $viewDefinition->getFormElementDefinitions();
 
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formelements[0]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\InsertFormElementDefinition', $formelements[3]);
@@ -252,12 +252,9 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($contentTypeDefinition->hasProperty('d'));
         $this->assertTrue($contentTypeDefinition->hasProperty('j'));
 
-        //var_dump($clippingDefinition->getPossibleInsertionNames());
-        //var_dump($clippingDefinition->getProperties());
-
-        $this->assertTrue($clippingDefinition->hasProperty('a'));
-        $this->assertTrue($clippingDefinition->hasProperty('d'));
-        $this->assertTrue($clippingDefinition->hasProperty('j'));
+        $this->assertTrue($viewDefinition->hasProperty('a'));
+        $this->assertTrue($viewDefinition->hasProperty('d'));
+        $this->assertTrue($viewDefinition->hasProperty('j'));
 
     }
 }
