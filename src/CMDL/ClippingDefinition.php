@@ -4,7 +4,7 @@ namespace CMDL;
 
 use CMDL\FormElementDefinitionCollection;
 
-class InsertionDefinition extends FormElementDefinitionCollection
+class ClippingDefinition extends FormElementDefinitionCollection
 {
 
 }

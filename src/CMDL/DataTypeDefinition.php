@@ -4,7 +4,7 @@ namespace CMDL;
 
 use CMDL\CMDLParserException;
 use CMDL\ViewDefinition;
-use CMDL\InsertionDefinition;
+use CMDL\ClippingDefinition;
 
 class DataTypeDefinition
 {
@@ -19,7 +19,7 @@ class DataTypeDefinition
 
     protected $cmdl = null;
     protected $views = array();
-    protected $insertions = array();
+    protected $clippings = array();
 
 
     public function __construct($name = null)
@@ -209,25 +209,25 @@ class DataTypeDefinition
     }
 
 
-    public function getInsertionDefinition($name)
+    public function getClippingDefinition($name)
     {
-        if (array_key_exists($name, $this->insertions))
+        if (array_key_exists($name, $this->clippings))
         {
-            return $this->insertions[$name];
+            return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('Insertion '.$name.' not defined.', CMDLParserException::CMDL_INSERTION_NOT_DEFINED);
+        throw new CMDLParserException('Clipping '.$name.' not defined.', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
     }
 
 
-    public function addInsertionDefinition(InsertionDefinition $definition)
+    public function addClippingDefinition(ClippingDefinition $definition)
     {
-        $this->insertions[$definition->getName()] = $definition;
+        $this->clippings[$definition->getName()] = $definition;
     }
 
-    public function hasInsertionDefinition($name)
+    public function hasClippingDefinition($name)
     {
-        return  array_key_exists($name, $this->insertions);
+        return  array_key_exists($name, $this->clippings);
     }
 
     public function hasProperty($property, $viewName = null)
@@ -262,7 +262,7 @@ class DataTypeDefinition
 
             $properties = $viewDefinition->getProperties();
 
-            $inserts = $viewDefinition->getPossibleInsertionNames();
+            $inserts = $viewDefinition->getNamesOfEventuallyInsertedClippings();
         }
         else
         {
@@ -270,7 +270,7 @@ class DataTypeDefinition
             foreach ($this->views as $viewDefinition)
             {
                 $properties = array_merge($properties, $viewDefinition->getProperties());
-                $inserts    = array_merge($inserts, $viewDefinition->getPossibleInsertionNames());
+                $inserts    = array_merge($inserts, $viewDefinition->getNamesOfEventuallyInsertedClippings());
             }
 
         }
@@ -278,12 +278,12 @@ class DataTypeDefinition
 
         $inserts = array_unique($inserts);
 
-        foreach ($inserts as $insertionName)
+        foreach ($inserts as $clippingName)
         {
 
-            $insertionDefinition = $this->getInsertionDefinition($insertionName);
+            $clippingDefinition = $this->getClippingDefinition($clippingName);
 
-            $properties = array_merge($properties, $insertionDefinition->getProperties());
+            $properties = array_merge($properties, $clippingDefinition->getProperties());
 
         }
 

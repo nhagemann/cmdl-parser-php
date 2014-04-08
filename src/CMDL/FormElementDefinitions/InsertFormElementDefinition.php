@@ -9,7 +9,7 @@ class InsertFormElementDefinition extends FormElementDefinition
 
     protected $elementType = 'insert';
 
-    protected $insertionName = null;
+    protected $clippingName = null;
 
     protected $propertyName = null;
 
@@ -22,13 +22,13 @@ class InsertFormElementDefinition extends FormElementDefinition
     }
 
 
-    public function setInsertionName($insertionName)
+    public function setClippingName($clippingName)
     {
-        $this->insertionName = $insertionName;
+        $this->clippingName = $clippingName;
     }
 
 
-    public function getInsertionName($value=null)
+    public function getClippingName($value=null)
     {
         if ($this->getPropertyName()!=null)
         {
@@ -38,7 +38,7 @@ class InsertFormElementDefinition extends FormElementDefinition
             }
             return null;
         }
-        return $this->insertionName;
+        return $this->clippingName;
     }
 
 

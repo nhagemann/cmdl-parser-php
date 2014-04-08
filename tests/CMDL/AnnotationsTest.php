@@ -218,7 +218,7 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
         /* @var $formElement InsertFormElementDefinition */
         $formElement = $formelements[3];
-        $this->assertEquals('insert1', $formElement->getInsertionName());
+        $this->assertEquals('insert1', $formElement->getClippingName());
 
 
 
@@ -239,9 +239,9 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
 
         /* @var $formElement InsertFormElementDefinition */
         $formElement = $formelements[3];
-        $this->assertEquals('insert1', $formElement->getInsertionName(1));
-        $this->assertEquals('insert2', $formElement->getInsertionName(2));
-        $this->assertEquals(null, $formElement->getInsertionName(3));
+        $this->assertEquals('insert1', $formElement->getClippingName(1));
+        $this->assertEquals('insert2', $formElement->getClippingName(2));
+        $this->assertEquals(null, $formElement->getClippingName(3));
         $this->assertEquals('a', $formElement->getPropertyName());
 
         $this->assertContains('a', $contentTypeDefinition->getProperties());

@@ -32,9 +32,9 @@ class InsertAnnotation extends Annotation
         {
             if (!$this->hasParam(1))
             {
-                throw new CMDLParserException('Missing mandatory parameter insertion name for annotation @insert.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
+                throw new CMDLParserException('Missing mandatory parameter clipping name for annotation @insert.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
             }
-            $formElementDefinition->setInsertionName($this->getParam(1));
+            $formElementDefinition->setClippingName($this->getParam(1));
         }
 
         $this->currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);

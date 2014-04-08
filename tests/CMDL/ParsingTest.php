@@ -115,7 +115,7 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testInsertionsExtracted()
+    public function testClippingsExtracted()
     {
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-04.cmdl');
@@ -130,14 +130,14 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
         $fields             = $viewDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
-        /* @var InsertionDefinition */
-        $insertionDefinition = $contentTypeDefinition->getInsertionDefinition('insert1');
-        $fields              = $insertionDefinition->getFormElementDefinitions();
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('insert1');
+        $fields              = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
 
-        /* @var InsertionDefinition */
-        $insertionDefinition = $contentTypeDefinition->getInsertionDefinition('insert2');
-        $fields              = $insertionDefinition->getFormElementDefinitions();
+        /* @var ClippingDefinition */
+        $clippingDefinition = $contentTypeDefinition->getClippingDefinition('insert2');
+        $fields              = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
     }
 

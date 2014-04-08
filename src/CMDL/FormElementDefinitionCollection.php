@@ -106,13 +106,13 @@ class FormElementDefinitionCollection
         if ($this->parentDataTypeDefinition)
         {
 
-            $inserts = $this->getPossibleInsertionNames();
-            foreach ($inserts as $insertionName)
+            $clippings = $this->getNamesOfEventuallyInsertedClippings();
+            foreach ($clippings as $clippingName)
             {
 
-                $insertionDefinition = $this->parentDataTypeDefinition->getInsertionDefinition($insertionName);
+                $clippingDefinition = $this->parentDataTypeDefinition->getClippingDefinition($clippingName);
 
-                $properties = array_merge($properties, $insertionDefinition->getProperties());
+                $properties = array_merge($properties, $clippingDefinition->getProperties());
 
             }
 
@@ -171,10 +171,10 @@ class FormElementDefinitionCollection
     }
 
 
-    public function getPossibleInsertionNames()
+    public function getNamesOfEventuallyInsertedClippings()
     {
         /* @var $formElementDefinition FormElementDefinition */
-        $inserts = array();
+        $clippingNames = array();
         foreach ($this->getFormElementDefinitions() as $formElementDefinition)
         {
             if ($formElementDefinition->getFormElementType() == 'insert')
@@ -182,16 +182,16 @@ class FormElementDefinitionCollection
 
                 if ($formElementDefinition->getPropertyName() == null)
                 {
-                    $inserts[] = $formElementDefinition->getInsertionName();
+                    $clippingNames[] = $formElementDefinition->getClippingName();
                 }
                 else
                 {
-                    $inserts = $inserts + array_values($formElementDefinition->getInsertConditions());
+                    $clippingNames = $clippingNames + array_values($formElementDefinition->getInsertConditions());
                 }
             }
 
         }
 
-        return $inserts;
+        return $clippingNames;
     }
 }

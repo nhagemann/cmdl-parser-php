@@ -7,7 +7,7 @@ use CMDL\DataTypeDefinition;
 use CMDL\ConfigTypeDefinition;
 use CMDL\ContentTypeDefinition;
 use CMDL\ViewDefinition;
-use CMDL\InsertionDefinition;
+use CMDL\ClippingDefinition;
 use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitionCollection;
 
@@ -168,10 +168,10 @@ class Parser
                             $dataTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
                         }
                         break;
-                    case '+': // start of an insertion definition
-                        $insertionName                          = Util::generateValidIdentifier($line);
-                        $currentFormElementDefinitionCollection = new InsertionDefinition($insertionName);
-                        $dataTypeDefinition->addInsertionDefinition($currentFormElementDefinitionCollection);
+                    case '+': // start of an clipping definition
+                        $clippingName                          = Util::generateValidIdentifier($line);
+                        $currentFormElementDefinitionCollection = new ClippingDefinition($clippingName);
+                        $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
                         break;
                     case '[':
 
