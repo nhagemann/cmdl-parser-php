@@ -154,7 +154,7 @@ class Parser
                     case ' ': // ignore empty lines
                     case '':
                         break;
-                    case '-': // start of a view definition
+                    case '=': // start of a view definition
                         $viewName = Util::generateValidIdentifier(trim($line, '-'));
 
                         if ($viewName == 'default')

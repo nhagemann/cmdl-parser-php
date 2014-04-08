@@ -20,11 +20,6 @@ CMDL 1.1:
 - @workflow chained-properties (a,b) languages/workspaces/full
 
 
-
-
-
-
-clipping => view
 inserts => clipping
 
 

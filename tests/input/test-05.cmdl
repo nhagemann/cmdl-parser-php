@@ -1,7 +1,7 @@
---- insert ---
+=== insert ===
 Title = textfield*!
 Type = selection (1:News,2:Information) {subtype}
---- edit ---
+=== edit ===
 Title = textfield*!
 Abstract = textarea*
 Body = textarea*

@@ -1,4 +1,4 @@
---- default ---
+=== default ===
 name
 author
 text = textarea 10
@@ -14,6 +14,6 @@ text = textarea 10
 
 @hidden-properties (source, licence)
 
---- list ---
+=== list ===
 name
 @hidden-properties (source)
