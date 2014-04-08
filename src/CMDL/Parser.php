@@ -170,7 +170,7 @@ class Parser
                         }
                         break;
                     case '+': // start of an clipping definition
-                        $clippingName                          = Util::generateValidIdentifier($line);
+                        $clippingName                           = Util::generateValidIdentifier($line);
                         $currentFormElementDefinitionCollection = new ClippingDefinition($clippingName);
                         $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
                         break;
@@ -240,6 +240,13 @@ class Parser
                             $sectionOpened = false;
                         }
 
+                        break;
+                    case '>':
+                        $formElementDefinition = new PrintFormElementDefinition();
+                        $p                     = strpos($line, ' ');
+                        $display               = trim(substr($line, $p));
+                        $formElementDefinition->setDisplay($display);
+                        $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                         break;
                     default:
 
@@ -328,17 +335,6 @@ class Parser
 
         switch ($type)
         {
-            case 'print':
-                $formElementDefinition = new PrintFormElementDefinition($name);
-                if (isset($params[0]))
-                {
-                    $formElementDefinition->setProperty($params[0]);
-                }
-                if (isset($params[1]))
-                {
-                    $formElementDefinition->setDisplay($params[1]);
-                }
-                break;
             case 'textfield':
                 $formElementDefinition = new TextfieldFormElementDefinition($name);
                 if (isset($params[0]))

@@ -74,7 +74,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
 
         $formElementDefinition = Parser::parseFormElementDefinition('Template = sourcecode html 15 L {text1}');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\SourceCodeFormElementDefinition', $formElementDefinition);
-        $this->assertEquals('html',$formElementDefinition->getType());
+        $this->assertEquals('html', $formElementDefinition->getType());
     }
 
 
@@ -110,16 +110,16 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = remote-selection http://www.example.org./json/customer');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RemoteSelectionFormElementDefinition', $formElementDefinition);
         $this->assertEquals('dropdown', $formElementDefinition->getType());
-        $this->assertEquals('http://www.example.org./json/customer',$formElementDefinition->getUrl());
+        $this->assertEquals('http://www.example.org./json/customer', $formElementDefinition->getUrl());
 
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = remote-multiselection http://www.example.org./json/customer');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RemoteMultiSelectionFormElementDefinition', $formElementDefinition);
         $this->assertEquals('list', $formElementDefinition->getType());
-        $this->assertEquals('http://www.example.org./json/customer',$formElementDefinition->getUrl());
+        $this->assertEquals('http://www.example.org./json/customer', $formElementDefinition->getUrl());
 
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = remote-reference http://www.example.org./repo news dropdown live date');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RemoteReferenceFormElementDefinition', $formElementDefinition);
-        $this->assertEquals('http://www.example.org./repo',$formElementDefinition->getUrl());
+        $this->assertEquals('http://www.example.org./repo', $formElementDefinition->getUrl());
         $this->assertEquals('dropdown', $formElementDefinition->getType());
         $this->assertEquals('news', $formElementDefinition->getContentType());
         $this->assertEquals('live', $formElementDefinition->getWorkspace());
@@ -127,7 +127,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
 
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = remote-multireference http://www.example.org./repo news list live date');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RemoteMultiReferenceFormElementDefinition', $formElementDefinition);
-        $this->assertEquals('http://www.example.org./repo',$formElementDefinition->getUrl());
+        $this->assertEquals('http://www.example.org./repo', $formElementDefinition->getUrl());
         $this->assertEquals('list', $formElementDefinition->getType());
         $this->assertEquals('news', $formElementDefinition->getContentType());
         $this->assertEquals('live', $formElementDefinition->getWorkspace());
@@ -143,6 +143,25 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('video', $formElementDefinition->getType());
         $this->assertEquals('youtube', $formElementDefinition->getParam(1));
         $this->assertCount(3, $formElementDefinition->getList(1));
+
+    }
+
+
+    public function testPrintFormElementDefinition()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('> Hello world!');
+
+        /* @var ViewDefinition */
+        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
+
+        $formElements = $viewDefinition->getFormElementDefinitions();
+
+        $formElementDefinition = $formElements[0];
+
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\PrintFormElementDefinition', $formElementDefinition);
+
+        $this->assertEquals('Hello world!', $formElementDefinition->getDisplay());
 
     }
 }
