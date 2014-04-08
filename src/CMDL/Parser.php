@@ -2,6 +2,7 @@
 
 namespace CMDL;
 
+use CMDL\Annotations\ContentTypeSynchronizedPropertiesAnnotation;
 use CMDL\CMDLParserException;
 use CMDL\DataTypeDefinition;
 use CMDL\ConfigTypeDefinition;
@@ -660,6 +661,9 @@ class Parser
                 break;
             case 'subtypes':
                 $annotation = new ContentTypeSubtypesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'synchronized-properties':
+                $annotation = new ContentTypeSynchronizedPropertiesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'workspaces':
                 $annotation = new DataTypeWorkspacesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);

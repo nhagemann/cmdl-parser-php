@@ -9,6 +9,7 @@ class ContentTypeDefinition extends DataTypeDefinition
 {
 
     protected $subtypes = null;
+
     protected $statusList = null;
 
     protected $operations = array( 'list', 'get', 'update', 'insert', 'delete', 'revision', 'export', 'import' );
@@ -16,6 +17,12 @@ class ContentTypeDefinition extends DataTypeDefinition
     protected $sortable = null;
 
     protected $timeShiftable = false;
+
+    protected $synchronizedProperties = array( 'global' => array(), 'workspaces' => array(), 'languages' => array() );
+
+    const SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL     = 'global';
+    const SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES = 'workspaces';
+    const SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES  = 'languages';
 
 
     public function hasStatusList()
@@ -170,6 +177,60 @@ class ContentTypeDefinition extends DataTypeDefinition
     public function isTimeShiftable()
     {
         return $this->timeShiftable;
+    }
+
+
+    public function addSynchronizedProperty($property, $scope = self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL)
+    {
+
+        switch ($scope)
+        {
+            case self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL:
+                if (($key = array_search($property, $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES])) !== false)
+                {
+                    unset($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES][$key]);
+                }
+                if (($key = array_search($property, $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES])) !== false)
+                {
+                    unset($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES][$key]);
+                }
+                $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL][] = $property;
+                break;
+            case self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES:
+                if (!in_array($property, $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL]))
+                {
+                    if (($key = array_search($property, $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES])) !== false)
+                    {
+                        unset($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES][$key]);
+                        $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL][] = $property;
+                    }
+                    else
+                    {
+                        $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES][] = $property;
+                    }
+                }
+                break;
+            case self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES:
+                if (!in_array($property, $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL]))
+                {
+                    if (($key = array_search($property, $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES])) !== false)
+                    {
+                        unset($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES][$key]);
+                        $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL][] = $property;
+                    }
+                    else
+                    {
+                        $this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES][] = $property;
+                    }
+                }
+                break;
+        }
+    }
+
+
+    public function getSynchronizedProperties()
+    {
+        return $this->synchronizedProperties;
     }
 
 }
