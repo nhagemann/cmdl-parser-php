@@ -227,6 +227,22 @@ class ContentTypeDefinition extends DataTypeDefinition
         }
     }
 
+    public function hasSynchronizedProperties()
+    {
+        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL])>0)
+        {
+            return true;
+        }
+        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES])>0)
+        {
+            return true;
+        }
+        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES])>0)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public function getSynchronizedProperties()
     {
