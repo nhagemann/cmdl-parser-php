@@ -244,7 +244,11 @@ class Parser
                     case '>':
                         $formElementDefinition = new PrintFormElementDefinition();
                         $p                     = strpos($line, ' ');
-                        $display               = trim(substr($line, $p));
+                        $display               = '';
+                        if ($p)
+                        {
+                            $display = trim(substr($line, $p));
+                        }
                         $formElementDefinition->setDisplay($display);
                         $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                         break;
