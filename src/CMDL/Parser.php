@@ -134,7 +134,7 @@ class Parser
         $currentFormElementDefinitionCollection = new ViewDefinition('default', $dataTypeDefinition);
         $dataTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
 
-        $cmdl = explode(PHP_EOL, $cmdl);
+        $cmdl = preg_split ('/$\R?^/m', $cmdl);
 
         $sectionOpened   = false;
         $tabOpened       = false;
@@ -142,6 +142,8 @@ class Parser
 
         foreach ($cmdl AS $line)
         {
+            $line = trim($line);
+            
             if (isset($line[0]))
             {
                 switch ($line[0])
