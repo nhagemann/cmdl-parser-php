@@ -5,10 +5,10 @@ namespace CMDL\FormElementDefinitions;
 use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
 
-class ColorpickerFormElementDefinition extends FormElementDefinition
+class ColorFormElementDefinition extends FormElementDefinition
 {
 
-    protected $elementType = 'colorpicker';
+    protected $elementType = 'color';
 
     protected $selectionType = 'free';
 
@@ -33,13 +33,13 @@ class ColorpickerFormElementDefinition extends FormElementDefinition
 
     public function setSelectionType($selectionType)
     {
-        if (in_array($selectionType, array( 'free','limited' )))
+        if (in_array($selectionType, array( 'free','fixed' )))
         {
             $this->selectionType = $selectionType;
         }
         else
         {
-            throw  new CMDLParserException('Parameter "selectionType" of form element ' . $this->elementType . ' must be one of free, limited.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "selectionType" of form element ' . $this->elementType . ' must be one of free, fixed.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 

@@ -21,6 +21,7 @@ use CMDL\FormElementDefinitions\TabNextFormElementDefinition;
 use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
+use CMDL\FormElementDefinitions\LinkFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
 use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
@@ -31,6 +32,7 @@ use CMDL\FormElementDefinitions\SourceCodeFormElementDefinition;
 use CMDL\FormElementDefinitions\PasswordFormElementDefinition;
 
 use CMDL\FormElementDefinitions\NumberFormElementDefinition;
+use CMDL\FormElementDefinitions\RangeFormElementDefinition;
 
 use CMDL\FormElementDefinitions\CheckboxFormElementDefinition;
 use CMDL\FormElementDefinitions\SelectionFormElementDefinition;
@@ -57,7 +59,7 @@ use CMDL\FormElementDefinitions\RemoteImageFormElementDefinition;
 use CMDL\FormElementDefinitions\RemoteImagesFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TableFormElementDefinition;
-use CMDL\FormElementDefinitions\ColorpickerFormElementDefinition;
+use CMDL\FormElementDefinitions\ColorFormElementDefinition;
 use CMDL\FormElementDefinitions\GeolocationFormElementDefinition;
 
 use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
@@ -348,6 +350,9 @@ class Parser
                     $formElementDefinition->setSize($params[0]);
                 }
                 break;
+            case 'link':
+                $formElementDefinition = new LinkFormElementDefinition($name, $params, $lists);
+                break;
             case 'textarea':
                 $formElementDefinition = new TextareaFormElementDefinition($name);
                 if (isset($params[0]))
@@ -419,6 +424,9 @@ class Parser
                 {
                     $formElementDefinition->setUnit($params[1]);
                 }
+                break;
+            case 'range':
+                $formElementDefinition = new RangeFormElementDefinition($name, $params, $lists);
                 break;
             case 'checkbox':
                 $formElementDefinition = new CheckboxFormElementDefinition($name);
@@ -588,8 +596,8 @@ class Parser
                     $formElementDefinition->setWidths($lists[1]);
                 }
                 break;
-            case 'colorpicker':
-                $formElementDefinition = new ColorpickerFormElementDefinition($name, $params, $lists);
+            case 'color':
+                $formElementDefinition = new ColorFormElementDefinition($name, $params, $lists);
                 break;
             case 'geolocation':
                 $formElementDefinition = new GeolocationFormElementDefinition($name, $params, $lists);

@@ -44,6 +44,14 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testLinkDefinition()
+    {
+        /* @var LinkFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('URL = link');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\LinkFormElementDefinition', $formElementDefinition);
+    }
+
+
     public function testTextareaDefinition()
     {
         /* @var TextareaFormElementDefinition */
@@ -134,6 +142,21 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('date', $formElementDefinition->getOrder());
     }
 
+
+    public function testColorDefinition()
+    {
+        /* @var ColorFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('background = color (white:fff, black:000)');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\ColorFormElementDefinition', $formElementDefinition);
+    }
+
+
+    public function testRangeDefinition()
+    {
+        /* @var RangeFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('temperature = range 18 30 0.5');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\RangeFormElementDefinition', $formElementDefinition);
+    }
 
     public function testCustomFormElementDefinition()
     {
