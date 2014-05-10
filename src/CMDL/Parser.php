@@ -47,6 +47,7 @@ use CMDL\FormElementDefinitions\RemoteMultiReferenceFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TimestampFormElementDefinition;
 use CMDL\FormElementDefinitions\DateFormElementDefinition;
+use CMDL\FormElementDefinitions\TimeFormElementDefinition;
 
 use CMDL\FormElementDefinitions\FileFormElementDefinition;
 use CMDL\FormElementDefinitions\FilesFormElementDefinition;
@@ -136,7 +137,7 @@ class Parser
         $currentFormElementDefinitionCollection = new ViewDefinition('default', $dataTypeDefinition);
         $dataTypeDefinition->addViewDefinition($currentFormElementDefinitionCollection);
 
-        $cmdl = preg_split ('/$\R?^/m', $cmdl);
+        $cmdl = preg_split('/$\R?^/m', $cmdl);
 
         $sectionOpened   = false;
         $tabOpened       = false;
@@ -145,7 +146,7 @@ class Parser
         foreach ($cmdl AS $line)
         {
             $line = trim($line);
-            
+
             if (isset($line[0]))
             {
                 switch ($line[0])
@@ -479,6 +480,13 @@ class Parser
                 if (isset($params[1]))
                 {
                     $formElementDefinition->setInit($params[1]);
+                }
+                break;
+            case 'time':
+                $formElementDefinition = new TimeFormElementDefinition($name);
+                if (isset($params[0]))
+                {
+                    $formElementDefinition->setType($params[0]);
                 }
                 break;
             case 'file':

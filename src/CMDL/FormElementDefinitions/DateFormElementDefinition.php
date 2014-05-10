@@ -43,7 +43,7 @@ class DateFormElementDefinition extends FormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be one of datetime, datetimeseconds', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be one of now, today', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 

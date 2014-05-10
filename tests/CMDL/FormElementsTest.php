@@ -158,6 +158,21 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RangeFormElementDefinition', $formElementDefinition);
     }
 
+
+    public function testDateTimeDefinition()
+    {
+        /* @var TimestampFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('start = timestamp');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TimestampFormElementDefinition', $formElementDefinition);
+        /* @var DateFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('start = date');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\DateFormElementDefinition', $formElementDefinition);
+        /* @var TimeFormElementDefinition */
+        $formElementDefinition = Parser::parseFormElementDefinition('start = time');
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TimeFormElementDefinition', $formElementDefinition);
+    }
+
+
     public function testCustomFormElementDefinition()
     {
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = custom video youtube (360p,720p,1080p)');
