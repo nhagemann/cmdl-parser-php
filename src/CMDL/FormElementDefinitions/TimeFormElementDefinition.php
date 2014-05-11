@@ -14,18 +14,18 @@ class TimeFormElementDefinition extends FormElementDefinition
 
     protected $init = null;
 
-    protected $maxValueLength = 10;
+    protected $maxValueLength = 8;
 
 
     public function setType($type)
     {
-        if (in_array($type, array( 'short', 'full' )))
+        if (in_array($type, array( 'short', 'long' )))
         {
             $this->type = $type;
         }
         else
         {
-            throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of short, full', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of short, long', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 
@@ -44,7 +44,7 @@ class TimeFormElementDefinition extends FormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be "short" or skipped.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be "now" or skipped.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 

@@ -488,6 +488,10 @@ class Parser
                 {
                     $formElementDefinition->setType($params[0]);
                 }
+                if (isset($params[1]))
+                {
+                    $formElementDefinition->setInit($params[1]);
+                }
                 break;
             case 'file':
                 $formElementDefinition = new FileFormElementDefinition($name);
