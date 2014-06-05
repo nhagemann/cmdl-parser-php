@@ -337,7 +337,7 @@ class DataTypeDefinition
     
     public function hasLanguage($language)
     {
-        if (!$this->hasLangauges())
+        if (!$this->hasLanguages())
         {
             if ($language == 'default')
             {
@@ -352,7 +352,7 @@ class DataTypeDefinition
         }
 
         return false;
-    }    
+    }   
 
 
     public function setWorkspaces($workspaces)
