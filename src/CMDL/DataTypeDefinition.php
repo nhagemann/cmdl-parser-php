@@ -358,4 +358,23 @@ class DataTypeDefinition
         return true;
     }
 
+    public function hasWorkspace($workspace)
+    {
+        if (!$this->hasWorkspaces())
+        {
+            if ($workspace == 'default')
+            {
+                return true;
+            }
+
+            return false;
+        }
+        if (array_key_exists($workspace, $this->workspaces))
+        {
+            return true;
+        }
+
+        return false;
+    }    
+
 }
