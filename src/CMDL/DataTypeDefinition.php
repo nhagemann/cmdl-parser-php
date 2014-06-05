@@ -334,6 +334,25 @@ class DataTypeDefinition
 
         return true;
     }
+    
+    public function hasLanguage($language)
+    {
+        if (!$this->hasLangauges())
+        {
+            if ($language == 'default')
+            {
+                return true;
+            }
+
+            return false;
+        }
+        if (array_key_exists($language, $this->languages))
+        {
+            return true;
+        }
+
+        return false;
+    }    
 
 
     public function setWorkspaces($workspaces)
