@@ -14,7 +14,7 @@ class DateFormElementDefinition extends FormElementDefinition
 
     protected $init = null;
 
-    protected $maxValueLength = 14;
+    protected $maxValueLength = 19;
 
     public function setType($type)
     {
