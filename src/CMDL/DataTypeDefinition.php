@@ -336,6 +336,20 @@ class DataTypeDefinition
     }
 
 
+
+    public function hasLanguage($language)
+    {
+        if ($this->hasLanguages())
+        {
+            if (array_key_exists($language,$this->languages))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public function setWorkspaces($workspaces)
     {
         $this->workspaces = $workspaces;
@@ -356,6 +370,18 @@ class DataTypeDefinition
         }
 
         return true;
+    }
+
+    public function hasWorkspace($workspace)
+    {
+        if ($this->hasWorkspaces())
+        {
+            if (array_key_exists($workspace,$this->workspaces))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
