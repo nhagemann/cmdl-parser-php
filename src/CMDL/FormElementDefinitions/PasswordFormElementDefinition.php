@@ -8,7 +8,7 @@ use CMDL\CMDLParserException;
 class PasswordFormElementDefinition extends FormElementDefinition
 {
 
-    protected $elementType = 'textfield';
+    protected $elementType = 'password';
 
     protected $type = 'md5-salted';
 
