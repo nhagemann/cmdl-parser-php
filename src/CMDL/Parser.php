@@ -22,6 +22,7 @@ use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
 
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\LinkFormElementDefinition;
+use CMDL\FormElementDefinitions\EmailFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
 use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
@@ -353,6 +354,9 @@ class Parser
                 break;
             case 'link':
                 $formElementDefinition = new LinkFormElementDefinition($name, $params, $lists);
+                break;
+            case 'email':
+                $formElementDefinition = new EmailFormElementDefinition($name, $params, $lists);
                 break;
             case 'textarea':
                 $formElementDefinition = new TextareaFormElementDefinition($name);
