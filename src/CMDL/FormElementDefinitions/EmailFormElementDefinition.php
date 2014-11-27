@@ -4,7 +4,7 @@ namespace CMDL\FormElementDefinitions;
 
 use CMDL\FormElementDefinition;
 
-class LinkFormElementDefinition extends FormElementDefinition
+class EmailFormElementDefinition extends FormElementDefinition
 {
 
     protected $elementType = 'email';
