@@ -39,7 +39,7 @@ class FormElementDefinitionCollection
     }
 
 
-    public function addFormElementDefinition($definition)
+    public function addFormElementDefinition(FormElementDefinition $definition)
     {
         if ($definition->getName() != null)
         {
