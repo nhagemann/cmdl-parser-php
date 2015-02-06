@@ -70,4 +70,19 @@ class PropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $properties);
 
     }
+
+
+    public function testProtectedProperties()
+    {
+        $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-05.cmdl');
+
+        $properties = $contentTypeDefinition->getProtectedProperties('default');
+        $this->assertCount(0, $properties);
+
+        $properties = $contentTypeDefinition->getProtectedProperties('edit');
+        $this->assertCount(1, $properties);
+
+        $properties = $contentTypeDefinition->getProtectedProperties('insert');
+        $this->assertCount(0, $properties);
+    }
 }

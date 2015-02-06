@@ -32,12 +32,12 @@ class RangeFormElementDefinition extends FormElementDefinition
             $this->setStep($params[2]);
         }
 
-        if ($this->min == null)
+        if ($this->min === null)
         {
             throw  new CMDLParserException('Missing mandatory parameter min for form element range.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        if ($this->max == null)
+        if ($this->max === null)
         {
             throw  new CMDLParserException('Missing mandatory parameter max for form element range.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }

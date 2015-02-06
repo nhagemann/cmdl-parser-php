@@ -21,6 +21,7 @@ class FormElementDefinition
 
     protected $mandatory = false;
     protected $unique = false;
+    protected $protected = false;
 
     protected $params = array();
     protected $lists = array();
@@ -98,6 +99,17 @@ class FormElementDefinition
     public function isUnique()
     {
         return (boolean)$this->unique;
+    }
+
+    public function markProtected()
+    {
+        $this->protected = true;
+    }
+
+
+    public function isProtected()
+    {
+        return (boolean)$this->protected;
     }
 
 

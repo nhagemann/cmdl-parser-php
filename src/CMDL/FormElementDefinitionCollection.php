@@ -14,6 +14,7 @@ class FormElementDefinitionCollection
     protected $properties = null;
     protected $mandatoryProperties = null;
     protected $uniqueProperties = null;
+    protected $protectedProperties = null;
 
     protected $hiddenProperties = array();
 
@@ -41,7 +42,7 @@ class FormElementDefinitionCollection
 
     public function addFormElementDefinition(FormElementDefinition $definition)
     {
-        if ($definition->getName() != null)
+        if ($definition->getName() != '')
         {
             $this->namedFields[$definition->getName()] = $definition;
         }
@@ -50,6 +51,7 @@ class FormElementDefinitionCollection
         $this->properties          = null;
         $this->mandatoryProperties = null;
         $this->uniqueProperties    = null;
+        $this->protectedProperties = null;
     }
 
 
@@ -85,6 +87,7 @@ class FormElementDefinitionCollection
         $properties          = $this->getHiddenProperties();
         $mandatoryProperties = array();
         $uniqueProperties    = array();
+        $protectedProperties = array();
 
         foreach ($this->fields as $formElementDefinition)
         {
@@ -98,6 +101,10 @@ class FormElementDefinitionCollection
                 if ($formElementDefinition->isUnique())
                 {
                     $uniqueProperties[] = $formElementDefinition->getName();
+                }
+                if ($formElementDefinition->isProtected())
+                {
+                    $protectedProperties[] = $formElementDefinition->getName();
                 }
 
             }
@@ -121,6 +128,7 @@ class FormElementDefinitionCollection
         $this->properties          = $properties;
         $this->mandatoryProperties = $mandatoryProperties;
         $this->uniqueProperties    = $uniqueProperties;
+        $this->protectedProperties = $protectedProperties;
 
         return $this->properties;
     }
@@ -145,6 +153,16 @@ class FormElementDefinitionCollection
         }
 
         return $this->uniqueProperties;
+    }
+
+    public function getProtectedProperties()
+    {
+        if (!$this->properties)
+        {
+            $this->getProperties();
+        }
+
+        return $this->protectedProperties;
     }
 
 
@@ -180,7 +198,7 @@ class FormElementDefinitionCollection
             if ($formElementDefinition->getFormElementType() == 'insert')
             {
 
-                if ($formElementDefinition->getPropertyName() == null)
+                if ($formElementDefinition->getPropertyName() == '')
                 {
                     $clippingNames[] = $formElementDefinition->getClippingName();
                 }

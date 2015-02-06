@@ -97,6 +97,16 @@ class Parser
     static $superProperties = array( 'name', 'status', 'subtype' );
 
 
+    /**
+     * @param        $filename
+     * @param null   $dataTypeName
+     * @param null   $dataTypeTitle
+     * @param string $dataType
+     *
+     * @returns DataTypeDefinition
+     *
+     * @throws CMDLParserException
+     */
     public static function parseCMDLFile($filename, $dataTypeName = null, $dataTypeTitle = null, $dataType = 'content')
     {
         if (realpath($filename))
@@ -186,7 +196,7 @@ class Parser
                         {
                             $currentTabLabel = rtrim(substr($line, 3), ']');
 
-                            if ($tabOpened == true) // There's already an open tab
+                            if ($tabOpened === true) // There's already an open tab
                             {
                                 $formElementDefinition = new TabNextFormElementDefinition();
 
@@ -203,7 +213,7 @@ class Parser
                         elseif (substr($line, 0, 2) == '[[') // it's a section
                         {
 
-                            if ($sectionOpened == true) // There's still an open section -> close it first
+                            if ($sectionOpened === true) // There's still an open section -> close it first
                             {
                                 $formElementDefinition = new SectionEndFormElementDefinition();
                                 $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
@@ -239,7 +249,7 @@ class Parser
                             $tabOpened       = false;
                             $currentTabLabel = '';
                         }
-                        elseif ($sectionOpened == true)
+                        elseif ($sectionOpened === true)
                         {
                             $formElementDefinition = new SectionEndFormElementDefinition();
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
@@ -270,11 +280,11 @@ class Parser
             }
         }
 
-        if ($dataTypeName != null)
+        if ($dataTypeName != '')
         {
             $dataTypeDefinition->setName($dataTypeName);
         }
-        if ($dataTypeTitle != null)
+        if ($dataTypeTitle != '')
         {
             $dataTypeDefinition->setTitle($dataTypeTitle);
         }
@@ -338,7 +348,7 @@ class Parser
                 $typeWithQualifier = $onTheRight;
             }
 
-            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*-');
+            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*§-');
             $type              = Util::generateValidIdentifier($typeWithQualifier, '-');
 
         }
@@ -639,11 +649,14 @@ class Parser
         if (strstr($typeWithQualifier, '*') !== false)
         {
             $formElementDefinition->markMandatory();
-
         }
         if (strstr($typeWithQualifier, '!') !== false)
         {
             $formElementDefinition->markUnique();
+        }
+        if (strstr($typeWithQualifier, '§') !== false)
+        {
+            $formElementDefinition->markProtected();
         }
 
         return $formElementDefinition;

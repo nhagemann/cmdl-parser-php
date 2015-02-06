@@ -27,7 +27,7 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     public function hasStatusList()
     {
-        if ($this->statusList == null || count($this->statusList) == 0)
+        if ($this->statusList === null || count($this->statusList) == 0)
         {
             return false;
         }
@@ -50,7 +50,7 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     public function hasSubtypes()
     {
-        if ($this->subtypes == null || count($this->subtypes) == 0)
+        if ($this->subtypes === null || count($this->subtypes) == 0)
         {
             return false;
         }
