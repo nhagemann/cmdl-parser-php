@@ -3,9 +3,8 @@
 namespace CMDL\FormElementDefinitions;
 
 use CMDL\FormElementDefinition;
-use CMDL\CMDLParserException;
 
-class RemoteReferenceFormElementDefinition extends FormElementDefinition
+class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinition
 {
 
     protected $type = 'dropdown';
@@ -27,7 +26,6 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
 
     public function __construct($name, $params = array(), $lists = array())
     {
-
         if (isset($params[0]))
         {
             $this->setUrl($params[0]);
@@ -57,62 +55,8 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
             $this->setTimeshift($params[6]);
         }
 
-        parent::__construct($name, $params, $lists);
-    }
-
-
-    public function setType($type)
-    {
-        if (in_array($type, array( 'dropdown', 'radio', 'toggle' )))
-        {
-            $this->type = $type;
-        }
-        else
-        {
-            throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
-        }
-    }
-
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-
-    public function setContentType($contentType)
-    {
-        $this->contentType = $contentType;
-    }
-
-
-    public function getContentType()
-    {
-        return $this->contentType;
-    }
-
-
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    }
-
-
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-
-    public function setWorkspace($workspace)
-    {
-        $this->workspace = $workspace;
-    }
-
-
-    public function getWorkspace()
-    {
-        return $this->workspace;
+        // skip constructor of form element reference, since it has less parameters and therefore a slightly different parameter order
+        FormElementDefinition::__construct($name, $params, $lists);
     }
 
 
@@ -127,27 +71,4 @@ class RemoteReferenceFormElementDefinition extends FormElementDefinition
         return $this->url;
     }
 
-
-    public function setTimeshift($timeshift)
-    {
-        $this->timeshift = $timeshift;
-    }
-
-
-    public function getTimeshift()
-    {
-        return $this->timeshift;
-    }
-
-
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-
-    public function getLanguage()
-    {
-        return $this->language;
-    }
 }
