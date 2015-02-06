@@ -348,7 +348,7 @@ class Parser
                 $typeWithQualifier = $onTheRight;
             }
 
-            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*ง-');
+            $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*ยง-');
             $type              = Util::generateValidIdentifier($typeWithQualifier, '-');
 
         }
@@ -654,7 +654,7 @@ class Parser
         {
             $formElementDefinition->markUnique();
         }
-        if (strstr($typeWithQualifier, 'ง') !== false)
+        if (strstr($typeWithQualifier, 'ยง') !== false)
         {
             $formElementDefinition->markProtected();
         }

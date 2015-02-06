@@ -30,7 +30,7 @@ class InsertFormElementDefinition extends FormElementDefinition
 
     public function getClippingName($value=null)
     {
-        if ($this->getPropertyName()!=null)
+        if ($this->getPropertyName()!='')
         {
             if (array_key_exists($value,$this->insertConditions))
             {
