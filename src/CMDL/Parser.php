@@ -172,6 +172,13 @@ class Parser
                     case '':
                         break;
                     case '=': // start of a view definition
+
+                        if ($tabOpened) // tab has not been closed
+                        {
+                            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+                            $tabOpened = false;
+                        }
+
                         $viewName = Util::generateValidIdentifier(trim($line, '-'));
 
                         if ($viewName == 'default')
@@ -186,6 +193,13 @@ class Parser
                         }
                         break;
                     case '+': // start of an clipping definition
+
+                        if ($tabOpened) // tab has not been closed
+                        {
+                            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+                            $tabOpened = false;
+                        }
+
                         $clippingName                           = Util::generateValidIdentifier($line);
                         $currentFormElementDefinitionCollection = new ClippingDefinition($clippingName);
                         $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
@@ -243,9 +257,7 @@ class Parser
                     case ']':
                         if (substr($line, 0, 3) == ']]]') // it's a tab
                         {
-                            $formElementDefinition = new TabEndFormElementDefinition();
-                            $formElementDefinition->setLabel($currentTabLabel);
-                            $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
+                            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
                             $tabOpened       = false;
                             $currentTabLabel = '';
                         }
@@ -289,7 +301,19 @@ class Parser
             $dataTypeDefinition->setTitle($dataTypeTitle);
         }
 
+        if ($tabOpened) // tab has not been closed
+        {
+            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+        }
+
         return $dataTypeDefinition;
+    }
+
+    protected static function closeTab($currentFormElementDefinitionCollection, $currentTabLabel)
+    {
+        $formElementDefinition = new TabEndFormElementDefinition();
+        $formElementDefinition->setLabel($currentTabLabel);
+        $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
     }
 
 

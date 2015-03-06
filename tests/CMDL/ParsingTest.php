@@ -172,4 +172,35 @@ class ParsingTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testTabsNotClosedExtracted()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-12.cmdl');
+
+        /* @var ViewDefinition */
+        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
+
+        $formElements = $viewDefinition->getFormElementDefinitions();
+
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabStartFormElementDefinition', $formElements[0]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[1]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[2]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabNextFormElementDefinition', $formElements[3]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[4]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[5]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $formElements[6]);
+
+        $this->assertTrue($contentTypeDefinition->hasClippingDefinition('clipping'));
+
+        $formElements = $contentTypeDefinition->getClippingDefinition('clipping')->getFormElementDefinitions();
+
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabStartFormElementDefinition', $formElements[0]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[1]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[2]);
+        $this->assertInstanceOf('CMDL\FormElementDefinitions\TabEndFormElementDefinition', $formElements[3]);
+
+
+
+    }
+
 }
