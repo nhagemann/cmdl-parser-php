@@ -101,7 +101,7 @@ class Util
     }
 
 
-    public static function extractLists($s)
+    public static function extractLists($s,$forceNumericalIndex = false)
     {
         $lists = array();
 
@@ -113,6 +113,7 @@ class Util
                 $items    = array();
                 $csvitems = explode(',', $csv);
 
+                $i=1;
                 foreach ($csvitems as $item)
                 {
                     $item     = trim($item);
@@ -127,6 +128,10 @@ class Util
                         $key   = $item;
                         $value = $item;
                     }
+                    if ($forceNumericalIndex)
+                    {
+                         $key= $i;
+                    }
 
                     // remove surrounding quotes
                     if (substr($value, 0, 1) == '"')
@@ -139,6 +144,7 @@ class Util
                     }
 
                     $items[$key] = $value;
+                    $i++;
                 }
                 $lists[] = $items;
             }

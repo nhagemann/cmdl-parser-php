@@ -2,6 +2,7 @@
 
 namespace CMDL\FormElementDefinitions;
 
+use CMDL\CMDLParserException;
 use CMDL\FormElementDefinition;
 
 class TableFormElementDefinition extends FormElementDefinition
@@ -14,6 +15,27 @@ class TableFormElementDefinition extends FormElementDefinition
     protected $widths = array();
 
     protected $maxValueLength = 256;
+
+
+    public function __construct($name, $params, $lists)
+    {
+
+        if (isset($lists[0]))
+        {
+            $this->setColumnHeadings($lists[0]);
+        }
+        else
+        {
+            throw  new CMDLParserException('Missing mandatory list "widths" of form element ' . $this->elementType, CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
+        }
+
+        if (isset($lists[1]))
+        {
+            $this->setWidths($lists[1]);
+        }
+
+        parent::__construct($name, $params, $lists);
+    }
 
 
     public function setColumnHeadings($columnHeadings)
