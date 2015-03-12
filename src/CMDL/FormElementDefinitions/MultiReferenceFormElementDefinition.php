@@ -14,9 +14,6 @@ class MultiReferenceFormElementDefinition extends ReferenceFormElementDefinition
 
     protected $contentType = null;
 
-    protected $workspace = 'default';
-
-    protected $order = 'name';
 
     protected $maxValueLength = 256;
 

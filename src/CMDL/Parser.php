@@ -175,7 +175,7 @@ class Parser
 
                         if ($tabOpened) // tab has not been closed
                         {
-                            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+                            self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
                             $tabOpened = false;
                         }
 
@@ -196,7 +196,7 @@ class Parser
 
                         if ($tabOpened) // tab has not been closed
                         {
-                            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+                            self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
                             $tabOpened = false;
                         }
 
@@ -257,7 +257,7 @@ class Parser
                     case ']':
                         if (substr($line, 0, 3) == ']]]') // it's a tab
                         {
-                            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+                            self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
                             $tabOpened       = false;
                             $currentTabLabel = '';
                         }
@@ -303,11 +303,12 @@ class Parser
 
         if ($tabOpened) // tab has not been closed
         {
-            self::closeTab($currentFormElementDefinitionCollection,$currentTabLabel);
+            self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
         }
 
         return $dataTypeDefinition;
     }
+
 
     protected static function closeTab($currentFormElementDefinitionCollection, $currentTabLabel)
     {
@@ -636,15 +637,8 @@ class Parser
                 }
                 break;
             case 'table':
-                $formElementDefinition = new TableFormElementDefinition($name);
-                if (isset($lists[0]))
-                {
-                    $formElementDefinition->setColumnHeadings($lists[0]);
-                }
-                if (isset($lists[1]))
-                {
-                    $formElementDefinition->setWidths($lists[1]);
-                }
+                $lists  = Util::extractLists($onTheRight,true);
+                $formElementDefinition = new TableFormElementDefinition($name, $params, $lists);
                 break;
             case 'color':
                 $formElementDefinition = new ColorFormElementDefinition($name, $params, $lists);

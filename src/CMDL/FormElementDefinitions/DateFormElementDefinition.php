@@ -24,7 +24,7 @@ class DateFormElementDefinition extends FormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of datetime, datetimeseconds', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+            throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of long, short, datetime, full', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 
