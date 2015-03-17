@@ -26,7 +26,7 @@ class TableFormElementDefinition extends FormElementDefinition
         }
         else
         {
-            throw  new CMDLParserException('Missing mandatory list "widths" of form element ' . $this->elementType, CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
+            throw  new CMDLParserException('Missing mandatory list "headings" of form element ' . $this->elementType, CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
         if (isset($lists[1]))
