@@ -89,6 +89,8 @@ use CMDL\Annotations\FormElementCollectionHiddenPropertiesAnnotation;
 
 use CMDL\Annotations\InsertAnnotation;
 
+use CMDL\Annotations\CustomAnnotation;
+
 use CMDL\Util;
 
 class Parser
@@ -637,7 +639,7 @@ class Parser
                 }
                 break;
             case 'table':
-                $lists  = Util::extractLists($onTheRight,true);
+                $lists                 = Util::extractLists($onTheRight, true);
                 $formElementDefinition = new TableFormElementDefinition($name, $params, $lists);
                 break;
             case 'color':
@@ -690,8 +692,9 @@ class Parser
             $annotationName = trim(substr($line, 1, $p));
             $onTheRight     = substr($line, $p + 1);
 
-            $lists  = Util::extractLists($onTheRight);
-            $params = Util::extractParams($onTheRight);
+            $lists          = Util::extractLists($onTheRight);
+            $params         = Util::extractParams($onTheRight);
+            $numericalLists = Util::extractLists($onTheRight, true);
         }
         else
         {
@@ -754,6 +757,10 @@ class Parser
                 break;
             case 'insert':
                 $annotation = new InsertAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'custom':
+
+                $annotation = new CustomAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists, $numericalLists);
                 break;
 
             default:

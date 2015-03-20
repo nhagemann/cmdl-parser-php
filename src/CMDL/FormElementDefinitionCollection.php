@@ -155,6 +155,7 @@ class FormElementDefinitionCollection
         return $this->uniqueProperties;
     }
 
+
     public function getProtectedProperties()
     {
         if (!$this->properties)
@@ -212,4 +213,7 @@ class FormElementDefinitionCollection
 
         return $clippingNames;
     }
+
+
+
 }
