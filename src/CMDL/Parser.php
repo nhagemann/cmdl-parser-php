@@ -89,6 +89,8 @@ use CMDL\Annotations\FormElementCollectionHiddenPropertiesAnnotation;
 
 use CMDL\Annotations\InsertAnnotation;
 
+use CMDL\Annotations\CustomAnnotation;
+
 use CMDL\Util;
 
 class Parser
@@ -755,6 +757,10 @@ class Parser
             case 'insert':
                 $annotation = new InsertAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
+            case 'custom':
+                $annotation = new CustomAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+
 
             default:
                 throw new CMDLParserException('Unknown annotation ' . $annotationName . '.', CMDLParserException::CMDL_UNKNOWN_ANNOTATION);

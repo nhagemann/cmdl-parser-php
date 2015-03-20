@@ -2,6 +2,7 @@
 
 namespace CMDL;
 
+use CMDL\Annotations\CustomAnnotation;
 use CMDL\CMDLParserException;
 use CMDL\ViewDefinition;
 use CMDL\ClippingDefinition;
@@ -21,6 +22,10 @@ class DataTypeDefinition
     protected $views = array();
     protected $clippings = array();
 
+    /**
+     * @var array CustomAnnotation
+     */
+    protected $customAnnotations = array();
 
     public function __construct($name = null)
     {
@@ -393,4 +398,21 @@ class DataTypeDefinition
         return false;
     }
 
+
+    /**
+     * @param CustomAnnotation $annotation
+     */
+    public function addCustomAnnotation(CustomAnnotation $annotation)
+    {
+        $this->customAnnotations[]=$annotation;
+    }
+
+
+    /**
+     * @return array CustomAnnotation
+     */
+    public function getCustomAnnotations()
+    {
+        return $this->customAnnotations;
+    }
 }
