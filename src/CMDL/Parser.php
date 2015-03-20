@@ -701,6 +701,7 @@ class Parser
             $annotationName = substr($line, 1);
             $lists          = array();
             $params         = array();
+            $numericalLists = array();
 
         }
 
