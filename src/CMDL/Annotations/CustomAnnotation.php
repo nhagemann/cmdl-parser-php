@@ -15,7 +15,7 @@ class CustomAnnotation extends Annotation
     protected $type;
 
 
-    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array())
+    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array(), $numericalLists = array())
     {
         if (isset($params[0]))
         {
@@ -33,7 +33,7 @@ class CustomAnnotation extends Annotation
             $remainingParams[$k - 1] = $v;
         }
 
-        parent::__construct($dataTypeDefinition, $currentFormElementDefinitionCollection, $remainingParams, $lists);
+        parent::__construct($dataTypeDefinition, $currentFormElementDefinitionCollection, $remainingParams, $lists, $numericalLists);
     }
 
 

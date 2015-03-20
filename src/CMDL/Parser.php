@@ -639,7 +639,7 @@ class Parser
                 }
                 break;
             case 'table':
-                $lists  = Util::extractLists($onTheRight,true);
+                $lists                 = Util::extractLists($onTheRight, true);
                 $formElementDefinition = new TableFormElementDefinition($name, $params, $lists);
                 break;
             case 'color':
@@ -692,8 +692,9 @@ class Parser
             $annotationName = trim(substr($line, 1, $p));
             $onTheRight     = substr($line, $p + 1);
 
-            $lists  = Util::extractLists($onTheRight);
-            $params = Util::extractParams($onTheRight);
+            $lists          = Util::extractLists($onTheRight);
+            $params         = Util::extractParams($onTheRight);
+            $numericalLists = Util::extractLists($onTheRight, true);
         }
         else
         {
@@ -758,9 +759,9 @@ class Parser
                 $annotation = new InsertAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'custom':
-                $annotation = new CustomAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
-                break;
 
+                $annotation = new CustomAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists, $numericalLists);
+                break;
 
             default:
                 throw new CMDLParserException('Unknown annotation ' . $annotationName . '.', CMDLParserException::CMDL_UNKNOWN_ANNOTATION);

@@ -20,14 +20,16 @@ class Annotation
     protected $currentFormElementDefinitionCollection = null;
     protected $params = array();
     protected $lists = array();
+    protected $numericalLists = array();
 
 
-    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array())
+    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array(), $numericalLists = array())
     {
-        $this->dataTypeDefinition = $dataTypeDefinition;
+        $this->dataTypeDefinition                     = $dataTypeDefinition;
         $this->currentFormElementDefinitionCollection = $currentFormElementDefinitionCollection;
-        $this->params                = $params;
-        $this->lists                 = $lists;
+        $this->params                                 = $params;
+        $this->lists                                  = $lists;
+        $this->numericalLists                         = $numericalLists;
     }
 
 
@@ -49,6 +51,12 @@ class Annotation
     }
 
 
+    public function hasNumericalList($nr)
+    {
+        return isset($this->numericalLists[$nr - 1]);
+    }
+
+
     public function getParam($nr)
     {
 
@@ -67,6 +75,18 @@ class Annotation
         if ($this->hasList($nr))
         {
             return $this->lists[$nr - 1];
+        }
+
+        return null;
+    }
+
+
+    public function getNumericalList($nr)
+    {
+
+        if ($this->hasList($nr))
+        {
+            return $this->numericalLists[$nr - 1];
         }
 
         return null;

@@ -70,7 +70,7 @@ class CustomAnnotationsTest extends \PHPUnit_Framework_TestCase
     public function testParams()
     {
         /* @var ContentTypeDefinition */
-        $contentTypeDefinition = Parser::parseCMDLString('@custom type p1 p2 p3 p4 (l1) (l2)');
+        $contentTypeDefinition = Parser::parseCMDLString('@custom type p1 p2 p3 p4 (l1) (l2,a,b)');
 
         $this->assertCount(1, $contentTypeDefinition->getCustomAnnotations());
 
@@ -84,7 +84,32 @@ class CustomAnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('p3', $customAnnotation->getParam(3));
         $this->assertEquals('p4', $customAnnotation->getParam(4));
         $this->assertEquals(null, $customAnnotation->getParam(5));
+        $this->assertFalse($customAnnotation->hasParam(5));
 
+        $this->assertCount(1,$customAnnotation->getList(1));
+        $this->assertCount(3,$customAnnotation->getList(2));
+        $this->assertFalse($customAnnotation->hasList(3));
     }
 
+
+    public function testNumericalLists()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('@custom type (a,b,c) (a,b,b)');
+
+        $this->assertCount(1, $contentTypeDefinition->getCustomAnnotations());
+
+        $customAnnotations = $contentTypeDefinition->getCustomAnnotations();
+
+        /** @var CustomAnnotation $customAnnotation */
+        $customAnnotation = $customAnnotations[0];
+
+        $this->assertCount(3,$customAnnotation->getList(1));
+        $this->assertCount(2,$customAnnotation->getList(2));
+        $this->assertFalse($customAnnotation->hasList(3));
+
+        $this->assertCount(3,$customAnnotation->getNumericalList(1));
+        $this->assertCount(3,$customAnnotation->getNumericalList(2));
+        $this->assertFalse($customAnnotation->hasNumericalList(3));
+    }
 }
