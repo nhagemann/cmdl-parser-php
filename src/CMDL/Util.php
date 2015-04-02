@@ -134,6 +134,14 @@ class Util
                     }
 
                     // remove surrounding quotes
+                    if (substr($key, 0, 1) == '"')
+                    {
+                        $key = trim($key, '"');
+                    }
+                    else
+                    {
+                        $key = trim($key, "'");
+                    }
                     if (substr($value, 0, 1) == '"')
                     {
                         $value = trim($value, '"');
