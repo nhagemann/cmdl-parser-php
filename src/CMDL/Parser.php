@@ -2,6 +2,7 @@
 
 namespace CMDL;
 
+use CMDL\Annotations\ContentTypeNameAnnotation;
 use CMDL\Annotations\ContentTypeSynchronizedPropertiesAnnotation;
 use CMDL\CMDLParserException;
 use CMDL\DataTypeDefinition;
@@ -713,6 +714,9 @@ class Parser
                 break;
             case 'description':
                 $annotation = new DataTypeDescriptionAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
+                break;
+            case 'name':
+                $annotation = new ContentTypeNameAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'languages':
                 $annotation = new DataTypeLanguagesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);

@@ -8,15 +8,15 @@ class Util
     public static function generateValidIdentifier($s, $additionalchars = '')
     {
         $map = array(
-            'À'       => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'Ae', 'Å' => 'A', 'Æ' => 'AE', 'Ç' =>
-            'C', 'È'  => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I',
-            'Ï'       => 'I', 'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' =>
-            'Oe', 'Ő' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'Ue', 'Ű' => 'U',
-            'Ý'       => 'Y', 'Þ' => 'TH', 'ß' => 'ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' =>
-            'ae', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
-            'ì'       => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'd', 'ñ' => 'n', 'ò' => 'o', 'ó' =>
-            'o', 'ô'  => 'o', 'õ' => 'o', 'ö' => 'oe', 'ő' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u',
-            'û'       => 'u', 'ü' => 'ue', 'ű' => 'u', 'ý' => 'y', 'þ' => 'th', 'ÿ' => 'y'
+            'À'           => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'Ae', 'Å' => 'A', 'Æ' => 'AE', 'Ç' =>
+                'C', 'È'  => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I',
+            'Ï'           => 'I', 'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' =>
+                'Oe', 'Ő' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'Ue', 'Ű' => 'U',
+            'Ý'           => 'Y', 'Þ' => 'TH', 'ß' => 'ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' =>
+                'ae', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'ì'           => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'd', 'ñ' => 'n', 'ò' => 'o', 'ó' =>
+                'o', 'ô'  => 'o', 'õ' => 'o', 'ö' => 'oe', 'ő' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u',
+            'û'           => 'u', 'ü' => 'ue', 'ű' => 'u', 'ý' => 'y', 'þ' => 'th', 'ÿ' => 'y'
         );
 
         $pattern = '/[' . join(array_keys($map), '') . ']/u';
@@ -101,7 +101,7 @@ class Util
     }
 
 
-    public static function extractLists($s,$forceNumericalIndex = false)
+    public static function extractLists($s, $forceNumericalIndex = false)
     {
         $lists = array();
 
@@ -113,7 +113,7 @@ class Util
                 $items    = array();
                 $csvitems = explode(',', $csv);
 
-                $i=1;
+                $i = 1;
                 foreach ($csvitems as $item)
                 {
                     $item     = trim($item);
@@ -130,7 +130,7 @@ class Util
                     }
                     if ($forceNumericalIndex)
                     {
-                         $key= $i;
+                        $key = $i;
                     }
 
                     // remove surrounding quotes
@@ -198,6 +198,36 @@ class Util
 
         return $params;
 
+    }
+
+
+    /**
+     * Replaces {{property}} strings with a matching property value
+     *
+     * @param $properties
+     * @param $pattern
+     *
+     *
+     * @link http://stackoverflow.com/questions/15773349/replacing-placeholder-variables-in-a-string
+     *
+     * @return mixed
+     */
+    public static function applyNamingPattern($properties, $pattern)
+    {
+        preg_match_all('^{{(.+?)}}^', $pattern, $matches);
+
+        if (isset($matches[1]) && count($matches[1]) > 0){
+            foreach ($matches[1] as $key => $value) {
+                if (array_key_exists($value, $properties)){
+                    $pattern = preg_replace("/\{\{$value\}\}/", $properties[$value], $pattern);
+                }
+                else{
+                    $pattern = preg_replace("/\{\{$value\}\}/", '', $pattern);
+                }
+            }
+        }
+
+        return $pattern;
     }
 }
 

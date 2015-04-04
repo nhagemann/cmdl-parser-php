@@ -20,9 +20,11 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     protected $synchronizedProperties = array( 'global' => array(), 'workspaces' => array(), 'languages' => array() );
 
-    const SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL     = 'global';
+    const SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL = 'global';
     const SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES = 'workspaces';
-    const SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES  = 'languages';
+    const SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES = 'languages';
+
+    protected $namingPattern = false;
 
 
     public function hasStatusList()
@@ -227,26 +229,47 @@ class ContentTypeDefinition extends DataTypeDefinition
         }
     }
 
+
     public function hasSynchronizedProperties()
     {
-        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL])>0)
+        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_GLOBAL]) > 0)
         {
             return true;
         }
-        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES])>0)
+        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_WORKSPACES]) > 0)
         {
             return true;
         }
-        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES])>0)
+        if (count($this->synchronizedProperties[self::SCOPE_SYNCHRONIZED_PROPERTY_LANGUAGES]) > 0)
         {
             return true;
         }
+
         return false;
     }
+
 
     public function getSynchronizedProperties()
     {
         return $this->synchronizedProperties;
+    }
+
+
+    public function hasNamingPattern()
+    {
+        return (boolean)$this->namingPattern;
+    }
+
+
+    public function getNamingPattern()
+    {
+        return $this->namingPattern;
+    }
+
+
+    public function setNamingPattern($namingPattern)
+    {
+        $this->namingPattern = $namingPattern;
     }
 
 }
