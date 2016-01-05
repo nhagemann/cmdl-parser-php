@@ -97,7 +97,7 @@ use CMDL\Util;
 class Parser
 {
 
-    static $superProperties = array( 'name', 'status', 'subtype' );
+    static $superProperties = array( 'name', 'status', 'subtype', 'position', 'parent' );
 
 
     /**
