@@ -710,7 +710,6 @@ class Parser
         {
             case 'title':
                 $annotation = new DataTypeTitleAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
-
                 break;
             case 'description':
                 $annotation = new DataTypeDescriptionAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
@@ -727,14 +726,8 @@ class Parser
             case 'subtypes':
                 $annotation = new ContentTypeSubtypesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
-            case 'synchronized-properties':
-                $annotation = new ContentTypeSynchronizedPropertiesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
-                break;
             case 'workspaces':
                 $annotation = new DataTypeWorkspacesAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
-                break;
-            case 'operations':
-                $annotation = new DataTypeOperationsAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'sortable':
                 $annotation = new DataTypeSortableAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
@@ -764,7 +757,6 @@ class Parser
                 $annotation = new InsertAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists);
                 break;
             case 'custom':
-
                 $annotation = new CustomAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection, $params, $lists, $numericalLists);
                 break;
 
