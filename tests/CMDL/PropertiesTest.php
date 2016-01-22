@@ -25,16 +25,16 @@ class PropertiesTest extends \PHPUnit_Framework_TestCase
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-05.cmdl');
 
         $properties = $contentTypeDefinition->getProperties('default');
-        $this->assertCount(3, $properties);
+        $this->assertCount(5, $properties);
 
         $properties = $contentTypeDefinition->getProperties('edit');
-        $this->assertCount(7, $properties);
+        $this->assertCount(9, $properties);
 
         $properties = $contentTypeDefinition->getProperties('insert');
-        $this->assertCount(4, $properties);
+        $this->assertCount(6, $properties);
 
         $properties = $contentTypeDefinition->getProperties();
-        $this->assertCount(7, $properties);
+        $this->assertCount(9, $properties);
 
     }
 

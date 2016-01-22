@@ -121,28 +121,6 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testOperationsAnnotation()
-    {
-        /* @var ContentTypeDefinition */
-        $contentTypeDefinition = Parser::parseCMDLString('');
-        $this->assertTrue($contentTypeDefinition->hasListOperation());
-        $this->assertTrue($contentTypeDefinition->hasGetOperation());
-        $this->assertTrue($contentTypeDefinition->hasInsertOperation());
-        $this->assertTrue($contentTypeDefinition->hasUpdateOperation());
-        $this->assertTrue($contentTypeDefinition->hasDeleteOperation());
-        $this->assertTrue($contentTypeDefinition->hasRevisionOperations());
-
-        /* @var ContentTypeDefinition */
-        $contentTypeDefinition = Parser::parseCMDLString('@operations (list)');
-        $this->assertTrue($contentTypeDefinition->hasListOperation());
-        $this->assertFalse($contentTypeDefinition->hasGetOperation());
-        $this->assertFalse($contentTypeDefinition->hasInsertOperation());
-        $this->assertFalse($contentTypeDefinition->hasUpdateOperation());
-        $this->assertFalse($contentTypeDefinition->hasDeleteOperation());
-        $this->assertFalse($contentTypeDefinition->hasRevisionOperations());
-
-    }
-
 
     public function testSortableAnnotation()
     {
