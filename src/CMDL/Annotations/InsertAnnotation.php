@@ -17,7 +17,25 @@ class InsertAnnotation extends Annotation
 
         $formElementDefinition = new InsertFormElementDefinition();
 
-        if ($this->hasList(1)) // it's property dependent insert
+        $property = false;
+
+        if ($this->hasList(3))
+        {
+            $property = true;
+            $formElementDefinition->setWorkspaces($this->getList(2));
+            $formElementDefinition->setLanguages($this->getList(3));
+        }
+        elseif ($this->hasList(2))
+        {
+            $formElementDefinition->setWorkspaces($this->getList(1));
+            $formElementDefinition->setLanguages($this->getList(2));
+        }
+        elseif ($this->hasList(1))
+        {
+            $property = true;
+        }
+
+        if ($property) // it's property dependent insert
         {
             if (!$this->hasParam(1))
             {

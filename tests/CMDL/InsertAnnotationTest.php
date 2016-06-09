@@ -115,4 +115,49 @@ class InsertAnnotationTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('i1',$viewDefinition->getNamesOfEventuallyInsertedClippings());
         $this->assertContains('i2',$viewDefinition->getNamesOfEventuallyInsertedClippings());
     }
+
+    public function testWorkspacesAndLanguagesRestrictions()
+    {
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('
+        
+        a
+        @insert a (1:i1) (default) ()
+        +++i1+++
+        b        
+        ');
+
+        $this->assertContains('a', $contentTypeDefinition->getProperties());
+        $this->assertContains('b', $contentTypeDefinition->getProperties());
+
+        /* @var ViewDefinition */
+        $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
+
+        $formelements = $viewDefinition->getFormElementDefinitions();
+
+        /** @var InsertFormElementDefinition $insertFormElement */
+        $insertFormElement = $formelements[1];
+        $this->assertContains('default',$insertFormElement->getWorkspaces());
+        $this->assertTrue($insertFormElement->hasWorkspacesRestriction());
+        $this->assertFalse($insertFormElement->hasLanguagesRestriction());
+
+        /* @var ContentTypeDefinition */
+        $contentTypeDefinition = Parser::parseCMDLString('
+        
+        a
+        @insert i1 (default) ()
+        +++i1+++
+        b        
+        ');
+
+        $this->assertContains('a', $contentTypeDefinition->getProperties());
+        $this->assertContains('b', $contentTypeDefinition->getProperties());
+
+        /** @var InsertFormElementDefinition $insertFormElement */
+        $insertFormElement = $formelements[1];
+        $this->assertContains('default',$insertFormElement->getWorkspaces());
+        $this->assertTrue($insertFormElement->hasWorkspacesRestriction());
+        $this->assertFalse($insertFormElement->hasLanguagesRestriction());
+
+    }
 }

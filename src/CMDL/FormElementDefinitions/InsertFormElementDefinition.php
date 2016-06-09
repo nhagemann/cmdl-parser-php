@@ -13,13 +13,11 @@ class InsertFormElementDefinition extends FormElementDefinition
 
     protected $propertyName = null;
 
-    protected $insertConditions = array();
+    protected $insertConditions = [ ];
 
+    protected $workspaces = [ ];
 
-    public function __construct()
-    {
-
-    }
+    protected $languages = [ ];
 
 
     public function setClippingName($clippingName)
@@ -28,16 +26,18 @@ class InsertFormElementDefinition extends FormElementDefinition
     }
 
 
-    public function getClippingName($value=null)
+    public function getClippingName($value = null)
     {
-        if ($this->getPropertyName()!='')
+        if ($this->getPropertyName() != '')
         {
-            if (array_key_exists($value,$this->insertConditions))
+            if (array_key_exists($value, $this->insertConditions))
             {
                 return $this->insertConditions[$value];
             }
+
             return null;
         }
+
         return $this->clippingName;
     }
 
@@ -63,6 +63,54 @@ class InsertFormElementDefinition extends FormElementDefinition
     public function getInsertConditions()
     {
         return $this->insertConditions;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getWorkspaces()
+    {
+        return $this->workspaces;
+    }
+
+
+    /**
+     * @param array $workspaces
+     */
+    public function setWorkspaces($workspaces)
+    {
+        $this->workspaces = array_keys($workspaces);
+    }
+
+
+    public function hasWorkspacesRestriction()
+    {
+        return (boolean)count($this->getWorkspaces());
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+
+    /**
+     * @param array $languages
+     */
+    public function setLanguages($languages)
+    {
+        $this->languages = array_keys($languages);
+    }
+
+
+    public function hasLanguagesRestriction()
+    {
+        return (boolean)count($this->getLanguages());
     }
 
 }
