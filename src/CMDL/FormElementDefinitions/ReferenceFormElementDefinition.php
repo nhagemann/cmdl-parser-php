@@ -12,6 +12,8 @@ class ReferenceFormElementDefinition extends FormElementDefinition
 
     protected $elementType = 'reference';
 
+    protected $repositoryName = null;
+
     protected $contentType = null;
 
     protected $workspace = 'default';
@@ -26,10 +28,22 @@ class ReferenceFormElementDefinition extends FormElementDefinition
     public function __construct($name, $params = array(), $lists = array())
     {
 
-        if (isset($params[0]))
+        if (!isset($params[0]))
         {
-            $this->setContentType($params[0]);
+            throw new CMDLParserException('Missing mandatory parameter contenttype for form element reference.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
+
+        $contentTypeName = $params[0];
+
+        if (strpos($contentTypeName, '.') !== false)
+        {
+            $split = explode('.', $contentTypeName);
+            $this->setRepositoryName($split[0]);
+            $contentTypeName = $split[1];
+        }
+
+        $this->setContentType($contentTypeName);
+
         if (isset($params[1]))
         {
             $this->setType($params[1]);
@@ -50,7 +64,6 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         {
             $this->setTimeshift($params[5]);
         }
-
 
         parent::__construct($name, $params, $lists);
     }
@@ -84,6 +97,30 @@ class ReferenceFormElementDefinition extends FormElementDefinition
     public function getContentType()
     {
         return $this->contentType;
+    }
+
+
+    /**
+     * @return null
+     */
+    public function getRepositoryName()
+    {
+        return $this->repositoryName;
+    }
+
+
+    /**
+     * @param null $repositoryName
+     */
+    public function setRepositoryName($repositoryName)
+    {
+        $this->repositoryName = $repositoryName;
+    }
+
+
+    public function hasRepositoryName()
+    {
+        return (boolean)$this->repositoryName;
     }
 
 
@@ -133,6 +170,5 @@ class ReferenceFormElementDefinition extends FormElementDefinition
     {
         return $this->language;
     }
-
 
 }

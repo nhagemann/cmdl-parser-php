@@ -280,6 +280,7 @@ class DataTypeDefinition
 
         }
 
+        
 
         $inserts = array_unique($inserts);
 

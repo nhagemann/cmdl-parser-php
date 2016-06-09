@@ -154,6 +154,17 @@ class Util
                     $items[$key] = $value;
                     $i++;
                 }
+
+                if (count ($items)==1)
+                {
+                    $item = reset($items);
+                    if ($item=='')
+                    {
+                        $items = [];
+                    }
+
+                }
+
                 $lists[] = $items;
             }
 
