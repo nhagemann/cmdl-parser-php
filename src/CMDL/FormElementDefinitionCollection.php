@@ -3,12 +3,18 @@
 namespace CMDL;
 
 use CMDL\FormElementDefinition;
+use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 
 class FormElementDefinitionCollection
 {
 
     protected $name;
+
+    /**
+     * @var FormElementDefinition[]
+     */
     protected $fields = array();
+
     protected $namedFields = array();
 
     protected $properties = null;
@@ -72,6 +78,9 @@ class FormElementDefinitionCollection
     }
 
 
+    /**
+     * @return FormElementDefinition[]
+     */
     public function getFormElementDefinitions()
     {
         return $this->fields;
@@ -192,12 +201,13 @@ class FormElementDefinitionCollection
 
     public function getNamesOfEventuallyInsertedClippings()
     {
-        /* @var $formElementDefinition FormElementDefinition */
+
         $clippingNames = array();
         foreach ($this->getFormElementDefinitions() as $formElementDefinition)
         {
             if ($formElementDefinition->getFormElementType() == 'insert')
             {
+                /* @var $formElementDefinition InsertFormElementDefinition */
 
                 if ($formElementDefinition->getPropertyName() == '')
                 {
@@ -205,7 +215,7 @@ class FormElementDefinitionCollection
                 }
                 else
                 {
-                    $clippingNames = $clippingNames + array_values($formElementDefinition->getInsertConditions());
+                    $clippingNames = array_merge($clippingNames, array_values($formElementDefinition->getInsertConditions()));
                 }
             }
 
@@ -213,7 +223,5 @@ class FormElementDefinitionCollection
 
         return $clippingNames;
     }
-
-
 
 }
