@@ -2,7 +2,6 @@
 
 namespace CMDL;
 
-use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 
 class FormElementDefinitionCollection
@@ -48,8 +47,7 @@ class FormElementDefinitionCollection
 
     public function addFormElementDefinition(FormElementDefinition $definition)
     {
-        if ($definition->getName() != '')
-        {
+        if ($definition->getName() != '') {
             $this->namedFields[$definition->getName()] = $definition;
         }
         $this->fields[] = $definition;
@@ -69,12 +67,12 @@ class FormElementDefinitionCollection
      */
     public function getFormElementDefinition($name)
     {
-        if (array_key_exists($name, $this->namedFields))
-        {
+        if (array_key_exists($name, $this->namedFields)) {
             return $this->namedFields[$name];
         }
 
-        throw new CMDLParserException('Could not find a formelement named ' . $name, CMDLParserException::CMDL_FORMELEMENT_NOT_FOUND);
+        throw new CMDLParserException('Could not find a formelement named ' . $name,
+            CMDLParserException::CMDL_FORMELEMENT_NOT_FOUND);
     }
 
 
@@ -89,8 +87,7 @@ class FormElementDefinitionCollection
 
     public function getProperties()
     {
-        if ($this->properties)
-        {
+        if ($this->properties) {
             return $this->properties;
         }
         $properties          = $this->getHiddenProperties();
@@ -98,33 +95,26 @@ class FormElementDefinitionCollection
         $uniqueProperties    = array();
         $protectedProperties = array();
 
-        foreach ($this->fields as $formElementDefinition)
-        {
-            if ($formElementDefinition->getName())
-            {
+        foreach ($this->fields as $formElementDefinition) {
+            if ($formElementDefinition->getName()) {
                 $properties[] = $formElementDefinition->getName();
-                if ($formElementDefinition->isMandatory())
-                {
+                if ($formElementDefinition->isMandatory()) {
                     $mandatoryProperties[] = $formElementDefinition->getName();
                 }
-                if ($formElementDefinition->isUnique())
-                {
+                if ($formElementDefinition->isUnique()) {
                     $uniqueProperties[] = $formElementDefinition->getName();
                 }
-                if ($formElementDefinition->isProtected())
-                {
+                if ($formElementDefinition->isProtected()) {
                     $protectedProperties[] = $formElementDefinition->getName();
                 }
 
             }
         }
 
-        if ($this->parentDataTypeDefinition)
-        {
+        if ($this->parentDataTypeDefinition) {
 
             $clippings = $this->getNamesOfEventuallyInsertedClippings();
-            foreach ($clippings as $clippingName)
-            {
+            foreach ($clippings as $clippingName) {
 
                 $clippingDefinition = $this->parentDataTypeDefinition->getClippingDefinition($clippingName);
 
@@ -145,8 +135,7 @@ class FormElementDefinitionCollection
 
     public function getMandatoryProperties()
     {
-        if (!$this->properties)
-        {
+        if (!$this->properties) {
             $this->getProperties();
         }
 
@@ -156,8 +145,7 @@ class FormElementDefinitionCollection
 
     public function getUniqueProperties()
     {
-        if (!$this->properties)
-        {
+        if (!$this->properties) {
             $this->getProperties();
         }
 
@@ -167,8 +155,7 @@ class FormElementDefinitionCollection
 
     public function getProtectedProperties()
     {
-        if (!$this->properties)
-        {
+        if (!$this->properties) {
             $this->getProperties();
         }
 
@@ -178,8 +165,7 @@ class FormElementDefinitionCollection
 
     public function hasProperty($property)
     {
-        if (in_array($property, $this->getProperties()))
-        {
+        if (in_array($property, $this->getProperties())) {
             return true;
         }
 
@@ -203,19 +189,15 @@ class FormElementDefinitionCollection
     {
 
         $clippingNames = array();
-        foreach ($this->getFormElementDefinitions() as $formElementDefinition)
-        {
-            if ($formElementDefinition->getFormElementType() == 'insert')
-            {
+        foreach ($this->getFormElementDefinitions() as $formElementDefinition) {
+            if ($formElementDefinition->getFormElementType() == 'insert') {
                 /* @var $formElementDefinition InsertFormElementDefinition */
 
-                if ($formElementDefinition->getPropertyName() == '')
-                {
+                if ($formElementDefinition->getPropertyName() == '') {
                     $clippingNames[] = $formElementDefinition->getClippingName();
-                }
-                else
-                {
-                    $clippingNames = array_merge($clippingNames, array_values($formElementDefinition->getInsertConditions()));
+                } else {
+                    $clippingNames = array_merge($clippingNames,
+                        array_values($formElementDefinition->getInsertConditions()));
                 }
             }
 

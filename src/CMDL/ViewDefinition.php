@@ -2,9 +2,6 @@
 
 namespace CMDL;
 
-use CMDL\Parser;
-use CMDL\FormElementDefinitionCollection;
-
 class ViewDefinition extends FormElementDefinitionCollection
 {
 

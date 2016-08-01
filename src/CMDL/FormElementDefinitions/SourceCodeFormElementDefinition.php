@@ -2,8 +2,6 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 use CMDL\CMDLParserException;
 
 class SourceCodeFormElementDefinition extends TextareaFormElementDefinition

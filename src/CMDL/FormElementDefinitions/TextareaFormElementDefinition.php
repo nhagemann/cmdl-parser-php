@@ -1,7 +1,6 @@
 <?php
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\CMDLParserException;
 
 class TextareaFormElementDefinition extends TextfieldFormElementDefinition

@@ -2,7 +2,6 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 
 class RichtextFormElementDefinition extends TextareaFormElementDefinition
 {

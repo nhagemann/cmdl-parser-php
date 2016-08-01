@@ -4,7 +4,6 @@ namespace CMDL\Annotations;
 
 use CMDL\Annotation;
 use CMDL\CMDLParserException;
-use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 use CMDL\DataTypeDefinition;
 
 class CustomAnnotation extends Annotation

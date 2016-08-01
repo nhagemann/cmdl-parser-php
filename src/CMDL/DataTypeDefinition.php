@@ -3,9 +3,6 @@
 namespace CMDL;
 
 use CMDL\Annotations\CustomAnnotation;
-use CMDL\CMDLParserException;
-use CMDL\ViewDefinition;
-use CMDL\ClippingDefinition;
 
 class DataTypeDefinition
 {
@@ -18,6 +15,8 @@ class DataTypeDefinition
 
     protected $workspaces = array( 'default' => 'Default' );
 
+    protected $timeShiftable = false;
+    
     protected $cmdl = null;
     protected $views = array();
     protected $clippings = array();
@@ -26,6 +25,7 @@ class DataTypeDefinition
      * @var array CustomAnnotation
      */
     protected $customAnnotations = array();
+
 
     public function __construct($name = null)
     {
@@ -108,10 +108,12 @@ class DataTypeDefinition
         return false;
     }
 
+
     public function getViewDefinitions()
     {
         return $this->views;
     }
+
 
     public function getListViewDefinition($name = 'list')
     {
@@ -221,7 +223,7 @@ class DataTypeDefinition
             return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('Clipping '.$name.' not defined.', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
+        throw new CMDLParserException('Clipping ' . $name . ' not defined.', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
     }
 
 
@@ -230,10 +232,12 @@ class DataTypeDefinition
         $this->clippings[$definition->getName()] = $definition;
     }
 
+
     public function hasClippingDefinition($name)
     {
-        return  array_key_exists($name, $this->clippings);
+        return array_key_exists($name, $this->clippings);
     }
+
 
     public function hasProperty($property, $viewName = null)
     {
@@ -260,7 +264,6 @@ class DataTypeDefinition
 
         $inserts = array();
 
-
         if ($viewName)
         {
             $viewDefinition = $this->getViewDefinition($viewName);
@@ -279,8 +282,6 @@ class DataTypeDefinition
             }
 
         }
-
-        
 
         $inserts = array_unique($inserts);
 
@@ -318,6 +319,7 @@ class DataTypeDefinition
 
     }
 
+
     public function getProtectedProperties($viewName)
     {
 
@@ -351,16 +353,16 @@ class DataTypeDefinition
     }
 
 
-
     public function hasLanguage($language)
     {
         if ($this->hasLanguages())
         {
-            if (array_key_exists($language,$this->languages))
+            if (array_key_exists($language, $this->languages))
             {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -387,15 +389,17 @@ class DataTypeDefinition
         return true;
     }
 
+
     public function hasWorkspace($workspace)
     {
         if ($this->hasWorkspaces())
         {
-            if (array_key_exists($workspace,$this->workspaces))
+            if (array_key_exists($workspace, $this->workspaces))
             {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -405,7 +409,7 @@ class DataTypeDefinition
      */
     public function addCustomAnnotation(CustomAnnotation $annotation)
     {
-        $this->customAnnotations[]=$annotation;
+        $this->customAnnotations[] = $annotation;
     }
 
 
@@ -416,4 +420,16 @@ class DataTypeDefinition
     {
         return $this->customAnnotations;
     }
+
+    public function setTimeShiftable($timeShiftable)
+    {
+        $this->timeShiftable = $timeShiftable;
+    }
+
+
+    public function isTimeShiftable()
+    {
+        return $this->timeShiftable;
+    }
+
 }

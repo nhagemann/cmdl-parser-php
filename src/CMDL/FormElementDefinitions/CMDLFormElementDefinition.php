@@ -2,8 +2,6 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
-
 class CMDLFormElementDefinition extends TextareaFormElementDefinition
 {
 

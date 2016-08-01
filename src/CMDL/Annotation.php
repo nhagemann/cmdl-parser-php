@@ -2,9 +2,6 @@
 
 namespace CMDL;
 
-use CMDL\DataTypeDefinition;
-use CMDL\FormElementDefinitionCollection;
-
 class Annotation
 {
 

@@ -24,7 +24,7 @@ class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinitio
     protected $timeshift = 0;
 
 
-    public function __construct($name, $params = array(), $lists = array())
+    public function __construct($name = null, $params = array(), $lists = array())
     {
         if (isset($params[0]))
         {
