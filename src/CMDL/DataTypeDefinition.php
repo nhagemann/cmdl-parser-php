@@ -11,12 +11,12 @@ class DataTypeDefinition
     protected $title = null;
     protected $description = null;
 
-    protected $languages = array( 'default' => 'Default' );
+    protected $languages = array('default' => 'Default');
 
-    protected $workspaces = array( 'default' => 'Default' );
+    protected $workspaces = array('default' => 'Default');
 
     protected $timeShiftable = false;
-    
+
     protected $cmdl = null;
     protected $views = array();
     protected $clippings = array();
@@ -89,19 +89,18 @@ class DataTypeDefinition
      */
     public function getViewDefinition($name = 'default')
     {
-        if (array_key_exists($name, $this->views))
-        {
+        if (array_key_exists($name, $this->views)) {
             return $this->views[$name];
         }
 
-        throw new CMDLParserException('Data type' . rtrim(' ' . $this->getName()) . ' has no view "' . $name . '"', CMDLParserException::CMDL_VIEW_NOT_DEFINED);
+        throw new CMDLParserException('Data type' . rtrim(' ' . $this->getName()) . ' has no view "' . $name . '"',
+            CMDLParserException::CMDL_VIEW_NOT_DEFINED);
     }
 
 
     public function hasViewDefinition($name)
     {
-        if (array_key_exists($name, $this->views))
-        {
+        if (array_key_exists($name, $this->views)) {
             return true;
         }
 
@@ -117,16 +116,13 @@ class DataTypeDefinition
 
     public function getListViewDefinition($name = 'list')
     {
-        if ($name != 'list')
-        {
-            if ($this->hasViewDefinition($name))
-            {
+        if ($name != 'list') {
+            if ($this->hasViewDefinition($name)) {
                 return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasViewDefinition('list'))
-        {
+        if ($this->hasViewDefinition('list')) {
             return $this->getViewDefinition('list');
         }
 
@@ -136,16 +132,13 @@ class DataTypeDefinition
 
     public function getInsertViewDefinition($name = 'insert')
     {
-        if ($name != 'insert')
-        {
-            if ($this->hasViewDefinition($name))
-            {
+        if ($name != 'insert') {
+            if ($this->hasViewDefinition($name)) {
                 return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasViewDefinition('insert'))
-        {
+        if ($this->hasViewDefinition('insert')) {
             return $this->getViewDefinition('insert');
         }
 
@@ -155,16 +148,13 @@ class DataTypeDefinition
 
     public function getEditViewDefinition($name = 'edit')
     {
-        if ($name != 'edit')
-        {
-            if ($this->hasViewDefinition($name))
-            {
+        if ($name != 'edit') {
+            if ($this->hasViewDefinition($name)) {
                 return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasViewDefinition('edit'))
-        {
+        if ($this->hasViewDefinition('edit')) {
             return $this->getViewDefinition('edit');
         }
 
@@ -174,16 +164,13 @@ class DataTypeDefinition
 
     public function getDuplicateViewDefinition($name = 'duplicate')
     {
-        if ($name != 'duplicate')
-        {
-            if ($this->hasViewDefinition($name))
-            {
+        if ($name != 'duplicate') {
+            if ($this->hasViewDefinition($name)) {
                 return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasViewDefinition('duplicate'))
-        {
+        if ($this->hasViewDefinition('duplicate')) {
             return $this->getViewDefinition('duplicate');
         }
 
@@ -193,16 +180,13 @@ class DataTypeDefinition
 
     public function getExchangeViewDefinition($name = 'exchange')
     {
-        if ($name != 'exchange')
-        {
-            if ($this->hasViewDefinition($name))
-            {
+        if ($name != 'exchange') {
+            if ($this->hasViewDefinition($name)) {
                 return $this->getViewDefinition($name);
             }
         }
 
-        if ($this->hasViewDefinition('exchange'))
-        {
+        if ($this->hasViewDefinition('exchange')) {
             return $this->getViewDefinition('exchange');
         }
 
@@ -218,12 +202,12 @@ class DataTypeDefinition
 
     public function getClippingDefinition($name)
     {
-        if (array_key_exists($name, $this->clippings))
-        {
+        if (array_key_exists($name, $this->clippings)) {
             return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('Clipping ' . $name . ' not defined.', CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
+        throw new CMDLParserException('Clipping ' . $name . ' not defined.',
+            CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
     }
 
 
@@ -242,17 +226,13 @@ class DataTypeDefinition
     public function hasProperty($property, $viewName = null)
     {
         // include super properties
-        if (in_array($property, Parser::$superProperties))
-        {
+        if (in_array($property, Parser::$superProperties)) {
             return true;
         }
 
-        if ($viewName)
-        {
+        if ($viewName) {
             return $this->getViewDefinition($viewName)->hasProperty($property);
-        }
-        else
-        {
+        } else {
             return in_array($property, $this->getProperties());
         }
 
@@ -264,19 +244,15 @@ class DataTypeDefinition
 
         $inserts = array();
 
-        if ($viewName)
-        {
+        if ($viewName) {
             $viewDefinition = $this->getViewDefinition($viewName);
 
             $properties = $viewDefinition->getProperties();
 
             $inserts = $viewDefinition->getNamesOfEventuallyInsertedClippings();
-        }
-        else
-        {
+        } else {
             $properties = array();
-            foreach ($this->views as $viewDefinition)
-            {
+            foreach ($this->views as $viewDefinition) {
                 $properties = array_merge($properties, $viewDefinition->getProperties());
                 $inserts    = array_merge($inserts, $viewDefinition->getNamesOfEventuallyInsertedClippings());
             }
@@ -285,8 +261,7 @@ class DataTypeDefinition
 
         $inserts = array_unique($inserts);
 
-        foreach ($inserts as $clippingName)
-        {
+        foreach ($inserts as $clippingName) {
 
             $clippingDefinition = $this->getClippingDefinition($clippingName);
 
@@ -344,8 +319,7 @@ class DataTypeDefinition
 
     public function hasLanguages()
     {
-        if ($this->languages === null || count($this->languages) < 2)
-        {
+        if ($this->languages === null || count($this->languages) < 2) {
             return false;
         }
 
@@ -355,12 +329,9 @@ class DataTypeDefinition
 
     public function hasLanguage($language)
     {
-        if ($this->hasLanguages())
-        {
-            if (array_key_exists($language, $this->languages))
-            {
-                return true;
-            }
+
+        if (array_key_exists($language, $this->languages)) {
+            return true;
         }
 
         return false;
@@ -381,8 +352,7 @@ class DataTypeDefinition
 
     public function hasWorkspaces()
     {
-        if ($this->workspaces === null || count($this->workspaces) < 2)
-        {
+        if ($this->workspaces === null || count($this->workspaces) < 2) {
             return false;
         }
 
@@ -392,12 +362,9 @@ class DataTypeDefinition
 
     public function hasWorkspace($workspace)
     {
-        if ($this->hasWorkspaces())
-        {
-            if (array_key_exists($workspace, $this->workspaces))
-            {
-                return true;
-            }
+
+        if (array_key_exists($workspace, $this->workspaces)) {
+            return true;
         }
 
         return false;
@@ -420,6 +387,7 @@ class DataTypeDefinition
     {
         return $this->customAnnotations;
     }
+
 
     public function setTimeShiftable($timeShiftable)
     {
