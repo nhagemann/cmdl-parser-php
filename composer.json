@@ -1,6 +1,6 @@
 {
     "name": "nhagemann/cmdl-parser-php",
-    "description": "Library to parse CMDL files into an object representation",
+    "description": "Library to parse AnyContent CMDL files into an object representation",
     "type": "library",
     "homepage": "http://www.nilshagemann.de",
     "license": "MIT",
