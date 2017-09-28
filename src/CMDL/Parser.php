@@ -81,7 +81,7 @@ use CMDL\Annotations\CustomAnnotation;
 class Parser
 {
 
-    static $superProperties = array('name', 'status', 'subtype', 'position', 'parent');
+    public static $superProperties = array('name', 'status', 'subtype', 'position', 'parent');
 
 
     /**
@@ -280,7 +280,7 @@ class Parser
     }
 
 
-    protected static function closeTab($currentFormElementDefinitionCollection, $currentTabLabel)
+    protected static function closeTab(FormElementDefinitionCollection $currentFormElementDefinitionCollection, $currentTabLabel)
     {
         $formElementDefinition = new TabEndFormElementDefinition();
         $formElementDefinition->setLabel($currentTabLabel);
