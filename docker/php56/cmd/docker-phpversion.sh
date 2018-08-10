@@ -1,0 +1,1 @@
+docker exec cmdl-parser-php56 php -v

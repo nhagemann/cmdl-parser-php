@@ -1,0 +1,16 @@
+version: '2'
+services:
+  cmdl-parser-php56:
+    container_name: cmdl-parser-php56
+    build:
+      context: ./build/php
+      dockerfile: Dockerfile
+    image: cmdl-parser-php56:1.0.0
+    volumes:
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ../../:/application
+    networks:
+      - anycontent
+networks:
+  anycontent:
+    driver: "bridge"

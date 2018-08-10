@@ -1,0 +1,1 @@
+docker exec -w /application cmdl-parser-php70 php /application/vendor/bin/phpunit $@

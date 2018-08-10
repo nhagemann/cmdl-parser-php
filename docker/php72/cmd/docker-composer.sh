@@ -1,0 +1,1 @@
+docker exec -w /application cmdl-parser-php72 php /composer.phar $@
