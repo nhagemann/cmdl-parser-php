@@ -1,4 +1,4 @@
-version: '2'
+version: '3.5'
 services:
   cmdl-parser-php70:
     container_name: cmdl-parser-php70
@@ -7,10 +7,11 @@ services:
       dockerfile: Dockerfile
     image: cmdl-parser-php70:1.0.0
     volumes:
-      - ./config/php/php.ini:/usr/local/etc/php/php.ini
-      - ../../:/application
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini:cached
+      - ../../:/application:cached
     networks:
       - anycontent
 networks:
   anycontent:
     driver: "bridge"
+    name: "anycontent"
