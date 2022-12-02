@@ -6,7 +6,6 @@ use CMDL\Annotation;
 
 class DataTypeTimeShiftableAnnotation extends Annotation
 {
-
     protected $annotationType = 'time-shiftable';
 
 
@@ -16,5 +15,4 @@ class DataTypeTimeShiftableAnnotation extends Annotation
 
         return $this->dataTypeDefinition;
     }
-
 }

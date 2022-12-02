@@ -4,7 +4,6 @@ namespace CMDL;
 
 class FormElementDefinition
 {
-
     protected $elementType = null;
 
     protected $name = null;
@@ -14,23 +13,29 @@ class FormElementDefinition
     protected $defaultValue = null;
 
     protected $help = null;
+
     protected $hint = null;
+
     protected $info = null;
+
     protected $placeholder = null;
 
     protected $mandatory = false;
+
     protected $unique = false;
+
     protected $protected = false;
 
-    protected $params = array();
-    protected $lists = array();
+    protected $params = [];
+
+    protected $lists = [];
 
     protected $maxValueLength = 255;
 
     protected $insertedByInsert = false;
 
 
-    public function __construct($name = null, $params = array(), $lists = array())
+    public function __construct($name = null, $params = [], $lists = [])
     {
         $this->setName($name);
         $this->params = $params;
@@ -88,7 +93,7 @@ class FormElementDefinition
 
     public function isMandatory()
     {
-        return (boolean)$this->mandatory;
+        return (bool) $this->mandatory;
     }
 
 
@@ -100,7 +105,7 @@ class FormElementDefinition
 
     public function isUnique()
     {
-        return (boolean)$this->unique;
+        return (bool) $this->unique;
     }
 
 
@@ -112,19 +117,19 @@ class FormElementDefinition
 
     public function isProtected()
     {
-        return (boolean)$this->protected;
+        return (bool) $this->protected;
     }
 
 
     public function hasParam($nr)
     {
-        return isset($this->params[$nr - 1]);
+        return isset($this->params[($nr - 1)]);
     }
 
 
     public function hasList($nr)
     {
-        return isset($this->lists[$nr - 1]);
+        return isset($this->lists[($nr - 1)]);
     }
 
 
@@ -144,7 +149,7 @@ class FormElementDefinition
     {
 
         if ($this->hasParam($nr)) {
-            return $this->params[$nr - 1];
+            return $this->params[($nr - 1)];
         }
 
         return null;
@@ -155,7 +160,7 @@ class FormElementDefinition
     {
 
         if ($this->hasList($nr)) {
-            return $this->lists[$nr - 1];
+            return $this->lists[($nr - 1)];
         }
 
         return null;
@@ -224,7 +229,7 @@ class FormElementDefinition
 
     public function isInsertedByInsert()
     {
-        return (boolean)$this->insertedByInsert;
+        return (bool) $this->insertedByInsert;
     }
 
 

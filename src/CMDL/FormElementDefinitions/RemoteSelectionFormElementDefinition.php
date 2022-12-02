@@ -15,7 +15,6 @@ use CMDL\CMDLParserException;
  */
 class RemoteSelectionFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'remote-selection';
 
     protected $type = 'dropdown';
@@ -23,48 +22,45 @@ class RemoteSelectionFormElementDefinition extends FormElementDefinition
     protected $url = null;
 
 
-    public function __construct($name, $params = array(), $lists = array())
+    public function __construct($name, $params = [], $lists = [])
     {
 
-        if (isset($params[0]))
-        {
+        if (isset($params[0])) {
             $this->setUrl($params[0]);
         }
-        if (isset($params[1]))
-        {
+
+        if (isset($params[1])) {
             $this->setType($params[1]);
         }
+
         parent::__construct($name, $params, $lists);
-    }
+    }//end __construct()
 
 
     public function setType($type)
     {
-        if (in_array($type, array( 'dropdown', 'radio', 'toggle' )))
-        {
+        if (in_array($type, [ 'dropdown', 'radio', 'toggle' ])) {
             $this->type = $type;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setType()
 
 
     public function getType()
     {
         return $this->type;
-    }
+    }//end getType()
 
 
     public function setUrl($url)
     {
         $this->url = $url;
-    }
+    }//end setUrl()
 
 
     public function getUrl()
     {
         return $this->url;
-    }
-}
+    }//end getUrl()
+}//end class

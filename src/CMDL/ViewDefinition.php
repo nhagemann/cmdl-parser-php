@@ -4,7 +4,6 @@ namespace CMDL;
 
 class ViewDefinition extends FormElementDefinitionCollection
 {
-
     public function getProperties()
     {
         $properties = parent::getProperties();
@@ -12,6 +11,5 @@ class ViewDefinition extends FormElementDefinitionCollection
         $properties = array_unique(array_merge(Parser::$superProperties, $properties));
 
         return $properties;
-    }
-
-}
+    }//end getProperties()
+}//end class

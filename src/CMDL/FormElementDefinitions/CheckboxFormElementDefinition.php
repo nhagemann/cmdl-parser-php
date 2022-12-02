@@ -6,7 +6,6 @@ use CMDL\FormElementDefinition;
 
 class CheckboxFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'checkbox';
 
     protected $maxValueLength = 1;
@@ -25,5 +24,4 @@ class CheckboxFormElementDefinition extends FormElementDefinition
 
 
     protected $legend = null;
-
 }

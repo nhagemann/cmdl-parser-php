@@ -8,10 +8,10 @@ use CMDL\ContentTypeDefinition;
 use CMDL\ViewDefinition;
 use CMDL\FormElementDefinition;
 use CMDL\FormElementDefinitions\InsertFormElementDefinition;
+use PHPUnit\Framework\TestCase;
 
-class AnnotationsTest extends \PHPUnit_Framework_TestCase
+class AnnotationsTest extends TestCase
 {
-
     public function testContentTypeDefinition()
     {
         /* @var ContentTypeDefinition */
@@ -26,7 +26,6 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test-03', $contentTypeDefinition->getName());
         $this->assertEquals('News', $contentTypeDefinition->getTitle());
         $this->assertEquals('Example Content Type', $contentTypeDefinition->getDescription());
-
     }
 
 
@@ -35,17 +34,16 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@title Test');
 
-        $this->setExpectedException('CMDL\CMDLParserException');
+        $this->expectException('CMDL\CMDLParserException');
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@title');
-
     }
 
 
     public function test2MissingMandatoryParameters()
     {
 
-        $this->setExpectedException('CMDL\CMDLParserException');
+        $this->expectException('CMDL\CMDLParserException');
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@description');
     }
@@ -105,7 +103,6 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@languages (de:Deutsch,en:English)');
         $this->assertEquals(true, $contentTypeDefinition->hasLanguages());
-
     }
 
 
@@ -177,5 +174,4 @@ class AnnotationsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($view->hasProperty('licence'));
         $this->assertTrue($view->hasProperty('source'));
     }
-
 }

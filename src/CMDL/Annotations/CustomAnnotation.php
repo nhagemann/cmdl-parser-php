@@ -8,28 +8,23 @@ use CMDL\DataTypeDefinition;
 
 class CustomAnnotation extends Annotation
 {
-
     protected $annotationType = 'custom';
 
     protected $type;
 
 
-    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = array(), $lists = array(), $numericalLists = array())
+    public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = [], $lists = [], $numericalLists = [])
     {
-        if (isset($params[0]))
-        {
+        if (isset($params[0])) {
             $this->setType($params[0]);
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Missing mandatory parameter "type" of annotation ' . $this->annotationType, CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        $remainingParams = array();
+        $remainingParams = [];
 
-        foreach ($params as $k => $v)
-        {
-            $remainingParams[$k - 1] = $v;
+        foreach ($params as $k => $v) {
+            $remainingParams[($k - 1)] = $v;
         }
 
         parent::__construct($dataTypeDefinition, $currentFormElementDefinitionCollection, $remainingParams, $lists, $numericalLists);
@@ -61,5 +56,4 @@ class CustomAnnotation extends Annotation
     {
         $this->type = $type;
     }
-
 }

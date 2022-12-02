@@ -7,7 +7,6 @@ use CMDL\CMDLParserException;
 
 class DateFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'date';
 
     protected $type = 'long';
@@ -16,41 +15,35 @@ class DateFormElementDefinition extends FormElementDefinition
 
     protected $maxValueLength = 19;
 
+
     public function setType($type)
     {
-        if (in_array($type, array( 'long', 'short', 'datetime', 'full' )))
-        {
+        if (in_array($type, [ 'long', 'short', 'datetime', 'full' ])) {
             $this->type = $type;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of long, short, datetime, full', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setType()
 
 
     public function getType()
     {
         return $this->type;
-    }
+    }//end getType()
 
 
     public function setInit($init)
     {
-        if (in_array($init, array( 'now', 'today' )))
-        {
+        if (in_array($init, [ 'now', 'today' ])) {
             $this->init = $init;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be one of now, today', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setInit()
 
 
     public function getInit()
     {
         return $this->init;
-    }
-
-}
+    }//end getInit()
+}//end class

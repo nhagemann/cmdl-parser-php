@@ -14,20 +14,16 @@ class TabStartFormElementDefinition extends FormElementDefinition
 
     public function setOpened($opened)
     {
-        if (is_bool($opened))
-        {
+        if (is_bool($opened)) {
             $this->opened = $opened;
+        } else {
+            throw new CMDLParserException('', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-        else
-        {
-            throw new CMDLParserException('',CMDLParserException::CMDL_INVALID_OPTION_VALUE);
-        }
-    }
+    }//end setOpened()
 
 
     public function getOpened()
     {
         return $this->opened;
-    }
-
-}
+    }//end getOpened()
+}//end class

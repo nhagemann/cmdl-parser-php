@@ -2,10 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-
 class RichtextFormElementDefinition extends TextareaFormElementDefinition
 {
-
     protected $elementType = 'richtext';
 
     protected $size = 'L';
@@ -13,4 +11,4 @@ class RichtextFormElementDefinition extends TextareaFormElementDefinition
     protected $rows = 10;
 
     protected $maxValueLength = 256;
-}
+}//end class

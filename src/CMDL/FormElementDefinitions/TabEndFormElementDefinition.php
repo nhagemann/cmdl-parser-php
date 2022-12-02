@@ -7,4 +7,4 @@ use CMDL\FormElementDefinition;
 class TabEndFormElementDefinition extends FormElementDefinition
 {
     protected $elementType = 'tab-end';
-}
+}//end class

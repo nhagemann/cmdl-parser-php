@@ -8,10 +8,10 @@ use CMDL\Parser;
 use CMDL\Util;
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
+use PHPUnit\Framework\TestCase;
 
-class FormElementsSelectionAndReferencesTest extends \PHPUnit_Framework_TestCase
+class FormElementsSelectionAndReferencesTest extends TestCase
 {
-
     public function testSelectionsAndReferencesDefinition()
     {
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = selection (1:a,2:b,3:c)');
@@ -66,12 +66,14 @@ class FormElementsSelectionAndReferencesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('news', $formElementDefinition->getContentType());
         $this->assertEquals('live', $formElementDefinition->getWorkspace());
         $this->assertEquals('date', $formElementDefinition->getOrder());
-    }
+    }//end testSelectionsAndReferencesDefinition()
 
 
     public function testRepositoryReference()
     {
-        /** @var ReferenceFormElementDefinition $formElementDefinition */
+        /*
+         * @var ReferenceFormElementDefinition $formElementDefinition
+         */
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = reference news');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\ReferenceFormElementDefinition', $formElementDefinition);
         $this->assertEquals('dropdown', $formElementDefinition->getType());
@@ -80,7 +82,9 @@ class FormElementsSelectionAndReferencesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('name', $formElementDefinition->getOrder());
         $this->assertFalse($formElementDefinition->hasRepositoryName());
 
-        /** @var ReferenceFormElementDefinition $formElementDefinition */
+        /*
+         * @var ReferenceFormElementDefinition $formElementDefinition
+         */
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = reference a.news');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\ReferenceFormElementDefinition', $formElementDefinition);
         $this->assertEquals('dropdown', $formElementDefinition->getType());
@@ -89,7 +93,9 @@ class FormElementsSelectionAndReferencesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('name', $formElementDefinition->getOrder());
         $this->assertTrue($formElementDefinition->hasRepositoryName());
 
-        /** @var MultiReferenceFormElementDefinition $formElementDefinition */
+        /*
+         * @var MultiReferenceFormElementDefinition $formElementDefinition
+         */
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = multireference news');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition', $formElementDefinition);
         $this->assertEquals('list', $formElementDefinition->getType());
@@ -98,7 +104,9 @@ class FormElementsSelectionAndReferencesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('name', $formElementDefinition->getOrder());
         $this->assertFalse($formElementDefinition->hasRepositoryName());
 
-        /** @var MultiReferenceFormElementDefinition $formElementDefinition */
+        /*
+         * @var MultiReferenceFormElementDefinition $formElementDefinition
+         */
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = multireference a.news');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition', $formElementDefinition);
         $this->assertEquals('list', $formElementDefinition->getType());
@@ -106,6 +114,5 @@ class FormElementsSelectionAndReferencesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('default', $formElementDefinition->getWorkspace());
         $this->assertEquals('name', $formElementDefinition->getOrder());
         $this->assertTrue($formElementDefinition->hasRepositoryName());
-    }
-
-}
+    }//end testRepositoryReference()
+}//end class

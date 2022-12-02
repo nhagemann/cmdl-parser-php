@@ -7,65 +7,57 @@ use CMDL\CMDLParserException;
 
 class ColorFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'color';
 
     protected $selectionType = 'free';
 
-    protected $options = array();
+    protected $options = [];
 
     protected $maxValueLength = 6;
 
 
-    public function __construct($name, $params = array(), $lists = array())
+    public function __construct($name, $params = [], $lists = [])
     {
-        if (isset($params[0]))
-        {
+        if (isset($params[0])) {
             $this->setSelectionType($params[0]);
         }
-        if (isset($lists[0]))
-        {
+
+        if (isset($lists[0])) {
             $this->setOptions($lists[0]);
         }
+
         parent::__construct($name, $params, $lists);
-    }
+    }//end __construct()
 
 
     public function setSelectionType($selectionType)
     {
-        if (in_array($selectionType, array( 'free','fixed' )))
-        {
+        if (in_array($selectionType, [ 'free', 'fixed' ])) {
             $this->selectionType = $selectionType;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "selectionType" of form element ' . $this->elementType . ' must be one of free, fixed.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setSelectionType()
 
 
     public function getSelectionType()
     {
         return $this->selectionType;
-    }
+    }//end getSelectionType()
 
 
     public function setOptions($options)
     {
-        if (is_array($options))
-        {
+        if (is_array($options)) {
             $this->options = $options;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "options" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setOptions()
 
 
     public function getOptions()
     {
         return $this->options;
-    }
-
-}
+    }//end getOptions()
+}//end class

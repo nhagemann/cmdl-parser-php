@@ -2,10 +2,8 @@
 
 namespace CMDL;
 
-
 class ContentTypeDefinition extends DataTypeDefinition
 {
-
     protected $subtypes = null;
 
     protected $statusList = null;
@@ -61,17 +59,20 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     public function setSortable($sortable)
     {
-        if (!in_array($sortable, array('list', 'tree'))) {
-            throw new CMDLParserException('Invalid sortables setting ("' . $sortable . '") for content type ' . rtrim(' ' . $this->getName()) . '. Must be one of list,tree.',
-                CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+        if (!in_array($sortable, ['list', 'tree'])) {
+            throw new CMDLParserException(
+                'Invalid sortables setting ("' . $sortable . '") for content type ' . rtrim(' ' . $this->getName()) . '. Must be one of list,tree.',
+                CMDLParserException::CMDL_INVALID_OPTION_VALUE
+            );
         }
+
         $this->sortable = $sortable;
     }
 
 
     public function isSortable()
     {
-        return (boolean)$this->sortable;
+        return (bool) $this->sortable;
     }
 
 
@@ -94,7 +95,7 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     public function hasNamingPattern()
     {
-        return (boolean)$this->namingPattern;
+        return (bool) $this->namingPattern;
     }
 
 
@@ -108,5 +109,4 @@ class ContentTypeDefinition extends DataTypeDefinition
     {
         $this->namingPattern = $namingPattern;
     }
-
 }

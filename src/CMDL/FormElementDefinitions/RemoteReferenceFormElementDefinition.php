@@ -6,7 +6,6 @@ use CMDL\FormElementDefinition;
 
 class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinition
 {
-
     protected $type = 'dropdown';
 
     protected $elementType = 'remote-reference';
@@ -24,51 +23,49 @@ class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinitio
     protected $timeshift = 0;
 
 
-    public function __construct($name = null, $params = array(), $lists = array())
+    public function __construct($name = null, $params = [], $lists = [])
     {
-        if (isset($params[0]))
-        {
+        if (isset($params[0])) {
             $this->setUrl($params[0]);
         }
-        if (isset($params[1]))
-        {
+
+        if (isset($params[1])) {
             $this->setContentType($params[1]);
         }
-        if (isset($params[2]))
-        {
+
+        if (isset($params[2])) {
             $this->setType($params[2]);
         }
-        if (isset($params[3]))
-        {
+
+        if (isset($params[3])) {
             $this->setWorkspace($params[3]);
         }
-        if (isset($params[4]))
-        {
+
+        if (isset($params[4])) {
             $this->setOrder($params[4]);
         }
-        if (isset($params[5]))
-        {
+
+        if (isset($params[5])) {
             $this->setLanguage($params[5]);
         }
-        if (isset($params[6]))
-        {
+
+        if (isset($params[6])) {
             $this->setTimeshift($params[6]);
         }
 
         // skip constructor of form element reference, since it has less parameters and therefore a slightly different parameter order
         FormElementDefinition::__construct($name, $params, $lists);
-    }
+    }//end __construct()
 
 
     public function setUrl($url)
     {
         $this->url = $url;
-    }
+    }//end setUrl()
 
 
     public function getUrl()
     {
         return $this->url;
-    }
-
-}
+    }//end getUrl()
+}//end class

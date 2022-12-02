@@ -2,10 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-
 class RemoteFileFormElementDefinition extends FileFormElementDefinition
 {
-
     protected $elementType = 'remote-file';
 
     protected $repositoryUrl = null;
@@ -14,12 +12,11 @@ class RemoteFileFormElementDefinition extends FileFormElementDefinition
     public function setRepositoryUrl($repositoryUrl)
     {
         $this->repositoryUrl = $repositoryUrl;
-    }
+    }//end setRepositoryUrl()
 
 
     public function getRepositoryUrl()
     {
         return $this->repositoryUrl;
-    }
-
-}
+    }//end getRepositoryUrl()
+}//end class

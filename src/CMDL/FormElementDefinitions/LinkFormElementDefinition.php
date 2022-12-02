@@ -6,7 +6,5 @@ use CMDL\FormElementDefinition;
 
 class LinkFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'link';
-
-}
+}//end class

@@ -7,7 +7,6 @@ use CMDL\CMDLParserException;
 
 class NumberFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'number';
 
     protected $digits = 0;
@@ -18,33 +17,28 @@ class NumberFormElementDefinition extends FormElementDefinition
     public function setDigits($digits)
     {
 
-        if (is_numeric($digits))
-        {
+        if (is_numeric($digits)) {
             $this->digits = $digits;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "digits" of form element ' . $this->elementType . ' must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-
-    }
+    }//end setDigits()
 
 
     public function getDigits()
     {
         return $this->digits;
-    }
+    }//end getDigits()
 
 
     public function setUnit($unit)
     {
         $this->unit = $unit;
-    }
+    }//end setUnit()
 
 
     public function getUnit()
     {
         return $this->unit;
-    }
-
-}
+    }//end getUnit()
+}//end class

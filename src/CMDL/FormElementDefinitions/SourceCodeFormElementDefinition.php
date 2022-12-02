@@ -6,7 +6,6 @@ use CMDL\CMDLParserException;
 
 class SourceCodeFormElementDefinition extends TextareaFormElementDefinition
 {
-
     protected $elementType = 'sourcecode';
 
     protected $size = 'L';
@@ -18,36 +17,34 @@ class SourceCodeFormElementDefinition extends TextareaFormElementDefinition
     protected $type = null;
 
 
-    public function __construct($name, $params = array(), $lists = array())
+    public function __construct($name, $params = [], $lists = [])
     {
-        if (!isset($params[0]))
-        {
+        if (!isset($params[0])) {
             throw new CMDLParserException('Missing mandatory parameter type for form element sourcecode.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
+
         $this->setType($params[0]);
 
-        if (isset($params[1]))
-        {
+        if (isset($params[1])) {
             $this->setRows($params[1]);
         }
-        if (isset($params[2]))
-        {
+
+        if (isset($params[2])) {
             $this->setSize($params[2]);
         }
 
         parent::__construct($name, $params, $lists);
-    }
+    }//end __construct()
 
 
     public function setType($type)
     {
         $this->type = strtolower($type);
-    }
+    }//end setType()
 
 
     public function getType()
     {
         return $this->type;
-    }
-
-}
+    }//end getType()
+}//end class

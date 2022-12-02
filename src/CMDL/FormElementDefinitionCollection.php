@@ -6,22 +6,24 @@ use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 
 class FormElementDefinitionCollection
 {
-
     protected $name;
 
     /**
      * @var FormElementDefinition[]
      */
-    protected $fields = array();
+    protected $fields = [];
 
-    protected $namedFields = array();
+    protected $namedFields = [];
 
     protected $properties = null;
+
     protected $mandatoryProperties = null;
+
     protected $uniqueProperties = null;
+
     protected $protectedProperties = null;
 
-    protected $hiddenProperties = array();
+    protected $hiddenProperties = [];
 
     protected $parentDataTypeDefinition = null;
 
@@ -30,19 +32,19 @@ class FormElementDefinitionCollection
     {
         $this->setName($name);
         $this->parentDataTypeDefinition = $parentDataTypeDefinition;
-    }
+    }//end __construct()
 
 
     public function setName($name)
     {
         $this->name = $name;
-    }
+    }//end setName()
 
 
     public function getName()
     {
         return $this->name;
-    }
+    }//end getName()
 
 
     public function addFormElementDefinition(FormElementDefinition $definition)
@@ -50,13 +52,14 @@ class FormElementDefinitionCollection
         if ($definition->getName() != '') {
             $this->namedFields[$definition->getName()] = $definition;
         }
+
         $this->fields[] = $definition;
 
         $this->properties          = null;
         $this->mandatoryProperties = null;
         $this->uniqueProperties    = null;
         $this->protectedProperties = null;
-    }
+    }//end addFormElementDefinition()
 
 
     /**
@@ -71,9 +74,11 @@ class FormElementDefinitionCollection
             return $this->namedFields[$name];
         }
 
-        throw new CMDLParserException('Could not find a formelement named ' . $name,
-            CMDLParserException::CMDL_FORMELEMENT_NOT_FOUND);
-    }
+        throw new CMDLParserException(
+            'Could not find a formelement named ' . $name,
+            CMDLParserException::CMDL_FORMELEMENT_NOT_FOUND
+        );
+    }//end getFormElementDefinition()
 
 
     /**
@@ -82,7 +87,7 @@ class FormElementDefinitionCollection
     public function getFormElementDefinitions()
     {
         return $this->fields;
-    }
+    }//end getFormElementDefinitions()
 
 
     public function getProperties()
@@ -90,10 +95,11 @@ class FormElementDefinitionCollection
         if ($this->properties) {
             return $this->properties;
         }
+
         $properties          = $this->getHiddenProperties();
-        $mandatoryProperties = array();
-        $uniqueProperties    = array();
-        $protectedProperties = array();
+        $mandatoryProperties = [];
+        $uniqueProperties    = [];
+        $protectedProperties = [];
 
         foreach ($this->fields as $formElementDefinition) {
             if ($formElementDefinition->getName()) {
@@ -101,27 +107,24 @@ class FormElementDefinitionCollection
                 if ($formElementDefinition->isMandatory()) {
                     $mandatoryProperties[] = $formElementDefinition->getName();
                 }
+
                 if ($formElementDefinition->isUnique()) {
                     $uniqueProperties[] = $formElementDefinition->getName();
                 }
+
                 if ($formElementDefinition->isProtected()) {
                     $protectedProperties[] = $formElementDefinition->getName();
                 }
-
             }
         }
 
         if ($this->parentDataTypeDefinition) {
-
             $clippings = $this->getNamesOfEventuallyInsertedClippings();
             foreach ($clippings as $clippingName) {
-
                 $clippingDefinition = $this->parentDataTypeDefinition->getClippingDefinition($clippingName);
 
                 $properties = array_merge($properties, $clippingDefinition->getProperties());
-
             }
-
         }
 
         $this->properties          = $properties;
@@ -130,7 +133,7 @@ class FormElementDefinitionCollection
         $this->protectedProperties = $protectedProperties;
 
         return $this->properties;
-    }
+    }//end getProperties()
 
 
     public function getMandatoryProperties()
@@ -140,7 +143,7 @@ class FormElementDefinitionCollection
         }
 
         return $this->mandatoryProperties;
-    }
+    }//end getMandatoryProperties()
 
 
     public function getUniqueProperties()
@@ -150,7 +153,7 @@ class FormElementDefinitionCollection
         }
 
         return $this->uniqueProperties;
-    }
+    }//end getUniqueProperties()
 
 
     public function getProtectedProperties()
@@ -160,7 +163,7 @@ class FormElementDefinitionCollection
         }
 
         return $this->protectedProperties;
-    }
+    }//end getProtectedProperties()
 
 
     public function hasProperty($property)
@@ -170,40 +173,39 @@ class FormElementDefinitionCollection
         }
 
         return false;
-    }
+    }//end hasProperty()
 
 
     public function setHiddenProperties($hiddenProperties)
     {
         $this->hiddenProperties = $hiddenProperties;
-    }
+    }//end setHiddenProperties()
 
 
     public function getHiddenProperties()
     {
         return $this->hiddenProperties;
-    }
+    }//end getHiddenProperties()
 
 
     public function getNamesOfEventuallyInsertedClippings()
     {
 
-        $clippingNames = array();
+        $clippingNames = [];
         foreach ($this->getFormElementDefinitions() as $formElementDefinition) {
             if ($formElementDefinition->getFormElementType() == 'insert') {
-                /* @var $formElementDefinition InsertFormElementDefinition */
-
+                // @var $formElementDefinition InsertFormElementDefinition
                 if ($formElementDefinition->getPropertyName() == '') {
                     $clippingNames[] = $formElementDefinition->getClippingName();
                 } else {
-                    $clippingNames = array_merge($clippingNames,
-                        array_values($formElementDefinition->getInsertConditions()));
+                    $clippingNames = array_merge(
+                        $clippingNames,
+                        array_values($formElementDefinition->getInsertConditions())
+                    );
                 }
             }
-
         }
 
         return $clippingNames;
-    }
-
-}
+    }//end getNamesOfEventuallyInsertedClippings()
+}//end class

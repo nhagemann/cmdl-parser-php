@@ -6,25 +6,28 @@ use CMDL\Annotations\CustomAnnotation;
 
 class DataTypeDefinition
 {
-
     protected $name = null;
+
     protected $title = null;
+
     protected $description = null;
 
-    protected $languages = array('default' => 'Default');
+    protected $languages = ['default' => 'Default'];
 
-    protected $workspaces = array('default' => 'Default');
+    protected $workspaces = ['default' => 'Default'];
 
     protected $timeShiftable = false;
 
     protected $cmdl = null;
-    protected $views = array();
-    protected $clippings = array();
+
+    protected $views = [];
+
+    protected $clippings = [];
 
     /**
      * @var array CustomAnnotation
      */
-    protected $customAnnotations = array();
+    protected $customAnnotations = [];
 
 
     public function __construct($name = null)
@@ -93,8 +96,10 @@ class DataTypeDefinition
             return $this->views[$name];
         }
 
-        throw new CMDLParserException('Data type' . rtrim(' ' . $this->getName()) . ' has no view "' . $name . '"',
-            CMDLParserException::CMDL_VIEW_NOT_DEFINED);
+        throw new CMDLParserException(
+            'Data type' . rtrim(' ' . $this->getName()) . ' has no view "' . $name . '"',
+            CMDLParserException::CMDL_VIEW_NOT_DEFINED
+        );
     }
 
 
@@ -206,8 +211,10 @@ class DataTypeDefinition
             return $this->clippings[$name];
         }
 
-        throw new CMDLParserException('Clipping ' . $name . ' not defined.',
-            CMDLParserException::CMDL_CLIPPING_NOT_DEFINED);
+        throw new CMDLParserException(
+            'Clipping ' . $name . ' not defined.',
+            CMDLParserException::CMDL_CLIPPING_NOT_DEFINED
+        );
     }
 
 
@@ -215,7 +222,6 @@ class DataTypeDefinition
     {
         $this->clippings[$definition->getName()] = $definition;
     }
-
 
     public function hasClippingDefinition($name)
     {
@@ -235,14 +241,13 @@ class DataTypeDefinition
         } else {
             return in_array($property, $this->getProperties());
         }
-
     }
 
 
     public function getProperties($viewName = null)
     {
 
-        $inserts = array();
+        $inserts = [];
 
         if ($viewName) {
             $viewDefinition = $this->getViewDefinition($viewName);
@@ -251,22 +256,19 @@ class DataTypeDefinition
 
             $inserts = $viewDefinition->getNamesOfEventuallyInsertedClippings();
         } else {
-            $properties = array();
+            $properties = [];
             foreach ($this->views as $viewDefinition) {
                 $properties = array_merge($properties, $viewDefinition->getProperties());
                 $inserts    = array_merge($inserts, $viewDefinition->getNamesOfEventuallyInsertedClippings());
             }
-
         }
 
         $inserts = array_unique($inserts);
 
         foreach ($inserts as $clippingName) {
-
             $clippingDefinition = $this->getClippingDefinition($clippingName);
 
             $properties = array_merge($properties, $clippingDefinition->getProperties());
-
         }
 
         $properties = array_unique($properties);
@@ -281,8 +283,7 @@ class DataTypeDefinition
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getMandatoryProperties();
-
-    }
+    }//end getMandatoryProperties()
 
 
     public function getUniqueProperties($viewName)
@@ -291,7 +292,6 @@ class DataTypeDefinition
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getUniqueProperties();
-
     }
 
 
@@ -301,7 +301,6 @@ class DataTypeDefinition
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getProtectedProperties();
-
     }
 
 
@@ -399,5 +398,4 @@ class DataTypeDefinition
     {
         return $this->timeShiftable;
     }
-
 }

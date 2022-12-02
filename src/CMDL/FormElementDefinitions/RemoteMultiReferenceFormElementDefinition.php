@@ -6,7 +6,6 @@ use CMDL\CMDLParserException;
 
 class RemoteMultiReferenceFormElementDefinition extends RemoteReferenceFormElementDefinition
 {
-
     protected $elementType = 'multireference';
 
     protected $type = 'list';
@@ -19,16 +18,13 @@ class RemoteMultiReferenceFormElementDefinition extends RemoteReferenceFormEleme
 
     protected $maxValueLength = 256;
 
+
     public function setType($type)
     {
-        if (in_array($type, array( 'list', 'checkbox' )))
-        {
+        if (in_array($type, [ 'list', 'checkbox' ])) {
             $this->type = $type;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of list, checkbox.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
-
-}
+    }//end setType()
+}//end class

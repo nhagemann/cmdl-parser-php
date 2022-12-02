@@ -7,15 +7,13 @@ use CMDL\CMDLParserException;
 
 class DataTypeSortableAnnotation extends Annotation
 {
-
     protected $annotationType = 'sortable';
+
 
     public function apply()
     {
-        if ($this->hasParam(1))
-        {
-            switch ($this->getParam(1))
-            {
+        if ($this->hasParam(1)) {
+            switch ($this->getParam(1)) {
                 case 'not':
                     $this->dataTypeDefinition->setSortable(false);
                     break;
@@ -30,14 +28,10 @@ class DataTypeSortableAnnotation extends Annotation
                     throw  new CMDLParserException('Parameter "type" of annotation ' . $this->annotationType . ' must be one of not,list,tree, related.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
                     break;
             }
-
-        }
-        else
-        {
+        } else {
             $this->dataTypeDefinition->setSortable('list');
         }
 
         return $this->dataTypeDefinition;
     }
-
 }

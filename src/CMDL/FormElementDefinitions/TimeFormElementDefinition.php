@@ -7,7 +7,6 @@ use CMDL\CMDLParserException;
 
 class TimeFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'time';
 
     protected $type = 'short';
@@ -19,39 +18,32 @@ class TimeFormElementDefinition extends FormElementDefinition
 
     public function setType($type)
     {
-        if (in_array($type, array( 'short', 'long' )))
-        {
+        if (in_array($type, [ 'short', 'long' ])) {
             $this->type = $type;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of short, long', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setType()
 
 
     public function getType()
     {
         return $this->type;
-    }
+    }//end getType()
 
 
     public function setInit($init)
     {
-        if (in_array($init, array( 'now' )))
-        {
+        if (in_array($init, [ 'now' ])) {
             $this->init = $init;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be "now" or skipped.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setInit()
 
 
     public function getInit()
     {
         return $this->init;
-    }
-
-}
+    }//end getInit()
+}//end class

@@ -6,7 +6,6 @@ use CMDL\FormElementDefinition;
 
 class PrintFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'print';
 
 
@@ -23,5 +22,4 @@ class PrintFormElementDefinition extends FormElementDefinition
 
 
     protected $display = null;
-
 }

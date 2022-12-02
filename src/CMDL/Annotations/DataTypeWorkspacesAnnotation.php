@@ -7,15 +7,13 @@ use CMDL\CMDLParserException;
 
 class DataTypeWorkspacesAnnotation extends Annotation
 {
-
     protected $annotationType = 'workspaces';
 
 
     public function apply()
     {
 
-        if (!$this->hasList(1))
-        {
+        if (!$this->hasList(1)) {
             throw new CMDLParserException('Missing mandatory list for annotation @workspaces.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
@@ -23,5 +21,4 @@ class DataTypeWorkspacesAnnotation extends Annotation
 
         return $this->dataTypeDefinition;
     }
-
 }

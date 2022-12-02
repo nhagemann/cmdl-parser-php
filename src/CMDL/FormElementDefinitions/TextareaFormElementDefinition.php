@@ -1,34 +1,32 @@
 <?php
+
 namespace CMDL\FormElementDefinitions;
 
 use CMDL\CMDLParserException;
 
 class TextareaFormElementDefinition extends TextfieldFormElementDefinition
 {
-
     protected $elementType = 'textarea';
 
     protected $size = 'L';
+
     protected $rows = 10;
 
     protected $maxValueLength = 256;
 
+
     public function setRows($rows)
     {
-        if (is_numeric($rows))
-        {
+        if (is_numeric($rows)) {
             $this->rows = $rows;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "rows" of form element ' . $this->elementType . ' must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setRows()
 
 
     public function getRows()
     {
         return $this->rows;
-    }
-
-}
+    }//end getRows()
+}//end class

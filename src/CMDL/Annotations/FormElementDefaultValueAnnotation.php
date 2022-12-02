@@ -7,25 +7,21 @@ use CMDL\CMDLParserException;
 
 class FormElementDefaultValueAnnotation extends Annotation
 {
-
     protected $annotationType = 'default-value';
 
 
     public function apply()
     {
 
-        if (!$this->hasParam(1))
-        {
+        if (!$this->hasParam(1)) {
             throw new CMDLParserException('Missing mandatory parameter property for annotation @default-value.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        if (!$this->hasParam(2))
-        {
+        if (!$this->hasParam(2)) {
             throw new CMDLParserException('Missing mandatory parameter value for annotation @default-value.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
 
-        if (!$this->dataTypeDefinition->hasProperty($this->getParam(1)))
-        {
+        if (!$this->dataTypeDefinition->hasProperty($this->getParam(1))) {
             throw new CMDLParserException('Unknown property ' . $this->getParam(1) . ' within annotation @default-value.', CMDLParserException::CMDL_UNKNOWN_PROPERTY);
         }
 
@@ -34,5 +30,4 @@ class FormElementDefaultValueAnnotation extends Annotation
 
         return $this->dataTypeDefinition;
     }
-
 }

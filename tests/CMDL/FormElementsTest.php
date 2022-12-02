@@ -6,13 +6,13 @@ use CMDL\Parser;
 use CMDL\Util;
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
+use PHPUnit\Framework\TestCase;
 
-class FormElementsTest extends \PHPUnit_Framework_TestCase
+class FormElementsTest extends TestCase
 {
-
     public function testTextfieldDefinition()
     {
-        /* @var TextfieldFormElementDefinition */
+        // @var TextfieldFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('Title');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElementDefinition);
 
@@ -22,7 +22,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
 
-        /* @var TextfieldFormElementDefinition */
+        // @var TextfieldFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('Überschrift = textfield* XL');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElementDefinition);
 
@@ -32,7 +32,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
 
-        /* @var TextfieldFormElementDefinition */
+        // @var TextfieldFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('Überschrift = textfield*! XL {headline}');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElementDefinition);
 
@@ -41,20 +41,20 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('XL', $formElementDefinition->getSize());
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertTrue($formElementDefinition->isUnique());
-    }
+    }//end testTextfieldDefinition()
 
 
     public function testLinkDefinition()
     {
-        /* @var LinkFormElementDefinition */
+        // @var LinkFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('URL = link');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\LinkFormElementDefinition', $formElementDefinition);
-    }
+    }//end testLinkDefinition()
 
 
     public function testTextareaDefinition()
     {
-        /* @var TextareaFormElementDefinition */
+        // @var TextareaFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('Abstract = textarea* 15 L {text1}');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextareaFormElementDefinition', $formElementDefinition);
         $this->assertEquals('Abstract', $formElementDefinition->getLabel());
@@ -63,7 +63,7 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('L', $formElementDefinition->getSize());
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
-    }
+    }//end testTextareaDefinition()
 
 
     public function testTextareaDescendantsDefinition()
@@ -83,37 +83,37 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $formElementDefinition = Parser::parseFormElementDefinition('Template = sourcecode html 15 L {text1}');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\SourceCodeFormElementDefinition', $formElementDefinition);
         $this->assertEquals('html', $formElementDefinition->getType());
-    }
+    }//end testTextareaDescendantsDefinition()
 
 
     public function testColorDefinition()
     {
-        /* @var ColorFormElementDefinition */
+        // @var ColorFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('background = color (white:fff, black:000)');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\ColorFormElementDefinition', $formElementDefinition);
-    }
+    }//end testColorDefinition()
 
 
     public function testRangeDefinition()
     {
-        /* @var RangeFormElementDefinition */
+        // @var RangeFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('temperature = range 18 30 0.5');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RangeFormElementDefinition', $formElementDefinition);
-    }
+    }//end testRangeDefinition()
 
 
     public function testDateTimeDefinition()
     {
-        /* @var TimestampFormElementDefinition */
+        // @var TimestampFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('start = timestamp');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TimestampFormElementDefinition', $formElementDefinition);
-        /* @var DateFormElementDefinition */
+        // @var DateFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('start = date');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\DateFormElementDefinition', $formElementDefinition);
-        /* @var TimeFormElementDefinition */
+        // @var TimeFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('start = time');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TimeFormElementDefinition', $formElementDefinition);
-    }
+    }//end testDateTimeDefinition()
 
 
     public function testCustomFormElementDefinition()
@@ -124,16 +124,15 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('video', $formElementDefinition->getType());
         $this->assertEquals('youtube', $formElementDefinition->getParam(1));
         $this->assertCount(3, $formElementDefinition->getList(1));
-
-    }
+    }//end testCustomFormElementDefinition()
 
 
     public function testPrintFormElementDefinition()
     {
-        /* @var ContentTypeDefinition */
+        // @var ContentTypeDefinition
         $contentTypeDefinition = Parser::parseCMDLString('> Hello world!');
 
-        /* @var ViewDefinition */
+        // @var ViewDefinition
         $viewDefinition = $contentTypeDefinition->getViewDefinition('default');
 
         $formElements = $viewDefinition->getFormElementDefinitions();
@@ -143,6 +142,5 @@ class FormElementsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\PrintFormElementDefinition', $formElementDefinition);
 
         $this->assertEquals('Hello world!', $formElementDefinition->getDisplay());
-
-    }
-}
+    }//end testPrintFormElementDefinition()
+}//end class

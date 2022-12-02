@@ -3,7 +3,6 @@
 namespace CMDL;
 
 use CMDL\Annotations\ContentTypeNameAnnotation;
-
 use CMDL\FormElementDefinitions\PrintFormElementDefinition;
 use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
 use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
@@ -11,7 +10,6 @@ use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
 use CMDL\FormElementDefinitions\TabStartFormElementDefinition;
 use CMDL\FormElementDefinitions\TabNextFormElementDefinition;
 use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
-
 use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
 use CMDL\FormElementDefinitions\LinkFormElementDefinition;
 use CMDL\FormElementDefinitions\EmailFormElementDefinition;
@@ -21,41 +19,30 @@ use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
 use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
 use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
 use CMDL\FormElementDefinitions\SourceCodeFormElementDefinition;
-
 use CMDL\FormElementDefinitions\PasswordFormElementDefinition;
-
 use CMDL\FormElementDefinitions\NumberFormElementDefinition;
 use CMDL\FormElementDefinitions\RangeFormElementDefinition;
-
 use CMDL\FormElementDefinitions\CheckboxFormElementDefinition;
 use CMDL\FormElementDefinitions\SelectionFormElementDefinition;
 use CMDL\FormElementDefinitions\MultiSelectionFormElementDefinition;
 use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
 use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
-
 use CMDL\FormElementDefinitions\RemoteSelectionFormElementDefinition;
 use CMDL\FormElementDefinitions\RemoteMultiSelectionFormElementDefinition;
 use CMDL\FormElementDefinitions\RemoteReferenceFormElementDefinition;
 use CMDL\FormElementDefinitions\RemoteMultiReferenceFormElementDefinition;
-
 use CMDL\FormElementDefinitions\TimestampFormElementDefinition;
 use CMDL\FormElementDefinitions\DateFormElementDefinition;
 use CMDL\FormElementDefinitions\TimeFormElementDefinition;
-
 use CMDL\FormElementDefinitions\FileFormElementDefinition;
 use CMDL\FormElementDefinitions\ImageFormElementDefinition;
-
 use CMDL\FormElementDefinitions\RemoteFileFormElementDefinition;
 use CMDL\FormElementDefinitions\RemoteImageFormElementDefinition;
-
 use CMDL\FormElementDefinitions\TableFormElementDefinition;
 use CMDL\FormElementDefinitions\ColorFormElementDefinition;
 use CMDL\FormElementDefinitions\GeolocationFormElementDefinition;
-
 use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
-
 use CMDL\FormElementDefinitions\CustomFormElementDefinition;
-
 use CMDL\Annotations\DataTypeTitleAnnotation;
 use CMDL\Annotations\DataTypeDescriptionAnnotation;
 use CMDL\Annotations\DataTypeLanguagesAnnotation;
@@ -64,28 +51,22 @@ use CMDL\Annotations\ContentTypeSubtypesAnnotation;
 use CMDL\Annotations\DataTypeWorkspacesAnnotation;
 use CMDL\Annotations\DataTypeSortableAnnotation;
 use CMDL\Annotations\DataTypeTimeShiftableAnnotation;
-
 use CMDL\Annotations\FormElementDefaultValueAnnotation;
-
 use CMDL\Annotations\FormElementHelpAnnotation;
 use CMDL\Annotations\FormElementHintAnnotation;
 use CMDL\Annotations\FormElementInfoAnnotation;
 use CMDL\Annotations\FormElementPlaceholderAnnotation;
-
 use CMDL\Annotations\FormElementCollectionHiddenPropertiesAnnotation;
-
 use CMDL\Annotations\InsertAnnotation;
-
 use CMDL\Annotations\CustomAnnotation;
 
 class Parser
 {
-
     public static $superProperties = array('name', 'status', 'subtype', 'position', 'parent');
 
 
     /**
-     * @param        $filename
+     * @param $filename
      * @param null   $dataTypeName
      * @param null   $dataTypeTitle
      * @param string $dataType
@@ -99,7 +80,6 @@ class Parser
         if (realpath($filename)) {
             $s = file_get_contents($filename);
             if ($s) {
-
                 $dataTypeDefinition = self::parseCMDLString($s, $dataTypeName, $dataTypeTitle, $dataType);
 
                 return $dataTypeDefinition;
@@ -123,8 +103,10 @@ class Parser
                 $dataTypeDefinition = new DataTypeDefinition();
                 break;
             default:
-                throw new CMDLParserException('Unknown data type ' . $dataType . '. Must be one of content,config,data.',
-                    CMDLParserException::CMDL_UNKNOWN_DATATYPE);
+                throw new CMDLParserException(
+                    'Unknown data type ' . $dataType . '. Must be one of content,config,data.',
+                    CMDLParserException::CMDL_UNKNOWN_DATATYPE
+                );
                 break;
         }
 
@@ -139,14 +121,17 @@ class Parser
         $tabOpened       = false;
         $currentTabLabel = '';
 
-        foreach ($cmdl AS $line) {
+        foreach ($cmdl as $line) {
             $line = trim($line);
 
             if (isset($line[0])) {
                 switch ($line[0]) {
                     case '@': // annotation
-                        $dataTypeDefinition = self::parseAnnotation($dataTypeDefinition,
-                            $currentFormElementDefinitionCollection, $line);
+                        $dataTypeDefinition = self::parseAnnotation(
+                            $dataTypeDefinition,
+                            $currentFormElementDefinitionCollection,
+                            $line
+                        );
 
                         break;
                     case '#': // comment
@@ -155,9 +140,7 @@ class Parser
                     case '':
                         break;
                     case '=': // start of a view definition
-
-                        if ($tabOpened) // tab has not been closed
-                        {
+                        if ($tabOpened) { // tab has not been closed
                             self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
                             $tabOpened = false;
                         }
@@ -173,9 +156,7 @@ class Parser
                         }
                         break;
                     case '+': // start of an clipping definition
-
-                        if ($tabOpened) // tab has not been closed
-                        {
+                        if ($tabOpened) { // tab has not been closed
                             self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
                             $tabOpened = false;
                         }
@@ -185,15 +166,11 @@ class Parser
                         $dataTypeDefinition->addClippingDefinition($currentFormElementDefinitionCollection);
                         break;
                     case '[':
-
-                        if (substr($line, 0, 3) == '[[[') // it's a tab
-                        {
+                        if (substr($line, 0, 3) == '[[[') { // it's a tab
                             $currentTabLabel = rtrim(substr($line, 3), ']');
 
-                            if ($tabOpened === true) // There's already an open tab
-                            {
+                            if ($tabOpened === true) { // There's already an open tab
                                 $formElementDefinition = new TabNextFormElementDefinition();
-
                             } else {
                                 $formElementDefinition = new TabStartFormElementDefinition();
                             }
@@ -201,11 +178,8 @@ class Parser
                             $formElementDefinition->setLabel($currentTabLabel);
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                             $tabOpened = true;
-                        } elseif (substr($line, 0, 2) == '[[') // it's a section
-                        {
-
-                            if ($sectionOpened === true) // There's still an open section -> close it first
-                            {
+                        } elseif (substr($line, 0, 2) == '[[') { // it's a section
+                            if ($sectionOpened === true) { // There's still an open section -> close it first
                                 $formElementDefinition = new SectionEndFormElementDefinition();
                                 $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                             }
@@ -220,7 +194,6 @@ class Parser
                             $formElementDefinition->setLabel(rtrim(substr($line, 2), ']'));
                             $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                             $sectionOpened = true;
-
                         } else // it's a headline
                         {
                             $formElementDefinition = new HeadlineFormElementDefinition();
@@ -230,8 +203,7 @@ class Parser
 
                         break;
                     case ']':
-                        if (substr($line, 0, 3) == ']]]') // it's a tab
-                        {
+                        if (substr($line, 0, 3) == ']]]') { // it's a tab
                             self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
                             $tabOpened       = false;
                             $currentTabLabel = '';
@@ -253,13 +225,11 @@ class Parser
                         $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
                         break;
                     default:
-
                         $formElementDefinition = self::parseFormElementDefinition($line);
 
                         $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
 
                         break;
-
                 }
             }
         }
@@ -271,8 +241,7 @@ class Parser
             $dataTypeDefinition->setTitle($dataTypeTitle);
         }
 
-        if ($tabOpened) // tab has not been closed
-        {
+        if ($tabOpened) { // tab has not been closed
             self::closeTab($currentFormElementDefinitionCollection, $currentTabLabel);
         }
 
@@ -296,8 +265,7 @@ class Parser
 
         $p = strpos($line, '=');
 
-        if ($p) // There could be no additional definition
-        {
+        if ($p) { // There could be no additional definition
             $title      = trim(substr($line, 0, $p));
             $onTheRight = trim(substr($line, $p + 1));
         } else {
@@ -307,7 +275,6 @@ class Parser
 
         if ($name) {
             $name = $name[0];
-
         } else {
             $name = Util::generateValidIdentifier($title);
         }
@@ -323,21 +290,18 @@ class Parser
         if ($onTheRight != '') {
             $p = strpos($onTheRight, ' ');
 
-            if ($p) // type could be the only content of $onetheright (i.e. no parameters given)
-            {
+            if ($p) { // type could be the only content of $onetheright (i.e. no parameters given)
                 $typeWithQualifier = substr($onTheRight, 0, $p);
                 $onTheRight        = substr($onTheRight, $p + 1);
 
                 $lists  = Util::extractLists($onTheRight);
                 $params = Util::extractParams($onTheRight);
-
             } else {
                 $typeWithQualifier = $onTheRight;
             }
 
             $typeWithQualifier = Util::generateValidIdentifier($typeWithQualifier, '!*§-');
             $type              = Util::generateValidIdentifier($typeWithQualifier, '-');
-
         }
 
         switch ($type) {
@@ -535,8 +499,10 @@ class Parser
                 $formElementDefinition = new CustomFormElementDefinition($name, $params, $lists);
                 break;
             default:
-                throw new CMDLParserException('Unknown form element type ' . $type . '.',
-                    CMDLParserException::CMDL_UNKNOWN_FORMELEMENT_TYPE);
+                throw new CMDLParserException(
+                    'Unknown form element type ' . $type . '.',
+                    CMDLParserException::CMDL_UNKNOWN_FORMELEMENT_TYPE
+                );
 
                 break;
         }
@@ -576,82 +542,152 @@ class Parser
             $lists          = array();
             $params         = array();
             $numericalLists = array();
-
         }
 
         switch ($annotationName) {
             case 'title':
-                $annotation = new DataTypeTitleAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection,
-                    $params, $lists);
+                $annotation = new DataTypeTitleAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'description':
-                $annotation = new DataTypeDescriptionAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeDescriptionAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'name':
-                $annotation = new ContentTypeNameAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new ContentTypeNameAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'languages':
-                $annotation = new DataTypeLanguagesAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeLanguagesAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'status':
-                $annotation = new ContentTypeStatusAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new ContentTypeStatusAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'subtypes':
-                $annotation = new ContentTypeSubtypesAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new ContentTypeSubtypesAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'workspaces':
-                $annotation = new DataTypeWorkspacesAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeWorkspacesAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'sortable':
-                $annotation = new DataTypeSortableAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeSortableAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'time-shiftable':
-                $annotation = new DataTypeTimeShiftableAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new DataTypeTimeShiftableAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'default-value':
-                $annotation = new FormElementDefaultValueAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementDefaultValueAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'help':
-                $annotation = new FormElementHelpAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementHelpAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'hint':
-                $annotation = new FormElementHintAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementHintAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'info':
-                $annotation = new FormElementInfoAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementInfoAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'placeholder':
-                $annotation = new FormElementPlaceholderAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementPlaceholderAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'hidden-properties':
-                $annotation = new FormElementCollectionHiddenPropertiesAnnotation($dataTypeDefinition,
-                    $currentFormElementDefinitionCollection, $params, $lists);
+                $annotation = new FormElementCollectionHiddenPropertiesAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'insert':
-                $annotation = new InsertAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection,
-                    $params, $lists);
+                $annotation = new InsertAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists
+                );
                 break;
             case 'custom':
-                $annotation = new CustomAnnotation($dataTypeDefinition, $currentFormElementDefinitionCollection,
-                    $params, $lists, $numericalLists);
+                $annotation = new CustomAnnotation(
+                    $dataTypeDefinition,
+                    $currentFormElementDefinitionCollection,
+                    $params,
+                    $lists,
+                    $numericalLists
+                );
                 break;
 
             default:
-                throw new CMDLParserException('Unknown annotation ' . $annotationName . '.',
-                    CMDLParserException::CMDL_UNKNOWN_ANNOTATION);
+                throw new CMDLParserException(
+                    'Unknown annotation ' . $annotationName . '.',
+                    CMDLParserException::CMDL_UNKNOWN_ANNOTATION
+                );
                 break;
         }
 

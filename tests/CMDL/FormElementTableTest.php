@@ -7,15 +7,14 @@ use CMDL\CMDLParserException;
 use CMDL\ContentTypeDefinition;
 use CMDL\ViewDefinition;
 use CMDL\FormElementDefinition;
-
 use CMDL\FormElementDefinitions\TableFormElementDefinition;
+use PHPUnit\Framework\TestCase;
 
-class FormElementTableTest extends \PHPUnit_Framework_TestCase
+class FormElementTableTest extends TestCase
 {
-
     public function testParsing()
     {
-        /* @var TableFormElementDefinition $formElementDefinition */
+        // @var TableFormElementDefinition $formElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('Table = table (A,B)');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TableFormElementDefinition', $formElementDefinition);
 
@@ -23,15 +22,13 @@ class FormElementTableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('table', $formElementDefinition->getName());
         $this->assertFalse($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
-        $this->assertEquals(array( 1 => 'A', 2 => 'B' ), $formElementDefinition->getColumnHeadings());
-        $this->assertEquals(array(), $formElementDefinition->getWidths());
+        $this->assertEquals([ 1 => 'A', 2 => 'B' ], $formElementDefinition->getColumnHeadings());
+        $this->assertEquals([], $formElementDefinition->getWidths());
 
-        /* @var TableFormElementDefinition $formElementDefinition */
+        // @var TableFormElementDefinition $formElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('Table = table (A,B) (10,10,50)');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TableFormElementDefinition', $formElementDefinition);
-        $this->assertEquals(array( 1 => 'A', 2 => 'B' ), $formElementDefinition->getColumnHeadings());
-        $this->assertEquals(array( 1 => '10', 2 => '10', 3 => '50' ), $formElementDefinition->getWidths());
-
-    }
-
-}
+        $this->assertEquals([ 1 => 'A', 2 => 'B' ], $formElementDefinition->getColumnHeadings());
+        $this->assertEquals([ 1 => '10', 2 => '10', 3 => '50' ], $formElementDefinition->getWidths());
+    }//end testParsing()
+}//end class

@@ -2,10 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-
 class HTMLFormElementDefinition extends TextareaFormElementDefinition
 {
-
     protected $elementType = 'html';
 
     protected $size = 'L';
@@ -13,5 +11,4 @@ class HTMLFormElementDefinition extends TextareaFormElementDefinition
     protected $rows = 10;
 
     protected $maxValueLength = 256;
-
-}
+}//end class

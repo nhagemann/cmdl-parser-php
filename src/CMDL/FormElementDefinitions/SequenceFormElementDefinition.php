@@ -7,30 +7,25 @@ use CMDL\CMDLParserException;
 
 class SequenceFormElementDefinition extends FormElementDefinition
 {
-
     protected $elementType = 'sequence';
 
-    protected $inserts = array();
+    protected $inserts = [];
 
     protected $maxValueLength = 256;
 
 
     public function setInserts($inserts)
     {
-        if (is_array($inserts))
-        {
+        if (is_array($inserts)) {
             $this->inserts = $inserts;
-        }
-        else
-        {
+        } else {
             throw  new CMDLParserException('Parameter "inserts" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }
+    }//end setInserts()
 
 
     public function getInserts()
     {
         return $this->inserts;
-    }
-
-}
+    }//end getInserts()
+}//end class
