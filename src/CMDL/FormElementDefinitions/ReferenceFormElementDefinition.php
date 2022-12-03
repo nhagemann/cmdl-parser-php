@@ -62,7 +62,7 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setType($type)
@@ -72,25 +72,25 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
+    }
 
 
     public function setContentType($contentType)
     {
         $this->contentType = $contentType;
-    }//end setContentType()
+    }
 
 
     public function getContentType()
     {
         return $this->contentType;
-    }//end getContentType()
+    }
 
 
     /**
@@ -99,7 +99,7 @@ class ReferenceFormElementDefinition extends FormElementDefinition
     public function getRepositoryName()
     {
         return $this->repositoryName;
-    }//end getRepositoryName()
+    }
 
 
     /**
@@ -108,59 +108,59 @@ class ReferenceFormElementDefinition extends FormElementDefinition
     public function setRepositoryName($repositoryName)
     {
         $this->repositoryName = $repositoryName;
-    }//end setRepositoryName()
+    }
 
 
     public function hasRepositoryName()
     {
         return (bool) $this->repositoryName;
-    }//end hasRepositoryName()
+    }
 
 
     public function setOrder($order)
     {
         $this->order = $order;
-    }//end setOrder()
+    }
 
 
     public function getOrder()
     {
         return $this->order;
-    }//end getOrder()
+    }
 
 
     public function setWorkspace($workspace)
     {
         $this->workspace = $workspace;
-    }//end setWorkspace()
+    }
 
 
     public function getWorkspace()
     {
         return $this->workspace;
-    }//end getWorkspace()
+    }
 
 
     public function setTimeshift($timeshift)
     {
         $this->timeshift = $timeshift;
-    }//end setTimeshift()
+    }
 
 
     public function getTimeshift()
     {
         return $this->timeshift;
-    }//end getTimeshift()
+    }
 
 
     public function setLanguage($language)
     {
         $this->language = $language;
-    }//end setLanguage()
+    }
 
 
     public function getLanguage()
     {
         return $this->language;
-    }//end getLanguage()
-}//end class
+    }
+}

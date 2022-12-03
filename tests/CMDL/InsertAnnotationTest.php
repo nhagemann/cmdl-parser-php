@@ -63,7 +63,7 @@ class InsertAnnotationTest extends TestCase
         $this->assertTrue($viewDefinition->hasProperty('a'));
         $this->assertTrue($viewDefinition->hasProperty('d'));
         $this->assertTrue($viewDefinition->hasProperty('j'));
-    }//end testInsertAnnotation()
+    }
 
 
     public function testMultipleInserts()
@@ -116,7 +116,7 @@ class InsertAnnotationTest extends TestCase
 
         $this->assertContains('i1', $viewDefinition->getNamesOfEventuallyInsertedClippings());
         $this->assertContains('i2', $viewDefinition->getNamesOfEventuallyInsertedClippings());
-    }//end testMultipleInserts()
+    }
 
 
     public function testWorkspacesAndLanguagesRestrictions()
@@ -169,5 +169,5 @@ class InsertAnnotationTest extends TestCase
         $this->assertContains('default', $insertFormElement->getWorkspaces());
         $this->assertTrue($insertFormElement->hasWorkspacesRestriction());
         $this->assertFalse($insertFormElement->hasLanguagesRestriction());
-    }//end testWorkspacesAndLanguagesRestrictions()
-}//end class
+    }
+}

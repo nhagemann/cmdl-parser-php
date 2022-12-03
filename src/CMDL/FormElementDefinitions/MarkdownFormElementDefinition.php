@@ -13,4 +13,4 @@ class MarkdownFormElementDefinition extends TextareaFormElementDefinition
     protected $rows = 10;
 
     protected $maxValueLength = 256;
-}//end class
+}

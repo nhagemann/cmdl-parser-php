@@ -12,11 +12,11 @@ class RemoteImageFormElementDefinition extends ImageFormElementDefinition
     public function setRepositoryUrl($repositoryUrl)
     {
         $this->repositoryUrl = $repositoryUrl;
-    }//end setRepositoryUrl()
+    }
 
 
     public function getRepositoryUrl()
     {
         return $this->repositoryUrl;
-    }//end getRepositoryUrl()
-}//end class
+    }
+}

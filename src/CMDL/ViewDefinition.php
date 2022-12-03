@@ -11,5 +11,5 @@ class ViewDefinition extends FormElementDefinitionCollection
         $properties = array_unique(array_merge(Parser::$superProperties, $properties));
 
         return $properties;
-    }//end getProperties()
-}//end class
+    }
+}

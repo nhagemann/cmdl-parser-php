@@ -30,5 +30,5 @@ class FormElementTableTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TableFormElementDefinition', $formElementDefinition);
         $this->assertEquals([ 1 => 'A', 2 => 'B' ], $formElementDefinition->getColumnHeadings());
         $this->assertEquals([ 1 => '10', 2 => '10', 3 => '50' ], $formElementDefinition->getWidths());
-    }//end testParsing()
-}//end class
+    }
+}

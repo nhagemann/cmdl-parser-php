@@ -27,7 +27,7 @@ class ColorFormElementDefinition extends FormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setSelectionType($selectionType)
@@ -37,13 +37,13 @@ class ColorFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "selectionType" of form element ' . $this->elementType . ' must be one of free, fixed.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setSelectionType()
+    }
 
 
     public function getSelectionType()
     {
         return $this->selectionType;
-    }//end getSelectionType()
+    }
 
 
     public function setOptions($options)
@@ -53,11 +53,11 @@ class ColorFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "options" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setOptions()
+    }
 
 
     public function getOptions()
     {
         return $this->options;
-    }//end getOptions()
-}//end class
+    }
+}

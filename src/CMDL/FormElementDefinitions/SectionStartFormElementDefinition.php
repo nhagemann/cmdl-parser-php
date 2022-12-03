@@ -19,11 +19,11 @@ class SectionStartFormElementDefinition extends FormElementDefinition
         } else {
             throw new CMDLParserException('', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setOpened()
+    }
 
 
     public function getOpened()
     {
         return $this->opened;
-    }//end getOpened()
-}//end class
+    }
+}

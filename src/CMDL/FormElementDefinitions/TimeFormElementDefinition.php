@@ -23,13 +23,13 @@ class TimeFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of short, long', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
+    }
 
 
     public function setInit($init)
@@ -39,11 +39,11 @@ class TimeFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be "now" or skipped.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setInit()
+    }
 
 
     public function getInit()
     {
         return $this->init;
-    }//end getInit()
-}//end class
+    }
+}

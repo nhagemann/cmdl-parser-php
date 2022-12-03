@@ -20,17 +20,17 @@ class CustomFormElementDefinition extends FormElementDefinition
         $this->setType($type);
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setType($type)
     {
         $this->type = $type;
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
-}//end class
+    }
+}

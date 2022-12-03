@@ -20,5 +20,5 @@ class MultiSelectionFormElementDefinition extends SelectionFormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of list, checkbox.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setType()
-}//end class
+    }
+}

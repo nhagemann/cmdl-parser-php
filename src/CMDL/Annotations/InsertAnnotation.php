@@ -22,10 +22,10 @@ class InsertAnnotation extends Annotation
             $property = true;
             $formElementDefinition->setWorkspaces($this->getList(2));
             $formElementDefinition->setLanguages($this->getList(3));
-        } else if ($this->hasList(2)) {
+        } elseif ($this->hasList(2)) {
             $formElementDefinition->setWorkspaces($this->getList(1));
             $formElementDefinition->setLanguages($this->getList(2));
-        } else if ($this->hasList(1)) {
+        } elseif ($this->hasList(1)) {
             $property = true;
         }
 

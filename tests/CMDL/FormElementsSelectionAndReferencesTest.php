@@ -66,7 +66,7 @@ class FormElementsSelectionAndReferencesTest extends TestCase
         $this->assertEquals('news', $formElementDefinition->getContentType());
         $this->assertEquals('live', $formElementDefinition->getWorkspace());
         $this->assertEquals('date', $formElementDefinition->getOrder());
-    }//end testSelectionsAndReferencesDefinition()
+    }
 
 
     public function testRepositoryReference()
@@ -114,5 +114,5 @@ class FormElementsSelectionAndReferencesTest extends TestCase
         $this->assertEquals('default', $formElementDefinition->getWorkspace());
         $this->assertEquals('name', $formElementDefinition->getOrder());
         $this->assertTrue($formElementDefinition->hasRepositoryName());
-    }//end testRepositoryReference()
-}//end class
+    }
+}

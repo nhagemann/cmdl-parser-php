@@ -22,11 +22,11 @@ class TextareaFormElementDefinition extends TextfieldFormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "rows" of form element ' . $this->elementType . ' must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setRows()
+    }
 
 
     public function getRows()
     {
         return $this->rows;
-    }//end getRows()
-}//end class
+    }
+}

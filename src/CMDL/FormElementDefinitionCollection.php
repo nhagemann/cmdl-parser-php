@@ -32,19 +32,19 @@ class FormElementDefinitionCollection
     {
         $this->setName($name);
         $this->parentDataTypeDefinition = $parentDataTypeDefinition;
-    }//end __construct()
+    }
 
 
     public function setName($name)
     {
         $this->name = $name;
-    }//end setName()
+    }
 
 
     public function getName()
     {
         return $this->name;
-    }//end getName()
+    }
 
 
     public function addFormElementDefinition(FormElementDefinition $definition)
@@ -59,7 +59,7 @@ class FormElementDefinitionCollection
         $this->mandatoryProperties = null;
         $this->uniqueProperties    = null;
         $this->protectedProperties = null;
-    }//end addFormElementDefinition()
+    }
 
 
     /**
@@ -78,7 +78,7 @@ class FormElementDefinitionCollection
             'Could not find a formelement named ' . $name,
             CMDLParserException::CMDL_FORMELEMENT_NOT_FOUND
         );
-    }//end getFormElementDefinition()
+    }
 
 
     /**
@@ -87,7 +87,7 @@ class FormElementDefinitionCollection
     public function getFormElementDefinitions()
     {
         return $this->fields;
-    }//end getFormElementDefinitions()
+    }
 
 
     public function getProperties()
@@ -133,7 +133,7 @@ class FormElementDefinitionCollection
         $this->protectedProperties = $protectedProperties;
 
         return $this->properties;
-    }//end getProperties()
+    }
 
 
     public function getMandatoryProperties()
@@ -143,7 +143,7 @@ class FormElementDefinitionCollection
         }
 
         return $this->mandatoryProperties;
-    }//end getMandatoryProperties()
+    }
 
 
     public function getUniqueProperties()
@@ -153,7 +153,7 @@ class FormElementDefinitionCollection
         }
 
         return $this->uniqueProperties;
-    }//end getUniqueProperties()
+    }
 
 
     public function getProtectedProperties()
@@ -163,7 +163,7 @@ class FormElementDefinitionCollection
         }
 
         return $this->protectedProperties;
-    }//end getProtectedProperties()
+    }
 
 
     public function hasProperty($property)
@@ -173,19 +173,19 @@ class FormElementDefinitionCollection
         }
 
         return false;
-    }//end hasProperty()
+    }
 
 
     public function setHiddenProperties($hiddenProperties)
     {
         $this->hiddenProperties = $hiddenProperties;
-    }//end setHiddenProperties()
+    }
 
 
     public function getHiddenProperties()
     {
         return $this->hiddenProperties;
-    }//end getHiddenProperties()
+    }
 
 
     public function getNamesOfEventuallyInsertedClippings()
@@ -207,5 +207,5 @@ class FormElementDefinitionCollection
         }
 
         return $clippingNames;
-    }//end getNamesOfEventuallyInsertedClippings()
-}//end class
+    }
+}

@@ -41,7 +41,7 @@ class FormElementsTest extends TestCase
         $this->assertEquals('XL', $formElementDefinition->getSize());
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertTrue($formElementDefinition->isUnique());
-    }//end testTextfieldDefinition()
+    }
 
 
     public function testLinkDefinition()
@@ -49,7 +49,7 @@ class FormElementsTest extends TestCase
         // @var LinkFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('URL = link');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\LinkFormElementDefinition', $formElementDefinition);
-    }//end testLinkDefinition()
+    }
 
 
     public function testTextareaDefinition()
@@ -63,7 +63,7 @@ class FormElementsTest extends TestCase
         $this->assertEquals('L', $formElementDefinition->getSize());
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
-    }//end testTextareaDefinition()
+    }
 
 
     public function testTextareaDescendantsDefinition()
@@ -83,7 +83,7 @@ class FormElementsTest extends TestCase
         $formElementDefinition = Parser::parseFormElementDefinition('Template = sourcecode html 15 L {text1}');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\SourceCodeFormElementDefinition', $formElementDefinition);
         $this->assertEquals('html', $formElementDefinition->getType());
-    }//end testTextareaDescendantsDefinition()
+    }
 
 
     public function testColorDefinition()
@@ -91,7 +91,7 @@ class FormElementsTest extends TestCase
         // @var ColorFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('background = color (white:fff, black:000)');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\ColorFormElementDefinition', $formElementDefinition);
-    }//end testColorDefinition()
+    }
 
 
     public function testRangeDefinition()
@@ -99,7 +99,7 @@ class FormElementsTest extends TestCase
         // @var RangeFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('temperature = range 18 30 0.5');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RangeFormElementDefinition', $formElementDefinition);
-    }//end testRangeDefinition()
+    }
 
 
     public function testDateTimeDefinition()
@@ -113,7 +113,7 @@ class FormElementsTest extends TestCase
         // @var TimeFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('start = time');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TimeFormElementDefinition', $formElementDefinition);
-    }//end testDateTimeDefinition()
+    }
 
 
     public function testCustomFormElementDefinition()
@@ -124,7 +124,7 @@ class FormElementsTest extends TestCase
         $this->assertEquals('video', $formElementDefinition->getType());
         $this->assertEquals('youtube', $formElementDefinition->getParam(1));
         $this->assertCount(3, $formElementDefinition->getList(1));
-    }//end testCustomFormElementDefinition()
+    }
 
 
     public function testPrintFormElementDefinition()
@@ -142,5 +142,5 @@ class FormElementsTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\PrintFormElementDefinition', $formElementDefinition);
 
         $this->assertEquals('Hello world!', $formElementDefinition->getDisplay());
-    }//end testPrintFormElementDefinition()
-}//end class
+    }
+}

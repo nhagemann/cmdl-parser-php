@@ -22,23 +22,23 @@ class NumberFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "digits" of form element ' . $this->elementType . ' must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setDigits()
+    }
 
 
     public function getDigits()
     {
         return $this->digits;
-    }//end getDigits()
+    }
 
 
     public function setUnit($unit)
     {
         $this->unit = $unit;
-    }//end setUnit()
+    }
 
 
     public function getUnit()
     {
         return $this->unit;
-    }//end getUnit()
-}//end class
+    }
+}

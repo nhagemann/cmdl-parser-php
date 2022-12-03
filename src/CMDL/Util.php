@@ -92,7 +92,7 @@ class Util
         $patterns = "/[^" . $allowedchars . "]*/";
 
         return preg_replace($patterns, "", $s);
-    }//end generateValidIdentifier()
+    }
 
 
     /**
@@ -125,7 +125,7 @@ class Util
 
             return $result;
         }
-    }//end getTextBetweenChars()
+    }
 
 
     public static function removeTextBetweenCharsIncludingDelimiters($s, $leftchar, $rightchar)
@@ -145,7 +145,7 @@ class Util
         }
 
         return $s;
-    }//end removeTextBetweenCharsIncludingDelimiters()
+    }
 
 
     public static function extractLists($s, $forceNumericalIndex = false)
@@ -189,7 +189,7 @@ class Util
 
                     $items[$key] = $value;
                     $i++;
-                }//end foreach
+                }
 
                 if (count($items) == 1) {
                     $item = reset($items);
@@ -199,11 +199,11 @@ class Util
                 }
 
                 $lists[] = $items;
-            }//end foreach
-        }//end if
+            }
+        }
 
         return $lists;
-    }//end extractLists()
+    }
 
 
     /**
@@ -235,7 +235,7 @@ class Util
         }
 
         return $params;
-    }//end extractParams()
+    }
 
 
     /**
@@ -263,5 +263,5 @@ class Util
         }
 
         return $pattern;
-    }//end applyNamingPattern()
-}//end class
+    }
+}

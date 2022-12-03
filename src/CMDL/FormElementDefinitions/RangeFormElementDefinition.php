@@ -39,7 +39,7 @@ class RangeFormElementDefinition extends FormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     /**
@@ -48,7 +48,7 @@ class RangeFormElementDefinition extends FormElementDefinition
     public function setMax($max)
     {
         $this->max = $max;
-    }//end setMax()
+    }
 
 
     /**
@@ -57,7 +57,7 @@ class RangeFormElementDefinition extends FormElementDefinition
     public function getMax()
     {
         return $this->max;
-    }//end getMax()
+    }
 
 
     /**
@@ -66,7 +66,7 @@ class RangeFormElementDefinition extends FormElementDefinition
     public function setMin($min)
     {
         $this->min = $min;
-    }//end setMin()
+    }
 
 
     /**
@@ -75,7 +75,7 @@ class RangeFormElementDefinition extends FormElementDefinition
     public function getMin()
     {
         return $this->min;
-    }//end getMin()
+    }
 
 
     /**
@@ -84,7 +84,7 @@ class RangeFormElementDefinition extends FormElementDefinition
     public function setStep($step)
     {
         $this->step = $step;
-    }//end setStep()
+    }
 
 
     /**
@@ -93,5 +93,5 @@ class RangeFormElementDefinition extends FormElementDefinition
     public function getStep()
     {
         return $this->step;
-    }//end getStep()
-}//end class
+    }
+}

@@ -17,7 +17,7 @@ class PropertiesTest extends TestCase
 
         $this->expectException('CMDL\CMDLParserException');
         $contentTypeDefinition->getProperties('unknownview');
-    }//end testUnknownView()
+    }
 
 
     public function testAllProperties()
@@ -35,7 +35,7 @@ class PropertiesTest extends TestCase
 
         $properties = $contentTypeDefinition->getProperties();
         $this->assertCount(9, $properties);
-    }//end testAllProperties()
+    }
 
 
     public function testMandatoryProperties()
@@ -50,7 +50,7 @@ class PropertiesTest extends TestCase
 
         $properties = $contentTypeDefinition->getMandatoryProperties('insert');
         $this->assertCount(1, $properties);
-    }//end testMandatoryProperties()
+    }
 
 
     public function testUniqueProperties()
@@ -66,7 +66,7 @@ class PropertiesTest extends TestCase
 
         $properties = $contentTypeDefinition->getUniqueProperties('insert');
         $this->assertCount(1, $properties);
-    }//end testUniqueProperties()
+    }
 
 
     public function testProtectedProperties()
@@ -81,5 +81,5 @@ class PropertiesTest extends TestCase
 
         $properties = $contentTypeDefinition->getProtectedProperties('insert');
         $this->assertCount(0, $properties);
-    }//end testProtectedProperties()
-}//end class
+    }
+}

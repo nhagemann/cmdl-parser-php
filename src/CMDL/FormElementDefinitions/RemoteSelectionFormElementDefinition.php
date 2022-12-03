@@ -34,7 +34,7 @@ class RemoteSelectionFormElementDefinition extends FormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setType($type)
@@ -44,23 +44,23 @@ class RemoteSelectionFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
+    }
 
 
     public function setUrl($url)
     {
         $this->url = $url;
-    }//end setUrl()
+    }
 
 
     public function getUrl()
     {
         return $this->url;
-    }//end getUrl()
-}//end class
+    }
+}

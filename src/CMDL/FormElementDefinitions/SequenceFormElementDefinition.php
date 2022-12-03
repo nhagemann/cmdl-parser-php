@@ -21,11 +21,11 @@ class SequenceFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "inserts" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setInserts()
+    }
 
 
     public function getInserts()
     {
         return $this->inserts;
-    }//end getInserts()
-}//end class
+    }
+}

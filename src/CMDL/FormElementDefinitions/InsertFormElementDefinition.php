@@ -22,7 +22,7 @@ class InsertFormElementDefinition extends FormElementDefinition
     public function setClippingName($clippingName)
     {
         $this->clippingName = $clippingName;
-    }//end setClippingName()
+    }
 
 
     public function getClippingName($value = null)
@@ -36,31 +36,31 @@ class InsertFormElementDefinition extends FormElementDefinition
         }
 
         return $this->clippingName;
-    }//end getClippingName()
+    }
 
 
     public function setPropertyName($propertyName)
     {
         $this->propertyName = $propertyName;
-    }//end setPropertyName()
+    }
 
 
     public function getPropertyName()
     {
         return $this->propertyName;
-    }//end getPropertyName()
+    }
 
 
     public function setInsertConditions($insertConditions)
     {
         $this->insertConditions = $insertConditions;
-    }//end setInsertConditions()
+    }
 
 
     public function getInsertConditions()
     {
         return $this->insertConditions;
-    }//end getInsertConditions()
+    }
 
 
     /**
@@ -69,7 +69,7 @@ class InsertFormElementDefinition extends FormElementDefinition
     public function getWorkspaces()
     {
         return $this->workspaces;
-    }//end getWorkspaces()
+    }
 
 
     /**
@@ -78,13 +78,13 @@ class InsertFormElementDefinition extends FormElementDefinition
     public function setWorkspaces($workspaces)
     {
         $this->workspaces = array_keys($workspaces);
-    }//end setWorkspaces()
+    }
 
 
     public function hasWorkspacesRestriction()
     {
         return (bool) count($this->getWorkspaces());
-    }//end hasWorkspacesRestriction()
+    }
 
 
     /**
@@ -93,7 +93,7 @@ class InsertFormElementDefinition extends FormElementDefinition
     public function getLanguages()
     {
         return $this->languages;
-    }//end getLanguages()
+    }
 
 
     /**
@@ -102,11 +102,11 @@ class InsertFormElementDefinition extends FormElementDefinition
     public function setLanguages($languages)
     {
         $this->languages = array_keys($languages);
-    }//end setLanguages()
+    }
 
 
     public function hasLanguagesRestriction()
     {
         return (bool) count($this->getLanguages());
-    }//end hasLanguagesRestriction()
-}//end class
+    }
+}

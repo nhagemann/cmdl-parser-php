@@ -37,5 +37,5 @@ class SequenceWithinInsertTest extends TestCase
         } catch (\Exception $e) {
             $this->fail($e->getMessage());
         }
-    }//end testFormElementFound()
-}//end class
+    }
+}

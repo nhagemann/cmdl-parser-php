@@ -24,7 +24,7 @@
         "phpunit" : "vendor/bin/phpunit",
         "phpcs": "vendor/bin/phpcs",
         "phpcbf": "vendor/bin/phpcbf",
-        "phpcs8.0": "vendor/bin/phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.1"
+        "phpcs8.0": "vendor/bin/phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.2"
     },
     "autoload": {
         "psr-0": {

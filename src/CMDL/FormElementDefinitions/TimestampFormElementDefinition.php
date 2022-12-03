@@ -23,13 +23,13 @@ class TimestampFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of datetime, full', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
+    }
 
 
     public function setInit($init)
@@ -39,11 +39,11 @@ class TimestampFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "init" of form element ' . $this->elementType . ' must be one of now, today', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setInit()
+    }
 
 
     public function getInit()
     {
         return $this->init;
-    }//end getInit()
-}//end class
+    }
+}

@@ -19,11 +19,11 @@ class TextfieldFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "size" of form element ' . $this->elementType . ' must be one of S,M,L,XL,XXL.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setSize()
+    }
 
 
     public function getSize()
     {
         return $this->size;
-    }//end getSize()
-}//end class
+    }
+}

@@ -283,7 +283,7 @@ class DataTypeDefinition
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getMandatoryProperties();
-    }//end getMandatoryProperties()
+    }
 
 
     public function getUniqueProperties($viewName)

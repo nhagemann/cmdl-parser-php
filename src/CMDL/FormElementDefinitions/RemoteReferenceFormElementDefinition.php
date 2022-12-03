@@ -55,17 +55,17 @@ class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinitio
 
         // skip constructor of form element reference, since it has less parameters and therefore a slightly different parameter order
         FormElementDefinition::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setUrl($url)
     {
         $this->url = $url;
-    }//end setUrl()
+    }
 
 
     public function getUrl()
     {
         return $this->url;
-    }//end getUrl()
-}//end class
+    }
+}

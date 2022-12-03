@@ -59,5 +59,5 @@ class ViewConventionsTest extends TestCase
         // @var ViewDefinition
         $viewDefinition = $contentTypeDefinition->getListViewDefinition();
         $this->assertEquals('list', $viewDefinition->getName());
-    }//end testDefaults()
-}//end class
+    }
+}

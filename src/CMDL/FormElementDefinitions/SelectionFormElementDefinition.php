@@ -25,7 +25,7 @@ class SelectionFormElementDefinition extends FormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setType($type)
@@ -35,13 +35,13 @@ class SelectionFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
+    }
 
 
     public function setOptions($options)
@@ -51,11 +51,11 @@ class SelectionFormElementDefinition extends FormElementDefinition
         } else {
             throw  new CMDLParserException('Parameter "options" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
-    }//end setOptions()
+    }
 
 
     public function getOptions()
     {
         return $this->options;
-    }//end getOptions()
-}//end class
+    }
+}

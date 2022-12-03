@@ -34,17 +34,17 @@ class SourceCodeFormElementDefinition extends TextareaFormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setType($type)
     {
         $this->type = strtolower($type);
-    }//end setType()
+    }
 
 
     public function getType()
     {
         return $this->type;
-    }//end getType()
-}//end class
+    }
+}

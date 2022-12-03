@@ -12,7 +12,7 @@ class UtilTest extends TestCase
         $this->assertEquals('koenig', Util::generateValidIdentifier('König'));
 
         $this->assertEquals('', Util::generateValidIdentifier('ฉันไม่สามารถอ่านนี้'));
-    }//end testIdentifierGeneration()
+    }
 
 
     public function testParamExtraction()
@@ -27,7 +27,7 @@ class UtilTest extends TestCase
         // params cannot contain quotation marks, so a string like the following will break the extraction deterministic
         $result = Util::extractParams('"That is a not working "quote""');
         $this->assertCount(3, $result);
-    }//end testParamExtraction()
+    }
 
 
     public function testListExtraction()
@@ -60,5 +60,5 @@ class UtilTest extends TestCase
         $this->assertContains('Lassy', $result[0]);
         $this->assertContains('Black Beauty ', $result[0]);
         $this->assertContains('Milka Cow', $result[0]);
-    }//end testListExtraction()
-}//end class
+    }
+}

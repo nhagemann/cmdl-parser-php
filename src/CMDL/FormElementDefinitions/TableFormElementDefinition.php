@@ -30,29 +30,29 @@ class TableFormElementDefinition extends FormElementDefinition
         }
 
         parent::__construct($name, $params, $lists);
-    }//end __construct()
+    }
 
 
     public function setColumnHeadings($columnHeadings)
     {
         $this->columnHeadings = $columnHeadings;
-    }//end setColumnHeadings()
+    }
 
 
     public function getColumnHeadings()
     {
         return $this->columnHeadings;
-    }//end getColumnHeadings()
+    }
 
 
     public function setWidths($widths)
     {
         $this->widths = $widths;
-    }//end setWidths()
+    }
 
 
     public function getWidths()
     {
         return $this->widths;
-    }//end getWidths()
-}//end class
+    }
+}

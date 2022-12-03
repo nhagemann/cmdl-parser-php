@@ -25,7 +25,10 @@ class DataTypeSortableAnnotation extends Annotation
                     $this->dataTypeDefinition->setSortable($this->getParam(1));
                     break;
                 default:
-                    throw  new CMDLParserException('Parameter "type" of annotation ' . $this->annotationType . ' must be one of not,list,tree, related.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
+                    throw  new CMDLParserException(
+                        'Parameter "type" of annotation ' . $this->annotationType . ' must be one of not,list,tree, related.',
+                        CMDLParserException::CMDL_INVALID_OPTION_VALUE
+                    );
                     break;
             }
         } else {

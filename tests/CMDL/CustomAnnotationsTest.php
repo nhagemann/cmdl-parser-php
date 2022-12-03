@@ -30,7 +30,7 @@ class CustomAnnotationsTest extends TestCase
         $this->assertInstanceOf('CMDL\Annotations\CustomAnnotation', $customAnnotation);
 
         $this->assertEquals('type', $customAnnotation->getType());
-    }//end testCustomAnnotation()
+    }
 
 
     public function testCustomAnnotationDuplicates()
@@ -72,7 +72,7 @@ class CustomAnnotationsTest extends TestCase
         $this->assertInstanceOf('CMDL\Annotations\CustomAnnotation', $customAnnotation);
 
         $this->assertEquals('type', $customAnnotation->getType());
-    }//end testCustomAnnotationDuplicates()
+    }
 
 
     public function testParams()
@@ -99,7 +99,7 @@ class CustomAnnotationsTest extends TestCase
         $this->assertCount(1, $customAnnotation->getList(1));
         $this->assertCount(3, $customAnnotation->getList(2));
         $this->assertFalse($customAnnotation->hasList(3));
-    }//end testParams()
+    }
 
 
     public function testNumericalLists()
@@ -123,5 +123,5 @@ class CustomAnnotationsTest extends TestCase
         $this->assertCount(3, $customAnnotation->getNumericalList(1));
         $this->assertCount(3, $customAnnotation->getNumericalList(2));
         $this->assertFalse($customAnnotation->hasNumericalList(3));
-    }//end testNumericalLists()
-}//end class
+    }
+}

@@ -28,7 +28,7 @@ class NamingPatternTest extends TestCase
         $this->assertTrue($contentTypeDefinition->hasNamingPattern());
 
         $this->assertEquals('{{lastname}}, {{firstname}}', $contentTypeDefinition->getNamingPattern());
-    }//end testNamingAssertion()
+    }
 
 
     public function testApplyPattern()
@@ -47,5 +47,5 @@ class NamingPatternTest extends TestCase
         $pattern = '{{lastname}}, {{firstname}}';
 
         $this->assertEquals('Hagemann, ', Util::applyNamingPattern($properties, $pattern));
-    }//end testApplyPattern()
-}//end class
+    }
+}
