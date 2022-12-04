@@ -253,7 +253,7 @@ class Util
         preg_match_all('^{{(.+?)}}^', $pattern, $matches);
 
         if (isset($matches[1]) && count($matches[1]) > 0) {
-            foreach ($matches[1] as $key => $value) {
+            foreach ($matches[1] as $value) {
                 if (array_key_exists($value, $properties)) {
                     $pattern = preg_replace("/\{\{$value\}\}/", $properties[$value], $pattern);
                 } else {
