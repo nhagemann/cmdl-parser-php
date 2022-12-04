@@ -4,9 +4,10 @@ namespace CMDL\Annotations;
 
 use CMDL\Annotation;
 use CMDL\CMDLParserException;
+use CMDL\ContentTypeAnnotation;
 use CMDL\ContentTypeDefinition;
 
-class ContentTypeNameAnnotation extends Annotation
+class ContentTypeNameAnnotation extends ContentTypeAnnotation
 {
     protected $annotationType = 'name';
 

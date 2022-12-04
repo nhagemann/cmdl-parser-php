@@ -2,7 +2,7 @@
 
 namespace CMDL;
 
-class Annotation
+abstract class Annotation
 {
     protected $annotationType = null;
 

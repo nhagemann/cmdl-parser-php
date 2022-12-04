@@ -4,8 +4,9 @@ namespace CMDL\Annotations;
 
 use CMDL\Annotation;
 use CMDL\CMDLParserException;
+use CMDL\ContentTypeAnnotation;
 
-class ContentTypeSubtypesAnnotation extends Annotation
+class ContentTypeSubtypesAnnotation extends ContentTypeAnnotation
 {
     protected $annotationType = 'subtypes';
 
