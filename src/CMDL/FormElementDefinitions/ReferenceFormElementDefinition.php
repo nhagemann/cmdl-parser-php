@@ -2,8 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 class ReferenceFormElementDefinition extends FormElementDefinition
 {
@@ -23,10 +23,8 @@ class ReferenceFormElementDefinition extends FormElementDefinition
 
     protected $timeshift = 0;
 
-
     public function __construct($name, $params = [], $lists = [])
     {
-
         if (!isset($params[0])) {
             throw new CMDLParserException('Missing mandatory parameter contenttype for form element reference.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }
@@ -64,34 +62,29 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     public function setType($type)
     {
-        if (in_array($type, [ 'dropdown', 'radio', 'toggle' ])) {
+        if (in_array($type, ['dropdown', 'radio', 'toggle'])) {
             $this->type = $type;
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 
-
     public function getType()
     {
         return $this->type;
     }
-
 
     public function setContentType($contentType)
     {
         $this->contentType = $contentType;
     }
 
-
     public function getContentType()
     {
         return $this->contentType;
     }
-
 
     /**
      * @return null
@@ -101,7 +94,6 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         return $this->repositoryName;
     }
 
-
     /**
      * @param null $repositoryName
      */
@@ -110,54 +102,45 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         $this->repositoryName = $repositoryName;
     }
 
-
     public function hasRepositoryName()
     {
         return (bool) $this->repositoryName;
     }
-
 
     public function setOrder($order)
     {
         $this->order = $order;
     }
 
-
     public function getOrder()
     {
         return $this->order;
     }
-
 
     public function setWorkspace($workspace)
     {
         $this->workspace = $workspace;
     }
 
-
     public function getWorkspace()
     {
         return $this->workspace;
     }
-
 
     public function setTimeshift($timeshift)
     {
         $this->timeshift = $timeshift;
     }
 
-
     public function getTimeshift()
     {
         return $this->timeshift;
     }
 
-
     public function setLanguage($language)
     {
         $this->language = $language;
     }
-
 
     public function getLanguage()
     {

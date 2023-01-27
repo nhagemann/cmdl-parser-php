@@ -12,7 +12,6 @@ class ContentTypeDefinition extends DataTypeDefinition
 
     protected $namingPattern = false;
 
-
     public function hasStatusList()
     {
         if ($this->statusList === null || count($this->statusList) == 0) {
@@ -22,18 +21,15 @@ class ContentTypeDefinition extends DataTypeDefinition
         return true;
     }
 
-
     public function setStatusList(array $statusList)
     {
         $this->statusList = $statusList;
     }
 
-
     public function getStatusList()
     {
         return $this->statusList;
     }
-
 
     public function hasSubtypes()
     {
@@ -44,18 +40,15 @@ class ContentTypeDefinition extends DataTypeDefinition
         return true;
     }
 
-
     public function setSubtypes(array $subtypes)
     {
         $this->subtypes = $subtypes;
     }
 
-
     public function getSubtypes()
     {
         return $this->subtypes;
     }
-
 
     public function setSortable($sortable)
     {
@@ -69,19 +62,16 @@ class ContentTypeDefinition extends DataTypeDefinition
         $this->sortable = $sortable;
     }
 
-
     public function isSortable()
     {
         return (bool) $this->sortable;
     }
-
 
     public function isSortableAsList()
     {
         // if a content type is sortable at all, it's at least sortable as a list
         return $this->isSortable();
     }
-
 
     public function isSortableAsTree()
     {
@@ -92,18 +82,15 @@ class ContentTypeDefinition extends DataTypeDefinition
         return false;
     }
 
-
     public function hasNamingPattern()
     {
         return (bool) $this->namingPattern;
     }
 
-
     public function getNamingPattern()
     {
         return $this->namingPattern;
     }
-
 
     public function setNamingPattern($namingPattern)
     {

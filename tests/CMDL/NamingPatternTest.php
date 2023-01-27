@@ -2,9 +2,9 @@
 
 namespace Tests\CMDL;
 
-use PHPUnit\Framework\TestCase;
 use CMDL\Parser;
 use CMDL\Util;
+use PHPUnit\Framework\TestCase;
 
 class NamingPatternTest extends TestCase
 {
@@ -32,7 +32,6 @@ class NamingPatternTest extends TestCase
         $this->assertEquals('{{lastname}}, {{firstname}}', $contentTypeDefinition->getNamingPattern());
     }
 
-
     public function testApplyPattern()
     {
         $properties = [
@@ -44,7 +43,7 @@ class NamingPatternTest extends TestCase
 
         $this->assertEquals('Hagemann, Nils', Util::applyNamingPattern($properties, $pattern));
 
-        $properties = [ 'lastname' => 'Hagemann' ];
+        $properties = ['lastname' => 'Hagemann'];
 
         $pattern = '{{lastname}}, {{firstname}}';
 

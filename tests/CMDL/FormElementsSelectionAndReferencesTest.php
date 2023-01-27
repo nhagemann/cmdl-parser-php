@@ -2,12 +2,7 @@
 
 namespace Tests\CMDL;
 
-use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
-use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
 use CMDL\Parser;
-use CMDL\Util;
-use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class FormElementsSelectionAndReferencesTest extends TestCase
@@ -67,7 +62,6 @@ class FormElementsSelectionAndReferencesTest extends TestCase
         $this->assertEquals('live', $formElementDefinition->getWorkspace());
         $this->assertEquals('date', $formElementDefinition->getOrder());
     }
-
 
     public function testRepositoryReference()
     {

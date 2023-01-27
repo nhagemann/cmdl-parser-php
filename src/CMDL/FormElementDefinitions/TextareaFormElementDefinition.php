@@ -14,7 +14,6 @@ class TextareaFormElementDefinition extends TextfieldFormElementDefinition
 
     protected $maxValueLength = 256;
 
-
     public function setRows($rows)
     {
         if (is_numeric($rows)) {
@@ -23,7 +22,6 @@ class TextareaFormElementDefinition extends TextfieldFormElementDefinition
             throw  new CMDLParserException('Parameter "rows" of form element ' . $this->elementType . ' must be a number.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
-
 
     public function getRows()
     {

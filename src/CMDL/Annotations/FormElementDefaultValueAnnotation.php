@@ -9,10 +9,8 @@ class FormElementDefaultValueAnnotation extends Annotation
 {
     protected $annotationType = 'default-value';
 
-
     public function apply()
     {
-
         if (!$this->hasParam(1)) {
             throw new CMDLParserException('Missing mandatory parameter property for annotation @default-value.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }

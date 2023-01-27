@@ -2,8 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 class RangeFormElementDefinition extends FormElementDefinition
 {
@@ -14,7 +14,6 @@ class RangeFormElementDefinition extends FormElementDefinition
     protected $max = null;
 
     protected $step = 1;
-
 
     public function __construct($name, $params = [], $lists = [])
     {
@@ -41,7 +40,6 @@ class RangeFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     /**
      * @param null $max
      */
@@ -49,7 +47,6 @@ class RangeFormElementDefinition extends FormElementDefinition
     {
         $this->max = $max;
     }
-
 
     /**
      * @return null
@@ -59,7 +56,6 @@ class RangeFormElementDefinition extends FormElementDefinition
         return $this->max;
     }
 
-
     /**
      * @param null $min
      */
@@ -67,7 +63,6 @@ class RangeFormElementDefinition extends FormElementDefinition
     {
         $this->min = $min;
     }
-
 
     /**
      * @return null
@@ -77,7 +72,6 @@ class RangeFormElementDefinition extends FormElementDefinition
         return $this->min;
     }
 
-
     /**
      * @param int $step
      */
@@ -85,7 +79,6 @@ class RangeFormElementDefinition extends FormElementDefinition
     {
         $this->step = $step;
     }
-
 
     /**
      * @return int

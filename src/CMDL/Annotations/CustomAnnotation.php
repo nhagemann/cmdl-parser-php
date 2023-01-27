@@ -12,7 +12,6 @@ class CustomAnnotation extends Annotation
 
     protected $type;
 
-
     public function __construct(DataTypeDefinition $dataTypeDefinition, $currentFormElementDefinitionCollection, $params = [], $lists = [], $numericalLists = [])
     {
         if (isset($params[0])) {
@@ -30,15 +29,12 @@ class CustomAnnotation extends Annotation
         parent::__construct($dataTypeDefinition, $currentFormElementDefinitionCollection, $remainingParams, $lists, $numericalLists);
     }
 
-
     public function apply()
     {
-
         $this->dataTypeDefinition->addCustomAnnotation($this);
 
         return $this->dataTypeDefinition;
     }
-
 
     /**
      * @return mixed
@@ -47,7 +43,6 @@ class CustomAnnotation extends Annotation
     {
         return $this->type;
     }
-
 
     /**
      * @param mixed $type

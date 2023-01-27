@@ -9,7 +9,6 @@ class DataTypeSortableAnnotation extends Annotation
 {
     protected $annotationType = 'sortable';
 
-
     public function apply()
     {
         if ($this->hasParam(1)) {

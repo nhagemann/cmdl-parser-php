@@ -9,10 +9,8 @@ class FormElementInfoAnnotation extends Annotation
 {
     protected $annotationType = 'info';
 
-
     public function apply()
     {
-
         if (!$this->hasParam(1)) {
             throw new CMDLParserException('Missing mandatory parameter property for annotation @info.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }

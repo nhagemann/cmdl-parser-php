@@ -9,7 +9,6 @@ class DataTypeTitleAnnotation extends Annotation
 {
     protected $annotationType = 'title';
 
-
     public function apply()
     {
         if ($this->hasParam(1)) {

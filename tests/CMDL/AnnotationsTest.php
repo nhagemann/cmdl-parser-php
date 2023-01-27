@@ -3,11 +3,6 @@
 namespace Tests\CMDL;
 
 use CMDL\Parser;
-use CMDL\CMDLParserException;
-use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
-use CMDL\FormElementDefinition;
-use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class AnnotationsTest extends TestCase
@@ -28,7 +23,6 @@ class AnnotationsTest extends TestCase
         $this->assertEquals('Example Content Type', $contentTypeDefinition->getDescription());
     }
 
-
     public function test1MissingMandatoryParameters()
     {
         /* @var ContentTypeDefinition */
@@ -39,15 +33,12 @@ class AnnotationsTest extends TestCase
         $contentTypeDefinition = Parser::parseCMDLString('@title');
     }
 
-
     public function test2MissingMandatoryParameters()
     {
-
         $this->expectException('CMDL\CMDLParserException');
         /* @var ContentTypeDefinition */
         $contentTypeDefinition = Parser::parseCMDLString('@description');
     }
-
 
     public function testDefaultValueAndHelpHintInfoPlaceholderAnnotations()
     {
@@ -64,7 +55,6 @@ class AnnotationsTest extends TestCase
         //@todo: Validation fails caused by brackets
         //$this->assertEquals('This name is used within all channels (Desktop, Mobile, Podcast)',$formElement->getInfo());
     }
-
 
     public function testLanguagesStatusSubtypesAnnotations()
     {
@@ -105,7 +95,6 @@ class AnnotationsTest extends TestCase
         $this->assertEquals(true, $contentTypeDefinition->hasLanguages());
     }
 
-
     public function testWorkspacesAnnotation()
     {
         /* @var ContentTypeDefinition */
@@ -116,8 +105,6 @@ class AnnotationsTest extends TestCase
         $contentTypeDefinition = Parser::parseCMDLString('@workspaces (draft,live)');
         $this->assertArrayHasKey('draft', $contentTypeDefinition->getWorkspaces());
     }
-
-
 
     public function testSortableAnnotation()
     {
@@ -140,7 +127,6 @@ class AnnotationsTest extends TestCase
         $this->assertTrue($contentTypeDefinition->isSortableAsTree());
     }
 
-
     public function testTimeShiftableAnnotation()
     {
         /* @var ContentTypeDefinition */
@@ -151,7 +137,6 @@ class AnnotationsTest extends TestCase
         $contentTypeDefinition = Parser::parseCMDLString('@time-shiftable ');
         $this->assertTrue($contentTypeDefinition->isTimeShiftAble());
     }
-
 
     public function testHiddenPropertiesAnnotation()
     {

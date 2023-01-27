@@ -2,8 +2,6 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
-
 class MarkdownFormElementDefinition extends TextareaFormElementDefinition
 {
     protected $elementType = 'markdown';

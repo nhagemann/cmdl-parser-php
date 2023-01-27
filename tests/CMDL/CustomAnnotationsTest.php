@@ -2,13 +2,7 @@
 
 namespace Tests\CMDL;
 
-use CMDL\Annotations\CustomAnnotation;
 use CMDL\Parser;
-use CMDL\CMDLParserException;
-use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
-use CMDL\FormElementDefinition;
-use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class CustomAnnotationsTest extends TestCase
@@ -31,7 +25,6 @@ class CustomAnnotationsTest extends TestCase
 
         $this->assertEquals('type', $customAnnotation->getType());
     }
-
 
     public function testCustomAnnotationDuplicates()
     {
@@ -74,7 +67,6 @@ class CustomAnnotationsTest extends TestCase
         $this->assertEquals('type', $customAnnotation->getType());
     }
 
-
     public function testParams()
     {
         // @var ContentTypeDefinition
@@ -100,7 +92,6 @@ class CustomAnnotationsTest extends TestCase
         $this->assertCount(3, $customAnnotation->getList(2));
         $this->assertFalse($customAnnotation->hasList(3));
     }
-
 
     public function testNumericalLists()
     {

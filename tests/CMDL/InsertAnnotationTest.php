@@ -3,18 +3,12 @@
 namespace Tests\CMDL;
 
 use CMDL\Parser;
-use CMDL\CMDLParserException;
-use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
-use CMDL\FormElementDefinition;
-use CMDL\FormElementDefinitions\InsertFormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class InsertAnnotationTest extends TestCase
 {
     public function testInsertAnnotation()
     {
-
         // @var ContentTypeDefinition
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-08.cmdl');
 
@@ -64,7 +58,6 @@ class InsertAnnotationTest extends TestCase
         $this->assertTrue($viewDefinition->hasProperty('d'));
         $this->assertTrue($viewDefinition->hasProperty('j'));
     }
-
 
     public function testMultipleInserts()
     {
@@ -117,7 +110,6 @@ class InsertAnnotationTest extends TestCase
         $this->assertContains('i1', $viewDefinition->getNamesOfEventuallyInsertedClippings());
         $this->assertContains('i2', $viewDefinition->getNamesOfEventuallyInsertedClippings());
     }
-
 
     public function testWorkspacesAndLanguagesRestrictions()
     {

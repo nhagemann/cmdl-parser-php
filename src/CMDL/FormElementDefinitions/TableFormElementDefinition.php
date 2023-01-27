@@ -15,10 +15,8 @@ class TableFormElementDefinition extends FormElementDefinition
 
     protected $maxValueLength = 256;
 
-
     public function __construct($name, $params, $lists)
     {
-
         if (isset($lists[0])) {
             $this->setColumnHeadings($lists[0]);
         } else {
@@ -32,24 +30,20 @@ class TableFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     public function setColumnHeadings($columnHeadings)
     {
         $this->columnHeadings = $columnHeadings;
     }
-
 
     public function getColumnHeadings()
     {
         return $this->columnHeadings;
     }
 
-
     public function setWidths($widths)
     {
         $this->widths = $widths;
     }
-
 
     public function getWidths()
     {

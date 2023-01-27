@@ -8,12 +8,10 @@ class RemoteFileFormElementDefinition extends FileFormElementDefinition
 
     protected $repositoryUrl = null;
 
-
     public function setRepositoryUrl($repositoryUrl)
     {
         $this->repositoryUrl = $repositoryUrl;
     }
-
 
     public function getRepositoryUrl()
     {

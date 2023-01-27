@@ -18,12 +18,10 @@ class InsertFormElementDefinition extends FormElementDefinition
 
     protected $languages = [];
 
-
     public function setClippingName($clippingName)
     {
         $this->clippingName = $clippingName;
     }
-
 
     public function getClippingName($value = null)
     {
@@ -38,30 +36,25 @@ class InsertFormElementDefinition extends FormElementDefinition
         return $this->clippingName;
     }
 
-
     public function setPropertyName($propertyName)
     {
         $this->propertyName = $propertyName;
     }
-
 
     public function getPropertyName()
     {
         return $this->propertyName;
     }
 
-
     public function setInsertConditions($insertConditions)
     {
         $this->insertConditions = $insertConditions;
     }
 
-
     public function getInsertConditions()
     {
         return $this->insertConditions;
     }
-
 
     /**
      * @return array
@@ -71,7 +64,6 @@ class InsertFormElementDefinition extends FormElementDefinition
         return $this->workspaces;
     }
 
-
     /**
      * @param array $workspaces
      */
@@ -80,12 +72,10 @@ class InsertFormElementDefinition extends FormElementDefinition
         $this->workspaces = array_keys($workspaces);
     }
 
-
     public function hasWorkspacesRestriction()
     {
         return (bool) count($this->getWorkspaces());
     }
-
 
     /**
      * @return array
@@ -95,7 +85,6 @@ class InsertFormElementDefinition extends FormElementDefinition
         return $this->languages;
     }
 
-
     /**
      * @param array $languages
      */
@@ -103,7 +92,6 @@ class InsertFormElementDefinition extends FormElementDefinition
     {
         $this->languages = array_keys($languages);
     }
-
 
     public function hasLanguagesRestriction()
     {

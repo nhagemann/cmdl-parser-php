@@ -2,7 +2,6 @@
 
 namespace CMDL\Annotations;
 
-use CMDL\Annotation;
 use CMDL\CMDLParserException;
 use CMDL\ContentTypeAnnotation;
 use CMDL\ContentTypeDefinition;
@@ -15,7 +14,6 @@ class ContentTypeNameAnnotation extends ContentTypeAnnotation
      * @var ContentTypeDefinition|null
      */
     protected $dataTypeDefinition = null;
-
 
     public function apply()
     {

@@ -2,8 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 class SequenceFormElementDefinition extends FormElementDefinition
 {
@@ -13,7 +13,6 @@ class SequenceFormElementDefinition extends FormElementDefinition
 
     protected $maxValueLength = 256;
 
-
     public function setInserts($inserts)
     {
         if (is_array($inserts)) {
@@ -22,7 +21,6 @@ class SequenceFormElementDefinition extends FormElementDefinition
             throw  new CMDLParserException('Parameter "inserts" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
-
 
     public function getInserts()
     {

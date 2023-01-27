@@ -3,9 +3,6 @@
 namespace Tests\CMDL;
 
 use CMDL\Parser;
-use CMDL\Util;
-use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class FormElementsTest extends TestCase
@@ -43,14 +40,12 @@ class FormElementsTest extends TestCase
         $this->assertTrue($formElementDefinition->isUnique());
     }
 
-
     public function testLinkDefinition()
     {
         // @var LinkFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('URL = link');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\LinkFormElementDefinition', $formElementDefinition);
     }
-
 
     public function testTextareaDefinition()
     {
@@ -64,7 +59,6 @@ class FormElementsTest extends TestCase
         $this->assertTrue($formElementDefinition->isMandatory());
         $this->assertFalse($formElementDefinition->isUnique());
     }
-
 
     public function testTextareaDescendantsDefinition()
     {
@@ -85,7 +79,6 @@ class FormElementsTest extends TestCase
         $this->assertEquals('html', $formElementDefinition->getType());
     }
 
-
     public function testColorDefinition()
     {
         // @var ColorFormElementDefinition
@@ -93,14 +86,12 @@ class FormElementsTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\ColorFormElementDefinition', $formElementDefinition);
     }
 
-
     public function testRangeDefinition()
     {
         // @var RangeFormElementDefinition
         $formElementDefinition = Parser::parseFormElementDefinition('temperature = range 18 30 0.5');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\RangeFormElementDefinition', $formElementDefinition);
     }
-
 
     public function testDateTimeDefinition()
     {
@@ -115,7 +106,6 @@ class FormElementsTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TimeFormElementDefinition', $formElementDefinition);
     }
 
-
     public function testCustomFormElementDefinition()
     {
         $formElementDefinition = Parser::parseFormElementDefinition('prop1 = custom video youtube (360p,720p,1080p)');
@@ -125,7 +115,6 @@ class FormElementsTest extends TestCase
         $this->assertEquals('youtube', $formElementDefinition->getParam(1));
         $this->assertCount(3, $formElementDefinition->getList(1));
     }
-
 
     public function testPrintFormElementDefinition()
     {

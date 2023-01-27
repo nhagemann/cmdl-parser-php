@@ -3,17 +3,12 @@
 namespace Tests\CMDL;
 
 use CMDL\Parser;
-use CMDL\CMDLParserException;
-use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
-use CMDL\FormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class ViewConventionsTest extends TestCase
 {
     public function testDefaults()
     {
-
         // @var ContentTypeDefinition
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-04.cmdl');
 

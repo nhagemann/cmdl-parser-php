@@ -3,10 +3,6 @@
 namespace Tests\CMDL;
 
 use CMDL\Parser;
-use CMDL\CMDLParserException;
-use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
-use CMDL\FormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class PropertiesTest extends TestCase
@@ -18,7 +14,6 @@ class PropertiesTest extends TestCase
         $this->expectException('CMDL\CMDLParserException');
         $contentTypeDefinition->getProperties('unknownview');
     }
-
 
     public function testAllProperties()
     {
@@ -37,7 +32,6 @@ class PropertiesTest extends TestCase
         $this->assertCount(9, $properties);
     }
 
-
     public function testMandatoryProperties()
     {
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-05.cmdl');
@@ -52,10 +46,8 @@ class PropertiesTest extends TestCase
         $this->assertCount(1, $properties);
     }
 
-
     public function testUniqueProperties()
     {
-
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-05.cmdl');
 
         $properties = $contentTypeDefinition->getUniqueProperties('default');
@@ -67,7 +59,6 @@ class PropertiesTest extends TestCase
         $properties = $contentTypeDefinition->getUniqueProperties('insert');
         $this->assertCount(1, $properties);
     }
-
 
     public function testProtectedProperties()
     {

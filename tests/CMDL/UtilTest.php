@@ -14,7 +14,6 @@ class UtilTest extends TestCase
         $this->assertEquals('', Util::generateValidIdentifier('ฉันไม่สามารถอ่านนี้'));
     }
 
-
     public function testParamExtraction()
     {
         $result = Util::extractParams('param1 "param 2" param3 (a,b,c)');
@@ -29,10 +28,8 @@ class UtilTest extends TestCase
         $this->assertCount(3, $result);
     }
 
-
     public function testListExtraction()
     {
-
         $result = Util::extractLists('(1:online,2:offline)');
         $this->assertCount(1, $result);
         $this->assertCount(2, $result[0]);

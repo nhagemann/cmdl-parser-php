@@ -16,7 +16,6 @@ class SourceCodeFormElementDefinition extends TextareaFormElementDefinition
 
     protected $type = null;
 
-
     public function __construct($name, $params = [], $lists = [])
     {
         if (!isset($params[0])) {
@@ -36,12 +35,10 @@ class SourceCodeFormElementDefinition extends TextareaFormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     public function setType($type)
     {
         $this->type = strtolower($type);
     }
-
 
     public function getType()
     {

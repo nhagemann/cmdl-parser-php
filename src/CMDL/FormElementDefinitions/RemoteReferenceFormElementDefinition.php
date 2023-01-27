@@ -22,7 +22,6 @@ class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinitio
 
     protected $timeshift = 0;
 
-
     public function __construct($name = null, $params = [], $lists = [])
     {
         if (isset($params[0])) {
@@ -57,12 +56,10 @@ class RemoteReferenceFormElementDefinition extends ReferenceFormElementDefinitio
         FormElementDefinition::__construct($name, $params, $lists);
     }
 
-
     public function setUrl($url)
     {
         $this->url = $url;
     }
-
 
     public function getUrl()
     {

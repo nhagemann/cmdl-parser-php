@@ -2,8 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 class ColorFormElementDefinition extends FormElementDefinition
 {
@@ -14,7 +14,6 @@ class ColorFormElementDefinition extends FormElementDefinition
     protected $options = [];
 
     protected $maxValueLength = 6;
-
 
     public function __construct($name, $params = [], $lists = [])
     {
@@ -29,22 +28,19 @@ class ColorFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     public function setSelectionType($selectionType)
     {
-        if (in_array($selectionType, [ 'free', 'fixed' ])) {
+        if (in_array($selectionType, ['free', 'fixed'])) {
             $this->selectionType = $selectionType;
         } else {
             throw  new CMDLParserException('Parameter "selectionType" of form element ' . $this->elementType . ' must be one of free, fixed.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 
-
     public function getSelectionType()
     {
         return $this->selectionType;
     }
-
 
     public function setOptions($options)
     {
@@ -54,7 +50,6 @@ class ColorFormElementDefinition extends FormElementDefinition
             throw  new CMDLParserException('Parameter "options" of form element ' . $this->elementType . ' must be an array.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
-
 
     public function getOptions()
     {

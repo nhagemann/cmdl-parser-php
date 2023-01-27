@@ -2,15 +2,14 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 class TabStartFormElementDefinition extends FormElementDefinition
 {
     protected $elementType = 'tab-start';
 
     protected $opened = false;
-
 
     public function setOpened($opened)
     {
@@ -20,7 +19,6 @@ class TabStartFormElementDefinition extends FormElementDefinition
             throw new CMDLParserException('', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
-
 
     public function getOpened()
     {

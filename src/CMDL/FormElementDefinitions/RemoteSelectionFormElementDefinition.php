@@ -2,8 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 /**
  * Class SelectionFormElementDefinition
@@ -21,10 +21,8 @@ class RemoteSelectionFormElementDefinition extends FormElementDefinition
 
     protected $url = null;
 
-
     public function __construct($name, $params = [], $lists = [])
     {
-
         if (isset($params[0])) {
             $this->setUrl($params[0]);
         }
@@ -36,28 +34,24 @@ class RemoteSelectionFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     public function setType($type)
     {
-        if (in_array($type, [ 'dropdown', 'radio', 'toggle' ])) {
+        if (in_array($type, ['dropdown', 'radio', 'toggle'])) {
             $this->type = $type;
         } else {
             throw  new CMDLParserException('Parameter "type" of form element ' . $this->elementType . ' must be one of dropdown, radio, toggle.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);
         }
     }
 
-
     public function getType()
     {
         return $this->type;
     }
 
-
     public function setUrl($url)
     {
         $this->url = $url;
     }
-
 
     public function getUrl()
     {

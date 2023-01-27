@@ -12,7 +12,6 @@ class CustomFormElementDefinition extends FormElementDefinition
 
     protected $maxValueLength = 256;
 
-
     public function __construct($name, $params, $lists)
     {
         $type = array_shift($params);
@@ -22,12 +21,10 @@ class CustomFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-
     public function setType($type)
     {
         $this->type = $type;
     }
-
 
     public function getType()
     {

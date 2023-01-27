@@ -94,7 +94,6 @@ class Util
         return preg_replace($patterns, "", $s);
     }
 
-
     /**
      *
      * @param string $s
@@ -107,7 +106,6 @@ class Util
      */
     public static function getTextBetweenChars($s, $leftchar, $rightchar)
     {
-
         // Everything between two i "/i[^i]*i/";
         $leftchar  = preg_quote($leftchar, "/");
         $rightchar = preg_quote($rightchar, "/");
@@ -127,10 +125,8 @@ class Util
         }
     }
 
-
     public static function removeTextBetweenCharsIncludingDelimiters($s, $leftchar, $rightchar)
     {
-
         $leftchar  = preg_quote($leftchar, "/");
         $rightchar = preg_quote($rightchar, "/");
         $pattern   = "/" . $leftchar . "[^" . $leftchar . $rightchar . "]*" . $rightchar . "/";
@@ -146,7 +142,6 @@ class Util
 
         return $s;
     }
-
 
     public static function extractLists($s, $forceNumericalIndex = false)
     {
@@ -205,7 +200,6 @@ class Util
         return $lists;
     }
 
-
     /**
      *
      * @param string $s
@@ -236,7 +230,6 @@ class Util
 
         return $params;
     }
-
 
     /**
      * Replaces {{property}} strings with a matching property value

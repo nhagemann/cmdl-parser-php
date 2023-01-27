@@ -2,8 +2,8 @@
 
 namespace CMDL\FormElementDefinitions;
 
-use CMDL\FormElementDefinition;
 use CMDL\CMDLParserException;
+use CMDL\FormElementDefinition;
 
 class NumberFormElementDefinition extends FormElementDefinition
 {
@@ -13,10 +13,8 @@ class NumberFormElementDefinition extends FormElementDefinition
 
     protected $unit = null;
 
-
     public function setDigits($digits)
     {
-
         if (is_numeric($digits)) {
             $this->digits = $digits;
         } else {
@@ -24,18 +22,15 @@ class NumberFormElementDefinition extends FormElementDefinition
         }
     }
 
-
     public function getDigits()
     {
         return $this->digits;
     }
 
-
     public function setUnit($unit)
     {
         $this->unit = $unit;
     }
-
 
     public function getUnit()
     {

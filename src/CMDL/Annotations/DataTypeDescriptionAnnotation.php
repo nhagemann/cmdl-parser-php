@@ -9,10 +9,8 @@ class DataTypeDescriptionAnnotation extends Annotation
 {
     protected $annotationType = 'description';
 
-
     public function apply()
     {
-
         if ($this->hasParam(1)) {
             $this->dataTypeDefinition->setDescription($this->getParam(1));
         } else {

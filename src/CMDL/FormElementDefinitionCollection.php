@@ -2,8 +2,6 @@
 
 namespace CMDL;
 
-use CMDL\FormElementDefinitions\InsertFormElementDefinition;
-
 class FormElementDefinitionCollection
 {
     protected $name;
@@ -27,25 +25,21 @@ class FormElementDefinitionCollection
 
     protected $parentDataTypeDefinition = null;
 
-
     public function __construct($name = 'default', $parentDataTypeDefinition = null)
     {
         $this->setName($name);
         $this->parentDataTypeDefinition = $parentDataTypeDefinition;
     }
 
-
     public function setName($name)
     {
         $this->name = $name;
     }
 
-
     public function getName()
     {
         return $this->name;
     }
-
 
     public function addFormElementDefinition(FormElementDefinition $definition)
     {
@@ -60,7 +54,6 @@ class FormElementDefinitionCollection
         $this->uniqueProperties    = null;
         $this->protectedProperties = null;
     }
-
 
     /**
      * @param $name
@@ -80,7 +73,6 @@ class FormElementDefinitionCollection
         );
     }
 
-
     /**
      * @return FormElementDefinition[]
      */
@@ -88,7 +80,6 @@ class FormElementDefinitionCollection
     {
         return $this->fields;
     }
-
 
     public function getProperties()
     {
@@ -135,7 +126,6 @@ class FormElementDefinitionCollection
         return $this->properties;
     }
 
-
     public function getMandatoryProperties()
     {
         if (!$this->properties) {
@@ -144,7 +134,6 @@ class FormElementDefinitionCollection
 
         return $this->mandatoryProperties;
     }
-
 
     public function getUniqueProperties()
     {
@@ -155,7 +144,6 @@ class FormElementDefinitionCollection
         return $this->uniqueProperties;
     }
 
-
     public function getProtectedProperties()
     {
         if (!$this->properties) {
@@ -164,7 +152,6 @@ class FormElementDefinitionCollection
 
         return $this->protectedProperties;
     }
-
 
     public function hasProperty($property)
     {
@@ -175,22 +162,18 @@ class FormElementDefinitionCollection
         return false;
     }
 
-
     public function setHiddenProperties($hiddenProperties)
     {
         $this->hiddenProperties = $hiddenProperties;
     }
-
 
     public function getHiddenProperties()
     {
         return $this->hiddenProperties;
     }
 
-
     public function getNamesOfEventuallyInsertedClippings()
     {
-
         $clippingNames = [];
         foreach ($this->getFormElementDefinitions() as $formElementDefinition) {
             if ($formElementDefinition->getFormElementType() == 'insert') {

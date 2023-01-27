@@ -9,10 +9,8 @@ class DataTypeLanguagesAnnotation extends Annotation
 {
     protected $annotationType = 'languages';
 
-
     public function apply()
     {
-
         if ($this->hasParam(1)) {
             if ($this->getParam(1) != 'none') {
                 throw new CMDLParserException('Invalid parameter value ' . $this->getParam(1) . ' for annotation @languages.', CMDLParserException::CMDL_INVALID_OPTION_VALUE);

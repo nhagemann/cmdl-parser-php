@@ -3,10 +3,6 @@
 namespace Tests\CMDL;
 
 use CMDL\Parser;
-use CMDL\CMDLParserException;
-use CMDL\ContentTypeDefinition;
-use CMDL\ViewDefinition;
-use CMDL\FormElementDefinition;
 use PHPUnit\Framework\TestCase;
 
 class ParsingTest extends TestCase
@@ -16,7 +12,6 @@ class ParsingTest extends TestCase
         $this->expectException('CMDL\CMDLParserException');
         Parser::parseCMDLFile('tests/input/test-00.cmdl');
     }
-
 
     public function testFileFound()
     {
@@ -28,7 +23,6 @@ class ParsingTest extends TestCase
         $this->assertInstanceOf('CMDL\ContentTypeDefinition', $contentTypeDefinition);
     }
 
-
     public function testViewNotDefined()
     {
         // @var ContentTypeDefinition
@@ -38,7 +32,6 @@ class ParsingTest extends TestCase
 
         $contentTypeDefinition->getViewDefinition('none');
     }
-
 
     public function testViewsDefined()
     {
@@ -53,7 +46,6 @@ class ParsingTest extends TestCase
         $this->assertInstanceOf('CMDL\ViewDefinition', $viewDefinition);
     }
 
-
     public function testFieldsReturned()
     {
         // @var ContentTypeDefinition
@@ -66,7 +58,6 @@ class ParsingTest extends TestCase
         $formElementDefinition = $viewDefinition->getFormElementDefinition('name');
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElementDefinition);
     }
-
 
     public function testHeadlinesExtracted()
     {
@@ -84,7 +75,6 @@ class ParsingTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\HeadlineFormElementDefinition', $formElements[3]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[4]);
     }
-
 
     public function testSectionsExtracted()
     {
@@ -108,7 +98,6 @@ class ParsingTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[9]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[9]);
     }
-
 
     public function testClippingsExtracted()
     {
@@ -135,7 +124,6 @@ class ParsingTest extends TestCase
         $fields = $clippingDefinition->getFormElementDefinitions();
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $fields[0]);
     }
-
 
     public function testTabsExtracted()
     {
@@ -165,7 +153,6 @@ class ParsingTest extends TestCase
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[15]);
         $this->assertInstanceOf('CMDL\FormElementDefinitions\TextfieldFormElementDefinition', $formElements[16]);
     }
-
 
     public function testTabsNotClosedExtracted()
     {

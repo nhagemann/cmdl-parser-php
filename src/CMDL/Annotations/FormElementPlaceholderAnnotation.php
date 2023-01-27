@@ -9,10 +9,8 @@ class FormElementPlaceholderAnnotation extends Annotation
 {
     protected $annotationType = 'placeholder';
 
-
     public function apply()
     {
-
         if (!$this->hasParam(1)) {
             throw new CMDLParserException('Missing mandatory parameter property for annotation @placeholder.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }

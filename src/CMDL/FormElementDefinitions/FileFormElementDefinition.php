@@ -12,24 +12,20 @@ class FileFormElementDefinition extends FormElementDefinition
 
     protected $fileTypes = [];
 
-
     public function setFileTypes($fileTypes)
     {
         $this->fileTypes = $fileTypes;
     }
-
 
     public function getFileTypes()
     {
         return $this->fileTypes;
     }
 
-
     public function setPath($path)
     {
         $this->path = $path;
     }
-
 
     public function getPath()
     {

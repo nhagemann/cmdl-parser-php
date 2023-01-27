@@ -10,10 +10,8 @@ class InsertAnnotation extends Annotation
 {
     protected $annotationType = 'insert';
 
-
     public function apply()
     {
-
         $formElementDefinition = new InsertFormElementDefinition();
 
         $property = false;

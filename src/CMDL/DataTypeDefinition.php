@@ -29,60 +29,50 @@ class DataTypeDefinition
      */
     protected $customAnnotations = [];
 
-
     public function __construct($name = null)
     {
         $this->name = $name;
     }
-
 
     public function setName($name)
     {
         $this->name = $name;
     }
 
-
     public function getName()
     {
         return $this->name;
     }
-
 
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
-
     public function getDescription()
     {
         return $this->description;
     }
-
 
     public function setTitle($title)
     {
         $this->title = $title;
     }
 
-
     public function getTitle()
     {
         return $this->title;
     }
-
 
     public function setCMDL($s)
     {
         $this->cmdl = $s;
     }
 
-
     public function getCMDL()
     {
         return $this->cmdl;
     }
-
 
     /**
      * @param string $name
@@ -102,7 +92,6 @@ class DataTypeDefinition
         );
     }
 
-
     public function hasViewDefinition($name)
     {
         if (array_key_exists($name, $this->views)) {
@@ -112,12 +101,10 @@ class DataTypeDefinition
         return false;
     }
 
-
     public function getViewDefinitions()
     {
         return $this->views;
     }
-
 
     public function getListViewDefinition($name = 'list')
     {
@@ -134,7 +121,6 @@ class DataTypeDefinition
         return $this->getViewDefinition('default');
     }
 
-
     public function getInsertViewDefinition($name = 'insert')
     {
         if ($name != 'insert') {
@@ -149,7 +135,6 @@ class DataTypeDefinition
 
         return $this->getViewDefinition('default');
     }
-
 
     public function getEditViewDefinition($name = 'edit')
     {
@@ -166,7 +151,6 @@ class DataTypeDefinition
         return $this->getViewDefinition('default');
     }
 
-
     public function getDuplicateViewDefinition($name = 'duplicate')
     {
         if ($name != 'duplicate') {
@@ -181,7 +165,6 @@ class DataTypeDefinition
 
         return $this->getViewDefinition('default');
     }
-
 
     public function getExchangeViewDefinition($name = 'exchange')
     {
@@ -198,12 +181,10 @@ class DataTypeDefinition
         return $this->getViewDefinition('default');
     }
 
-
     public function addViewDefinition(ViewDefinition $definition)
     {
         $this->views[$definition->getName()] = $definition;
     }
-
 
     public function getClippingDefinition($name)
     {
@@ -217,7 +198,6 @@ class DataTypeDefinition
         );
     }
 
-
     public function addClippingDefinition(ClippingDefinition $definition)
     {
         $this->clippings[$definition->getName()] = $definition;
@@ -227,7 +207,6 @@ class DataTypeDefinition
     {
         return array_key_exists($name, $this->clippings);
     }
-
 
     public function hasProperty($property, $viewName = null)
     {
@@ -243,10 +222,8 @@ class DataTypeDefinition
         }
     }
 
-
     public function getProperties($viewName = null)
     {
-
         $inserts = [];
 
         if ($viewName) {
@@ -276,45 +253,36 @@ class DataTypeDefinition
         return $properties;
     }
 
-
     public function getMandatoryProperties($viewName)
     {
-
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getMandatoryProperties();
     }
 
-
     public function getUniqueProperties($viewName)
     {
-
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getUniqueProperties();
     }
 
-
     public function getProtectedProperties($viewName)
     {
-
         $viewDefinition = $this->getViewDefinition($viewName);
 
         return $viewDefinition->getProtectedProperties();
     }
-
 
     public function setLanguages(array $languages)
     {
         $this->languages = $languages;
     }
 
-
     public function getLanguages()
     {
         return $this->languages;
     }
-
 
     public function hasLanguages()
     {
@@ -325,10 +293,8 @@ class DataTypeDefinition
         return true;
     }
 
-
     public function hasLanguage($language)
     {
-
         if (array_key_exists($language, $this->languages)) {
             return true;
         }
@@ -336,18 +302,15 @@ class DataTypeDefinition
         return false;
     }
 
-
     public function setWorkspaces($workspaces)
     {
         $this->workspaces = $workspaces;
     }
 
-
     public function getWorkspaces()
     {
         return $this->workspaces;
     }
-
 
     public function hasWorkspaces()
     {
@@ -358,10 +321,8 @@ class DataTypeDefinition
         return true;
     }
 
-
     public function hasWorkspace($workspace)
     {
-
         if (array_key_exists($workspace, $this->workspaces)) {
             return true;
         }
@@ -369,15 +330,10 @@ class DataTypeDefinition
         return false;
     }
 
-
-    /**
-     * @param CustomAnnotation $annotation
-     */
     public function addCustomAnnotation(CustomAnnotation $annotation)
     {
         $this->customAnnotations[] = $annotation;
     }
-
 
     /**
      * @return array CustomAnnotation
@@ -387,12 +343,10 @@ class DataTypeDefinition
         return $this->customAnnotations;
     }
 
-
     public function setTimeShiftable($timeShiftable)
     {
         $this->timeShiftable = $timeShiftable;
     }
-
 
     public function isTimeShiftable()
     {

@@ -9,10 +9,8 @@ class FormElementHintAnnotation extends Annotation
 {
     protected $annotationType = 'hint';
 
-
     public function apply()
     {
-
         if (!$this->hasParam(1)) {
             throw new CMDLParserException('Missing mandatory parameter property for annotation @hint.', CMDLParserException::CMDL_MISSING_MANDATORY_PARAM);
         }

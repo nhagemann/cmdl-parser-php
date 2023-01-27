@@ -3,67 +3,66 @@
 namespace CMDL;
 
 use CMDL\Annotations\ContentTypeNameAnnotation;
-use CMDL\FormElementDefinitions\PrintFormElementDefinition;
-use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
-use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
-use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
-use CMDL\FormElementDefinitions\TabStartFormElementDefinition;
-use CMDL\FormElementDefinitions\TabNextFormElementDefinition;
-use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
-use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
-use CMDL\FormElementDefinitions\LinkFormElementDefinition;
-use CMDL\FormElementDefinitions\EmailFormElementDefinition;
-use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
-use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
-use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
-use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
-use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
-use CMDL\FormElementDefinitions\SourceCodeFormElementDefinition;
-use CMDL\FormElementDefinitions\PasswordFormElementDefinition;
-use CMDL\FormElementDefinitions\NumberFormElementDefinition;
-use CMDL\FormElementDefinitions\RangeFormElementDefinition;
-use CMDL\FormElementDefinitions\CheckboxFormElementDefinition;
-use CMDL\FormElementDefinitions\SelectionFormElementDefinition;
-use CMDL\FormElementDefinitions\MultiSelectionFormElementDefinition;
-use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
-use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
-use CMDL\FormElementDefinitions\RemoteSelectionFormElementDefinition;
-use CMDL\FormElementDefinitions\RemoteMultiSelectionFormElementDefinition;
-use CMDL\FormElementDefinitions\RemoteReferenceFormElementDefinition;
-use CMDL\FormElementDefinitions\RemoteMultiReferenceFormElementDefinition;
-use CMDL\FormElementDefinitions\TimestampFormElementDefinition;
-use CMDL\FormElementDefinitions\DateFormElementDefinition;
-use CMDL\FormElementDefinitions\TimeFormElementDefinition;
-use CMDL\FormElementDefinitions\FileFormElementDefinition;
-use CMDL\FormElementDefinitions\ImageFormElementDefinition;
-use CMDL\FormElementDefinitions\RemoteFileFormElementDefinition;
-use CMDL\FormElementDefinitions\RemoteImageFormElementDefinition;
-use CMDL\FormElementDefinitions\TableFormElementDefinition;
-use CMDL\FormElementDefinitions\ColorFormElementDefinition;
-use CMDL\FormElementDefinitions\GeolocationFormElementDefinition;
-use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
-use CMDL\FormElementDefinitions\CustomFormElementDefinition;
-use CMDL\Annotations\DataTypeTitleAnnotation;
-use CMDL\Annotations\DataTypeDescriptionAnnotation;
-use CMDL\Annotations\DataTypeLanguagesAnnotation;
 use CMDL\Annotations\ContentTypeStatusAnnotation;
 use CMDL\Annotations\ContentTypeSubtypesAnnotation;
-use CMDL\Annotations\DataTypeWorkspacesAnnotation;
+use CMDL\Annotations\CustomAnnotation;
+use CMDL\Annotations\DataTypeDescriptionAnnotation;
+use CMDL\Annotations\DataTypeLanguagesAnnotation;
 use CMDL\Annotations\DataTypeSortableAnnotation;
 use CMDL\Annotations\DataTypeTimeShiftableAnnotation;
+use CMDL\Annotations\DataTypeTitleAnnotation;
+use CMDL\Annotations\DataTypeWorkspacesAnnotation;
+use CMDL\Annotations\FormElementCollectionHiddenPropertiesAnnotation;
 use CMDL\Annotations\FormElementDefaultValueAnnotation;
 use CMDL\Annotations\FormElementHelpAnnotation;
 use CMDL\Annotations\FormElementHintAnnotation;
 use CMDL\Annotations\FormElementInfoAnnotation;
 use CMDL\Annotations\FormElementPlaceholderAnnotation;
-use CMDL\Annotations\FormElementCollectionHiddenPropertiesAnnotation;
 use CMDL\Annotations\InsertAnnotation;
-use CMDL\Annotations\CustomAnnotation;
+use CMDL\FormElementDefinitions\CheckboxFormElementDefinition;
+use CMDL\FormElementDefinitions\CMDLFormElementDefinition;
+use CMDL\FormElementDefinitions\ColorFormElementDefinition;
+use CMDL\FormElementDefinitions\CustomFormElementDefinition;
+use CMDL\FormElementDefinitions\DateFormElementDefinition;
+use CMDL\FormElementDefinitions\EmailFormElementDefinition;
+use CMDL\FormElementDefinitions\FileFormElementDefinition;
+use CMDL\FormElementDefinitions\GeolocationFormElementDefinition;
+use CMDL\FormElementDefinitions\HeadlineFormElementDefinition;
+use CMDL\FormElementDefinitions\HTMLFormElementDefinition;
+use CMDL\FormElementDefinitions\ImageFormElementDefinition;
+use CMDL\FormElementDefinitions\LinkFormElementDefinition;
+use CMDL\FormElementDefinitions\MarkdownFormElementDefinition;
+use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
+use CMDL\FormElementDefinitions\MultiSelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\NumberFormElementDefinition;
+use CMDL\FormElementDefinitions\PasswordFormElementDefinition;
+use CMDL\FormElementDefinitions\PrintFormElementDefinition;
+use CMDL\FormElementDefinitions\RangeFormElementDefinition;
+use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteFileFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteImageFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteMultiReferenceFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteMultiSelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteReferenceFormElementDefinition;
+use CMDL\FormElementDefinitions\RemoteSelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\RichtextFormElementDefinition;
+use CMDL\FormElementDefinitions\SectionEndFormElementDefinition;
+use CMDL\FormElementDefinitions\SectionStartFormElementDefinition;
+use CMDL\FormElementDefinitions\SelectionFormElementDefinition;
+use CMDL\FormElementDefinitions\SequenceFormElementDefinition;
+use CMDL\FormElementDefinitions\SourceCodeFormElementDefinition;
+use CMDL\FormElementDefinitions\TabEndFormElementDefinition;
+use CMDL\FormElementDefinitions\TableFormElementDefinition;
+use CMDL\FormElementDefinitions\TabNextFormElementDefinition;
+use CMDL\FormElementDefinitions\TabStartFormElementDefinition;
+use CMDL\FormElementDefinitions\TextareaFormElementDefinition;
+use CMDL\FormElementDefinitions\TextfieldFormElementDefinition;
+use CMDL\FormElementDefinitions\TimeFormElementDefinition;
+use CMDL\FormElementDefinitions\TimestampFormElementDefinition;
 
 class Parser
 {
     public static $superProperties = array('name', 'status', 'subtype', 'position', 'parent');
-
 
     /**
      * @param $filename
@@ -80,15 +79,12 @@ class Parser
         if (realpath($filename)) {
             $s = file_get_contents($filename);
             if ($s) {
-                $dataTypeDefinition = self::parseCMDLString($s, $dataTypeName, $dataTypeTitle, $dataType);
-
-                return $dataTypeDefinition;
+                return self::parseCMDLString($s, $dataTypeName, $dataTypeTitle, $dataType);
             }
         }
 
         throw new CMDLParserException('', CMDLParserException::CMDL_FILE_NOT_FOUND);
     }
-
 
     public static function parseCMDLString($cmdl, $dataTypeName = null, $dataTypeTitle = null, $dataType = 'content')
     {
@@ -248,14 +244,12 @@ class Parser
         return $dataTypeDefinition;
     }
 
-
     protected static function closeTab(FormElementDefinitionCollection $currentFormElementDefinitionCollection, $currentTabLabel)
     {
         $formElementDefinition = new TabEndFormElementDefinition();
         $formElementDefinition->setLabel($currentTabLabel);
         $currentFormElementDefinitionCollection->addFormElementDefinition($formElementDefinition);
     }
-
 
     public static function parseFormElementDefinition($line)
     {
@@ -521,7 +515,6 @@ class Parser
 
         return $formElementDefinition;
     }
-
 
     public static function parseAnnotation(
         DataTypeDefinition $dataTypeDefinition,
