@@ -1,1 +1,0 @@
-docker exec cmdl-parser-php72 php -v
