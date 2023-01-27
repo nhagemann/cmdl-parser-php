@@ -33,8 +33,13 @@
         "phpmd": "vendor/bin/phpmd src ansi phpmd.xml"
     },
     "autoload": {
-        "psr-0": {
-            "CMDL": "src/"
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "config": {

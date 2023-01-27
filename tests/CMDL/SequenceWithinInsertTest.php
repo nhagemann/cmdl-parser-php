@@ -1,6 +1,6 @@
 <?php
 
-namespace CMDL;
+namespace Tests\CMDL;
 
 use CMDL\Parser;
 use PHPUnit\Framework\TestCase;

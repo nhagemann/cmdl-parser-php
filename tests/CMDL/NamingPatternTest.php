@@ -1,8 +1,10 @@
 <?php
 
-namespace CMDL;
+namespace Tests\CMDL;
 
 use PHPUnit\Framework\TestCase;
+use CMDL\Parser;
+use CMDL\Util;
 
 class NamingPatternTest extends TestCase
 {

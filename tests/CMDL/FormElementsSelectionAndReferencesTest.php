@@ -1,6 +1,6 @@
 <?php
 
-namespace CMDL;
+namespace Tests\CMDL;
 
 use CMDL\FormElementDefinitions\MultiReferenceFormElementDefinition;
 use CMDL\FormElementDefinitions\ReferenceFormElementDefinition;
