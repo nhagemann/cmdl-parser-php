@@ -9,11 +9,11 @@ class RangeFormElementDefinition extends FormElementDefinition
 {
     protected $elementType = 'range';
 
-    protected $min = null;
+    protected ?int $min = null;
 
-    protected $max = null;
+    protected ?int $max = null;
 
-    protected $step = 1;
+    protected float $step = 1;
 
     public function __construct($name, $params = [], $lists = [])
     {
@@ -40,50 +40,32 @@ class RangeFormElementDefinition extends FormElementDefinition
         parent::__construct($name, $params, $lists);
     }
 
-    /**
-     * @param null $max
-     */
     public function setMax($max)
     {
         $this->max = $max;
     }
 
-    /**
-     * @return null
-     */
     public function getMax()
     {
         return $this->max;
     }
 
-    /**
-     * @param null $min
-     */
     public function setMin($min)
     {
         $this->min = $min;
     }
 
-    /**
-     * @return null
-     */
     public function getMin()
     {
         return $this->min;
     }
 
-    /**
-     * @param int $step
-     */
-    public function setStep($step)
+    public function setStep(float $step)
     {
         $this->step = $step;
     }
 
-    /**
-     * @return int
-     */
-    public function getStep()
+    public function getStep(): float
     {
         return $this->step;
     }

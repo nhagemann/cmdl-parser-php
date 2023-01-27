@@ -64,17 +64,7 @@ class Parser
 {
     public static $superProperties = array('name', 'status', 'subtype', 'position', 'parent');
 
-    /**
-     * @param $filename
-     * @param null   $dataTypeName
-     * @param null   $dataTypeTitle
-     * @param string $dataType
-     *
-     * @returns DataTypeDefinition
-     *
-     * @throws CMDLParserException
-     */
-    public static function parseCMDLFile($filename, $dataTypeName = null, $dataTypeTitle = null, $dataType = 'content')
+    public static function parseCMDLFile(string $filename, ?string $dataTypeName = null, ?string $dataTypeTitle = null, string $dataType = 'content'): DataTypeDefinition
     {
         if (realpath($filename)) {
             $s = file_get_contents($filename);

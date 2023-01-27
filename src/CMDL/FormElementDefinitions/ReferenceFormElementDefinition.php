@@ -86,18 +86,12 @@ class ReferenceFormElementDefinition extends FormElementDefinition
         return $this->contentType;
     }
 
-    /**
-     * @return null
-     */
-    public function getRepositoryName()
+    public function getRepositoryName(): string
     {
         return $this->repositoryName;
     }
 
-    /**
-     * @param null $repositoryName
-     */
-    public function setRepositoryName($repositoryName)
+    public function setRepositoryName(string $repositoryName)
     {
         $this->repositoryName = $repositoryName;
     }
