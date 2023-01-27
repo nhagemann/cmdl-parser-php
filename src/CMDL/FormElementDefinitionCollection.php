@@ -2,6 +2,8 @@
 
 namespace CMDL;
 
+use CMDL\FormElementDefinitions\InsertFormElementDefinition;
+
 class FormElementDefinitionCollection
 {
     protected $name;
@@ -177,7 +179,8 @@ class FormElementDefinitionCollection
         $clippingNames = [];
         foreach ($this->getFormElementDefinitions() as $formElementDefinition) {
             if ($formElementDefinition->getFormElementType() == 'insert') {
-                // @var $formElementDefinition InsertFormElementDefinition
+                assert($formElementDefinition instanceof  InsertFormElementDefinition);
+
                 if ($formElementDefinition->getPropertyName() == '') {
                     $clippingNames[] = $formElementDefinition->getClippingName();
                 } else {

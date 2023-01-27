@@ -4,6 +4,7 @@ namespace CMDL\Annotations;
 
 use CMDL\Annotation;
 use CMDL\CMDLParserException;
+use CMDL\ContentTypeDefinition;
 
 class DataTypeSortableAnnotation extends Annotation
 {
@@ -11,6 +12,8 @@ class DataTypeSortableAnnotation extends Annotation
 
     public function apply()
     {
+        assert($this->dataTypeDefinition instanceof ContentTypeDefinition);
+
         if ($this->hasParam(1)) {
             switch ($this->getParam(1)) {
                 case 'not':
@@ -20,15 +23,11 @@ class DataTypeSortableAnnotation extends Annotation
                 case 'tree':
                     $this->dataTypeDefinition->setSortable($this->getParam(1));
                     break;
-                case 'related':
-                    $this->dataTypeDefinition->setSortable($this->getParam(1));
-                    break;
                 default:
                     throw  new CMDLParserException(
-                        'Parameter "type" of annotation ' . $this->annotationType . ' must be one of not,list,tree, related.',
+                        'Parameter "type" of annotation ' . $this->annotationType . ' must be one of not, list, tree.',
                         CMDLParserException::CMDL_INVALID_OPTION_VALUE
                     );
-                    break;
             }
         } else {
             $this->dataTypeDefinition->setSortable('list');

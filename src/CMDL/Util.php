@@ -94,17 +94,7 @@ class Util
         return preg_replace($patterns, "", $s);
     }
 
-    /**
-     *
-     * @param string $s
-     * @param string $leftchar
-     * @param string $rightchar
-     *
-     * @return array
-     *
-     * @link: http://weblogtoolscollection.com/regex/regex.php
-     */
-    public static function getTextBetweenChars($s, $leftchar, $rightchar)
+    public static function getTextBetweenChars(string $s, string $leftchar, string $rightchar): array|false
     {
         // Everything between two i "/i[^i]*i/";
         $leftchar  = preg_quote($leftchar, "/");

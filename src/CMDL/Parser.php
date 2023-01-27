@@ -103,7 +103,6 @@ class Parser
                     'Unknown data type ' . $dataType . '. Must be one of content,config,data.',
                     CMDLParserException::CMDL_UNKNOWN_DATATYPE
                 );
-                break;
         }
 
         $dataTypeDefinition->setCMDL($cmdl);
@@ -497,8 +496,6 @@ class Parser
                     'Unknown form element type ' . $type . '.',
                     CMDLParserException::CMDL_UNKNOWN_FORMELEMENT_TYPE
                 );
-
-                break;
         }
 
         $formElementDefinition->setLabel($title);
@@ -681,7 +678,6 @@ class Parser
                     'Unknown annotation ' . $annotationName . '.',
                     CMDLParserException::CMDL_UNKNOWN_ANNOTATION
                 );
-                break;
         }
 
         $dataTypeDefinition = $annotation->apply();

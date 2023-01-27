@@ -58,4 +58,26 @@ class UtilTest extends TestCase
         $this->assertContains('Black Beauty ', $result[0]);
         $this->assertContains('Milka Cow', $result[0]);
     }
+
+    /** @dataProvider providerTextBetweenChars */
+    public function testGetTextBetweenChars(string $text, string $leftchar, string $rightchar, array|false $textBetween): void
+    {
+        $result = Util::getTextBetweenChars($text, $leftchar, $rightchar);
+        $this->assertEquals($textBetween, $result);
+    }
+
+    public function providerTextBetweenChars()
+    {
+        return [
+            ['{a}','{','}',['a']],
+            ['{a','{','}',false],
+            ['a','{','}',false],
+            ['','{','}',false],
+            ['{a}{b}','{','}',['a','b']],
+            ['{a} {b}','{','}',['a','b']],
+            ['{a} {b','{','}',['a']],
+            ['{a} b','{','}',['a']],
+            ['{a{b}}','{','}',['b']],
+        ];
+    }
 }

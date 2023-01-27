@@ -2,15 +2,14 @@
 
 namespace Tests\CMDL;
 
+use CMDL\CMDLParserException;
 use CMDL\Parser;
 use PHPUnit\Framework\TestCase;
 
 class SequenceWithinInsertTest extends TestCase
 {
-    public function testFormElementFound()
+    public function testSequenceWithinInsertNotFullyImplemented()
     {
-        return;
-
         $contentTypeDefinition = Parser::parseCMDLFile('tests/input/test-11.cmdl');
 
         $this->assertInstanceOf('CMDL\ContentTypeDefinition', $contentTypeDefinition);
@@ -27,15 +26,12 @@ class SequenceWithinInsertTest extends TestCase
         $this->assertTrue($viewDefinition->hasProperty('a'));
         $this->assertTrue($viewDefinition->hasProperty('b'));
 
-        try {
-            $viewDefinition->getFormElementDefinition('name');
-            $viewDefinition->getFormElementDefinition('comment');
-            $viewDefinition->getFormElementDefinition('a');
-            $viewDefinition->getFormElementDefinition('b');
+        $viewDefinition->getFormElementDefinition('name');
+        $viewDefinition->getFormElementDefinition('comment');
+        $viewDefinition->getFormElementDefinition('a');
 
-            $this->addToAssertionCount(4);
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
-        }
+        // Property b has been created, but form element for property b cannot be retrieved
+        $this->expectException(CMDLParserException::class);
+        $viewDefinition->getFormElementDefinition('b');
     }
 }
