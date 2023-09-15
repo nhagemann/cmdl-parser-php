@@ -7,7 +7,7 @@
     <!-- Our base rule: set to PSR12-->
     <rule ref="PSR12"/>
 
-    <!-- extend line length from 120 to 300 // needs to be reduces to 200 -->
+    <!-- extend line length from 120 to 300 -->
     <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="lineLimit" value="300"/>

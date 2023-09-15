@@ -2,6 +2,9 @@
 
 namespace CMDL;
 
+/**
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
+ */
 class FormElementDefinition
 {
     protected $elementType = null;

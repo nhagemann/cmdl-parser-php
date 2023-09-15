@@ -2,6 +2,9 @@
 
 namespace CMDL;
 
+/**
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
+ */
 abstract class Annotation
 {
     protected $annotationType = null;
